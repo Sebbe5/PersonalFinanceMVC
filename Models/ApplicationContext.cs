@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PersonalFinanceMVC.Models.Entities;
 using System.Data;
 
 namespace PersonalFinanceMVC.Models
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 

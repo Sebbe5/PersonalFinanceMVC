@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalFinanceMVC.Models;
 
@@ -11,9 +12,11 @@ using PersonalFinanceMVC.Models;
 namespace PersonalFinanceMVC.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230324180749_Removed budget list to identity")]
+    partial class Removedbudgetlisttoidentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,12 +234,7 @@ namespace PersonalFinanceMVC.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Budgets");
                 });
@@ -316,13 +314,6 @@ namespace PersonalFinanceMVC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Budget", b =>
-                {
-                    b.HasOne("PersonalFinanceMVC.Models.ApplicationUser", null)
-                        .WithMany("Budgets")
-                        .HasForeignKey("UserID");
-                });
-
             modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Expense", b =>
                 {
                     b.HasOne("PersonalFinanceMVC.Models.Entities.Budget", "Budget")
@@ -332,11 +323,6 @@ namespace PersonalFinanceMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Budget");
-                });
-
-            modelBuilder.Entity("PersonalFinanceMVC.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Budgets");
                 });
 
             modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Budget", b =>
