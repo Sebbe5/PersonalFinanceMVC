@@ -3,7 +3,7 @@
     public class EditBudgetVM
     {
         public string BudgetName { get; set; }
-        public ExpenseItemVM[] Expenses { get; set; }
+        public List<ExpenseItemVM> Expenses { get; set; } = new List<ExpenseItemVM>();
         
         public class ExpenseItemVM
         {

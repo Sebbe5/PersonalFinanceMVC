@@ -5,3 +5,6 @@
 
 <h1>Edit @Model.BudgetName</h1>
 
+@foreach(var item in Model.Expenses){
+    <p>@item.Name |@item.Amount</p>
+}
