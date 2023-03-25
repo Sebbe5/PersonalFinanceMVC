@@ -1,0 +1,11 @@
+﻿@model CreateBudgetVM;
+@{
+    ViewData["Title"] = "CreateBudget";
+}
+
+<form asp-controller="Home" asp-action="CreateBudget">
+    <label asp-for="Name"></label>
+    <input asp-for="Name"/>
+    <input type="submit" value="Next"/>
+</form>
+

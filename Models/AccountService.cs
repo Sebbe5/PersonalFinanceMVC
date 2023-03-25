@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using PersonalFinance.Views.Home;
 using PersonalFinanceMVC.Models;
-using static PersonalFinance.Views.Home.BudgetVM;
+using PersonalFinanceMVC.Models.Entities;
+using PersonalFinanceMVC.Views.Home;
+using PersonalFinanceMVC.Views.Login;
+using static PersonalFinanceMVC.Views.Home.BudgetVM;
 
-namespace PersonalFinance.Models
+namespace PersonalFinanceMVC.Models
 {
     public class AccountService
     {
@@ -74,6 +76,16 @@ namespace PersonalFinance.Models
                 vm.budgets[i].Id = q[i].Id;
             }
             return vm;
+        }
+
+        public void AddBudgetToUser(CreateBudgetVM vm)
+        {
+            context.Budgets.Add(new Budget
+            {
+                Name = vm.Name,
+                ApplicationUserId = userId,
+            });
+            context.SaveChanges();
         }
     }
 }

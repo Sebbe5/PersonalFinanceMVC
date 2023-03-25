@@ -3,6 +3,9 @@
     Layout = "_Layout";
     ViewData["Title"] = "Register";
 }
+@section Title{
+    @ViewBag.Title
+}
 <div class="my-5 container">
     <form asp-controller="Login" asp-action="Register" class="row">
 

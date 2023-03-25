@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PersonalFinance.Models;
-using PersonalFinance.Views.Home;
+using PersonalFinanceMVC.Models;
+using PersonalFinanceMVC.Views.Login;
 
-namespace PersonalFinance.Controllers
+namespace PersonalFinanceMVC.Controllers
 {
     public class LoginController : Controller
     {

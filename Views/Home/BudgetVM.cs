@@ -1,4 +1,4 @@
-﻿namespace PersonalFinance.Views.Home
+﻿namespace PersonalFinanceMVC.Views.Home
 {
     public class BudgetVM
     {

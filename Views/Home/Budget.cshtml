@@ -2,10 +2,10 @@
 @{
     ViewData["Title"] = "Budgets";
 }
-<h3>@User.Identity.Name's budgets</h3>
+<h1>@User.Identity.Name's budgets</h1>
 @foreach (var item in Model.budgets)
 {
     <p>@item.Name @item.Id</p>
 }
-<a>Create new budget</a>
+<a asp-controller="Home" asp-action="CreateBudget">Create new budget</a>
 

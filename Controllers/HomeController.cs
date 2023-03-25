@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PersonalFinance.Models;
-using PersonalFinance.Views.Home;
+using PersonalFinanceMVC.Models;
+using PersonalFinanceMVC.Views.Home;
 
-namespace PersonalFinance.Controllers
+namespace PersonalFinanceMVC.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -30,6 +30,24 @@ namespace PersonalFinance.Controllers
         public IActionResult CreateBudget()
         {
             return View();
+        }
+
+        [HttpPost("createBudget")]
+        public IActionResult CreateBudget(CreateBudgetVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            accountService.AddBudgetToUser(vm);
+            return RedirectToAction(nameof(Budget));
+        }
+
+        [HttpGet("editBudget")]
+        public IActionResult EditBudget(CreateBudgetVM vm, int id)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            accountService.AddBudgetToUser(vm);
+            return RedirectToAction(nameof(Budget));
         }
 
 

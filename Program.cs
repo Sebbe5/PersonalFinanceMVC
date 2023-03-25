@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PersonalFinance.Models;
 using PersonalFinanceMVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);

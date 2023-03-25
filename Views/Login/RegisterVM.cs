@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PersonalFinance.Views.Home
+namespace PersonalFinanceMVC.Views.Login
 {
     public class RegisterVM
     {
