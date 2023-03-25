@@ -2,7 +2,7 @@
 {
     public class BudgetVM
     {
-        public List<BudgetItemVM> budgets = new List<BudgetItemVM>();
+        public BudgetItemVM[] budgets;
         public class BudgetItemVM
         {
             public int Id { get; set; }
