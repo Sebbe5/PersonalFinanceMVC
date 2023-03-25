@@ -14,8 +14,7 @@
                 RenderSection("NoHomeButton", false);
             else
             {
-
-                <img class="col-3 maxWidthImg" src="~/images/home.png" />
+                <a class="col-3" asp-controller="Home" asp-action="Member"><img class="maxWidthImg link-image" src="~/images/home.png" /></a>
             }
         }
 

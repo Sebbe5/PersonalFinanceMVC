@@ -57,6 +57,9 @@ h5 {
         
     }
     .maxWidthImg{
-        max-height: 53px;
+        height: 53px;
+    }
+    .link-image{
+        width: 100%;
     }
 }
