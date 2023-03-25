@@ -9,9 +9,11 @@ namespace PersonalFinanceMVC.Controllers
     public class HomeController : Controller
     {
         AccountService accountService;
+        DataService dataService;
         public HomeController(AccountService accountService)
         {
             this.accountService = accountService;
+            this.dataService = dataService;
         }
 
         [HttpGet("member")]
@@ -42,12 +44,9 @@ namespace PersonalFinanceMVC.Controllers
         }
 
         [HttpGet("editBudget")]
-        public IActionResult EditBudget(CreateBudgetVM vm, int id)
+        public IActionResult EditBudget(EditBudgetVM vm, int id)
         {
-            if (!ModelState.IsValid)
-                return View();
-            accountService.AddBudgetToUser(vm);
-            return RedirectToAction(nameof(Budget));
+            return View(dataService.GetBudgetNameAndExpenses(id));
         }
 
 

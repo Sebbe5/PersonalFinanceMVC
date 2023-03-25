@@ -5,7 +5,8 @@
 <h1>@User.Identity.Name's budgets</h1>
 @foreach (var item in Model.budgets)
 {
-    <p>@item.Name @item.Id</p>
+    <p>@item.Name | <a asp-controller="Home" asp-action="EditBudget" asp-route-id="@item.Id">Edit</a></p>
+    
 }
 <a asp-controller="Home" asp-action="CreateBudget">Create new budget</a>
 
