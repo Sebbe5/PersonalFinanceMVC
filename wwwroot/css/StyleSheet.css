@@ -1,10 +1,22 @@
-﻿body{
-    background-color:whitesmoke;
+﻿html{
+    margin: 0;
+}
+
+body {
+    background-color: hsl(44, 50%, 95%)
+}
+
+.menu-color {
+    background-image: linear-gradient(hsl(44, 70%, 85%), hsl(44, 50%, 65%))
+}
+
+.one-page{
+    height: 100vh;
 }
 
 .discrete-link {
     text-decoration: none;
-    color: gray;
+    color: #575757;
 }
 
     .discrete-link:hover {
@@ -17,9 +29,10 @@
     }
 
 .function-box {
-    border: solid 2px black;
     border-radius: 1rem;
-    background-image: linear-gradient(hsl(134, 100%, 88%), hsl(134, 100%, 68%));
+    background-color: hsl(54, 50%, 85%);
+    box-shadow: 0 0 5px black;
+    
 }
 
 a.function-box {

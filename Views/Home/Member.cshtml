@@ -1,23 +1,42 @@
 ﻿@{
+    Layout = "_Layout";
     ViewData["Title"] = "Member";
 }
+@section Title{
+    @ViewBag.Title
+}
+<div class="one-page">
+    <header class="menu-color container mb-3">
+        <div class="p-1 row border-bottom justify-content-between">
+            <img class="col-3 maxWidthImg" src="~/images/moneyicon.png" />
 
-<div class="container">
-    <div class="row text-center justify-content-around g-3">
-        <a asp-controller="Home" asp-action="Budget" class="col-10 function-box p-3">
-            <div >
-                <img src="~/images/budget.png" />
-                <h5>Budgets</h5>
-            </div>
-        </a>
-        <a asp-controller="Home" asp-action="Invest" class="col-10 function-box p-3">
-            <img src="~/images/invesment.png" />
-            <h5>Invest</h5>
-        </a>
-        <a asp-controller="Home" asp-action="Compound" class="col-10 function-box p-3">
-            <img src="~/images/CompountInterestCalculator.png" />
-            <h5>Compound Calculator</h5>
-        </a>
+            <img class="col-3 maxWidthImg" src="~/images/home.png" />
+        </div>
+    </header>
+    <div class="container">
+        <div class="row text-center justify-content-around g-3">
+            <a asp-controller="Home" asp-action="Budget" class="col-10 function-box p-3">
+                <div>
+                    <img src="~/images/budget.png" />
+                    <h5>Budgets</h5>
+                </div>
+            </a>
+            <a asp-controller="Home" asp-action="Invest" class="col-10 function-box p-3">
+                <img src="~/images/invest.png" />
+                <h5>Invest</h5>
+            </a>
+            <a asp-controller="Home" asp-action="Compound" class="col-10 function-box p-3">
+                <img src="~/images/Compound.png" />
+                <h5>Compound Calculator</h5>
+            </a>
+        </div>
     </div>
+    <footer class="menu-color position-absolute bottom-0 w-100 border-top container">
+        <div class="row p-2">
+            <p class="mb-0 col-6">User: <span class="fw-bold">@User.Identity.Name</span></p>
+            <a asp-controller="Login" asp-action="Logout" class="discrete-link col-6 text-end">Sign out</a>
+        </div>
+    </footer>
 </div>
+
 

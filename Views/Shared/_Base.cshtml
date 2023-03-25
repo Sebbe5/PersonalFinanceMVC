@@ -5,19 +5,11 @@
     @ViewBag.Title
 }
 
-<header class="container">
-    <div class="p-2 row justify-content-between">
-        <img class="col-3 maxWidthImg" src="~/images/moneyicon-removebg-preview.png" />
-        <div class="col-9 container">
-            <div class="row">
-                <p class="mb-0">Logged in user: <span class="fw-bold">@User.Identity.Name</span></p>
-
-            </div>
-            <div class="row">
-                <a asp-controller="Login" asp-action="Logout" class="discrete-link">Sign out</a>
-            </div>
-        </div>
+<header class="container mb-3">
+    <div class="p-1 row border-bottom justify-content-between">
+        <img class="col-3 maxWidthImg" src="~/images/moneyicon.png" />
         
+        <img class="col-3 maxWidthImg" src="~/images/home.png" />
     </div>
 </header>
 
