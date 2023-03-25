@@ -6,7 +6,6 @@ namespace PersonalFinanceMVC.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [ForeignKey("UserID")]
-        public List<Budget> Budgets{ get; set; }
+        public List<Budget> Budgets { get; set; }
     }
 }
