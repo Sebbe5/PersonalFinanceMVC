@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PersonalFinance.Views.Home;
 using PersonalFinanceMVC.Models;
+using static PersonalFinance.Views.Home.BudgetVM;
 
 namespace PersonalFinance.Models
 {
@@ -58,6 +59,21 @@ namespace PersonalFinance.Models
             await signInManager.SignOutAsync();
         }
 
-        
+        public BudgetVM GetUserBudgets()
+        {
+            var q = context.Budgets
+                .Where(b => b.ApplicationUserId == userId)
+                .ToArray();
+
+            BudgetVM vm = new BudgetVM();
+            vm.budgets = new BudgetItemVM[q.Length];
+            for (int i = 0; i < q.Length; i++)
+            {
+                vm.budgets[i] = new BudgetItemVM();
+                vm.budgets[i].Name = q[i].Name;
+                vm.budgets[i].Id = q[i].Id;
+            }
+            return vm;
+        }
     }
 }

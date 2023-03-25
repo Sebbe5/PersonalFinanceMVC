@@ -1,7 +1,11 @@
 ﻿@model BudgetVM;
 @{
-    ViewData["Title"] = "Budget";
+    ViewData["Title"] = "Budgets";
 }
-
-
+<h3>@User.Identity.Name's budgets</h3>
+@foreach (var item in Model.budgets)
+{
+    <p>@item.Name @item.Id</p>
+}
+<a>Create new budget</a>
 
