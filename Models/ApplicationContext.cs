@@ -20,6 +20,8 @@ namespace PersonalFinanceMVC.Models
             modelBuilder.Entity<Expense>()
                 .Property(e => e.Money)
                 .HasColumnType(SqlDbType.Money.ToString());
+
+            modelBuilder.Entity<ApplicationUser>().Property(x => x.UserName).HasMaxLength(12);
         }
     }
 }
