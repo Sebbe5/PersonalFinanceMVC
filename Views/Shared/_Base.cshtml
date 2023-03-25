@@ -6,15 +6,15 @@
 }
 
 <header class="container mb-3 menu-color">
-    <div class="p-1 row border-bottom justify-content-between">
-        <img class="col-3 maxWidthImg" src="~/images/moneyicon.png" />
+    <div class="p-1 row border-bottom justify-content-between px-3">
+        <img class="col-2 maxWidthImg px-0" src="~/images/moneyicon.png" />
 
         @{
             if (IsSectionDefined("NoHomeButton"))
                 RenderSection("NoHomeButton", false);
             else
             {
-                <a class="col-3" asp-controller="Home" asp-action="Member"><img class="maxWidthImg link-image" src="~/images/home.png" /></a>
+                <a class="col-2 px-0" asp-controller="Home" asp-action="Member"><img class="maxWidthImg link-image" src="~/images/home.png" /></a>
             }
         }
 
