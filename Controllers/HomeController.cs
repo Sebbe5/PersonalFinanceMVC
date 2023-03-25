@@ -10,7 +10,7 @@ namespace PersonalFinanceMVC.Controllers
     {
         AccountService accountService;
         DataService dataService;
-        public HomeController(AccountService accountService)
+        public HomeController(AccountService accountService, DataService dataService)
         {
             this.accountService = accountService;
             this.dataService = dataService;
@@ -44,7 +44,7 @@ namespace PersonalFinanceMVC.Controllers
         }
 
         [HttpGet("editBudget")]
-        public IActionResult EditBudget(EditBudgetVM vm, int id)
+        public IActionResult EditBudget(int id)
         {
             return View(dataService.GetBudgetNameAndExpenses(id));
         }
