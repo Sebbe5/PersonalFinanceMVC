@@ -28,11 +28,14 @@ body {
         color: black;
     }
 
+.shadow-box {
+    box-shadow: 0 0 5px black;
+}
+
 .function-box {
     border-radius: 1rem;
     background-color: hsl(54, 50%, 85%);
     box-shadow: 0 0 5px black;
-    
 }
 
 a.function-box {
