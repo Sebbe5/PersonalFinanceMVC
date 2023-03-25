@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Member";
+}
+
+<div class="container">
+    <div class="row text-center justify-content-around g-3">
+        <a asp-controller="Home" asp-action="Budget" class="col-10 function-box p-3">
+            <div >
+                <img src="~/images/budget.png" />
+                <h5>Budget</h5>
+            </div>
+        </a>
+        <a asp-controller="Home" asp-action="Invest" class="col-10 function-box p-3">
+            <img src="~/images/investments.png" />
+            <h5>Invest</h5>
+        </a>
+        <a asp-controller="Home" asp-action="Compound" class="col-10 function-box p-3">
+            <img src="~/images/compound.png" />
+            <h5>Compound Calculator</h5>
+        </a>
+    </div>
+</div>
+

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PersonalFinance.Models;
 using PersonalFinanceMVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,16 +15,18 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 
 builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/login");
 
+builder.Services.AddScoped<AccountService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
 app.UseRouting();
 
-app.UseStaticFiles();
-
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => endpoints.MapControllers());
+app.UseEndpoints(o => o.MapControllers());
+
+app.UseStaticFiles();
 
 app.Run();

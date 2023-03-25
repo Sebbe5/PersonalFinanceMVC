@@ -1,0 +1,45 @@
+﻿body{
+    background-color:whitesmoke;
+}
+
+.discrete-link {
+    text-decoration: none;
+    color: gray;
+}
+
+    .discrete-link:hover {
+        text-decoration: underline;
+        color: #575757;
+    }
+
+    .discrete-link:active {
+        color: black;
+    }
+
+.function-box {
+    border: solid 2px black;
+    border-radius: 1rem;
+    background-image: linear-gradient(hsl(134, 100%, 88%), hsl(134, 100%, 68%));
+}
+
+a.function-box {
+    text-decoration: none;
+}
+
+h5 {
+    margin-bottom: 0;
+    font-weight: 700;
+    color: black;
+}
+
+@media(min-width: 576px) {
+    .maxWidthImg {
+        width: 150px;
+    }
+}
+
+@media(max-width: 576px) {
+    img {
+        width: 40%;
+    }
+}

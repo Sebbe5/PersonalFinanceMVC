@@ -1,7 +1,23 @@
 ﻿@{
     Layout = "_Layout";
+    ViewData["Title"] = "_Base";
 }
 
-<h1>This is the base</h1>
+<header class="container">
+    <div class="p-2 row justify-content-between">
+        <img class="col-3 maxWidthImg" src="~/images/moneyicon-removebg-preview.png" />
+        <div class="col-9 container">
+            <div class="row">
+                <p class="mb-0">Logged in user: <span class="fw-bold">@User.Identity.Name</span></p>
+
+            </div>
+            <div class="row">
+                <a asp-controller="Login" asp-action="Logout" class="discrete-link">Sign out</a>
+            </div>
+        </div>
+        
+    </div>
+</header>
+
 @RenderBody()
-    
+
