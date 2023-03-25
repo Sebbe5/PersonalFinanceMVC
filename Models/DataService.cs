@@ -1,4 +1,5 @@
-﻿using PersonalFinanceMVC.Views.Home;
+﻿using PersonalFinanceMVC.Models.Entities;
+using PersonalFinanceMVC.Views.Home;
 
 namespace PersonalFinanceMVC.Models
 {
@@ -13,16 +14,22 @@ namespace PersonalFinanceMVC.Models
         public EditBudgetVM GetBudgetNameAndExpenses(int id)
         {
             EditBudgetVM vm = new EditBudgetVM();
-            var q = context.Budgets.FirstOrDefault(b => b.Id == id);
-            vm.BudgetName = q.Name;
-            for (int i = 0; i < q.Expenses.Count; i++)
-            {
-                vm.Expenses[i] = new EditBudgetVM.ExpenseItemVM();
-                vm.Expenses[i].Name = q.Expenses[i].Name;
-                vm.Expenses[i].Amount = q.Expenses[i].Money;
-            }
+            vm.BudgetName = context.Budgets
+                .Select(b => new
+                {
+                    b.Id,
+                    b.Name
+                })
+                .FirstOrDefault(b => b.Id == id)
+                .Name;
+            var q = GetAllExpenses(id);
+            for (int i = 0; i < q.Length; i++)
+                vm.Expenses.Add(new EditBudgetVM.ExpenseItemVM { Name = q[i].Name, Amount = q[i].Money });
+            
             return vm;
-
         }
+
+        public Expense[] GetAllExpenses(int id) => context.Expenses.Where(e => e.BudgetId == id).ToArray();
+
     }
 }
