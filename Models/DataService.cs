@@ -31,5 +31,10 @@ namespace PersonalFinanceMVC.Models
 
         public Expense[] GetAllExpenses(int id) => context.Expenses.Where(e => e.BudgetId == id).ToArray();
 
+        internal void DeleteBudget(int id)
+        {
+            context.Budgets.Remove(context.Budgets.FirstOrDefault(b => b.Id == id));
+            context.SaveChanges();
+        }
     }
 }

@@ -49,6 +49,13 @@ namespace PersonalFinanceMVC.Controllers
             return View(dataService.GetBudgetNameAndExpenses(id));
         }
 
+        [HttpGet("deleteBudget")]
+        public IActionResult DeleteBudget(int id)
+        {
+            dataService.DeleteBudget(id);
+            return RedirectToAction(nameof(Budget));
+        }
+
 
     }
 }
