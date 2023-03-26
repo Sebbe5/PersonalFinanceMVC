@@ -6,5 +6,7 @@
 <h1>Edit @Model.BudgetName</h1>
 
 @foreach(var item in Model.Expenses){
-    <p>@item.Name |@item.Amount</p>
+    <p>@item.Name |@item.Amount
+        | <a asp-controller="Home" asp-action="DeleteExpense" asp-route-id="@item.Id">Delete</a>
+    </p>
 }

@@ -24,7 +24,7 @@ namespace PersonalFinanceMVC.Models
                 .Name;
             var q = GetAllExpenses(id);
             for (int i = 0; i < q.Length; i++)
-                vm.Expenses.Add(new EditBudgetVM.ExpenseItemVM { Name = q[i].Name, Amount = q[i].Money });
+                vm.Expenses.Add(new EditBudgetVM.ExpenseItemVM { Name = q[i].Name, Amount = q[i].Money, Id = q[i].Id });
             
             return vm;
         }
@@ -36,5 +36,12 @@ namespace PersonalFinanceMVC.Models
             context.Budgets.Remove(context.Budgets.FirstOrDefault(b => b.Id == id));
             context.SaveChanges();
         }
+
+        internal void DeleteExpense(int id)
+        {
+            context.Expenses.Remove(context.Expenses.FirstOrDefault(e => e.Id == id));
+            context.SaveChanges();
+        }
+
     }
 }
