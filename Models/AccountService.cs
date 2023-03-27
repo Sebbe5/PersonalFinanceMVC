@@ -12,7 +12,7 @@ namespace PersonalFinanceMVC.Models
         UserManager<ApplicationUser> userManager;
         SignInManager<ApplicationUser> signInManager;
         RoleManager<IdentityRole> roleManager;
-        string userId;
+        readonly string userId;
 
         private readonly ApplicationContext context;
         
