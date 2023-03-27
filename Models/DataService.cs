@@ -43,5 +43,10 @@ namespace PersonalFinanceMVC.Models
             context.SaveChanges();
         }
 
+        public void Test()
+        {
+
+        }
+
     }
 }
