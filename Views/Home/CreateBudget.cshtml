@@ -2,10 +2,13 @@
 @{
     ViewData["Title"] = "CreateBudget";
 }
+<div class="container">
+    <form asp-controller="Home" asp-action="CreateBudget">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <input type="submit" value="Next" />
+    </form>
+    <div asp-validation-summary="All"></div>
+</div>
 
-<form asp-controller="Home" asp-action="CreateBudget">
-    <label asp-for="Name"></label>
-    <input asp-for="Name"/>
-    <input type="submit" value="Next"/>
-</form>
 

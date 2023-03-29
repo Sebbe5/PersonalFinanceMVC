@@ -2,14 +2,17 @@
 @{
     ViewData["Title"] = "Budgets";
 }
-<h1>@User.Identity.Name's budgets</h1>
-@foreach (var item in Model.budgets)
-{
-    <p>
-        @item.Name |
-        <a asp-controller="Home" asp-action="EditBudget" asp-route-id="@item.Id">Edit</a> |
-        <a asp-controller="Home" asp-action="DeleteBudget" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
-    </p>
-}
-<a asp-controller="Home" asp-action="CreateBudget">Create new budget</a>
+<div class="container">
+    <h1>@User.Identity.Name's budgets</h1>
+    @foreach (var item in Model.budgets)
+    {
+        <p>
+            @item.Name |
+            <a asp-controller="Home" asp-action="EditBudget" asp-route-id="@item.Id">Edit</a> |
+            <a asp-controller="Home" asp-action="DeleteBudget" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
+        </p>
+    }
+    <a asp-controller="Home" asp-action="CreateBudget">Create new budget</a>
+</div>
+
 
