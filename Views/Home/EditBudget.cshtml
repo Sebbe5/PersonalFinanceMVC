@@ -4,31 +4,43 @@
 }
 
 <div class="container">
-    <h1>Edit @Model.BudgetName</h1>
     <form class="container lesser-container shadow-box py-1 menu-color mt-3" asp-controller="Home" asp-action="AddExpense">
         <h2>New Expense</h2>
-        <div class="row my-3">
+        <div class="row my-2">
             <label class="col-3" asp-for="NewAmount"></label>
             <input type="number" class="col-8" asp-for="NewAmount" />
         </div>
 
-        <div class="row my-3">
+        <div class="row my-2">
             <label class="col-3" asp-for="NewName"></label>
             <input class="col-8" asp-for="NewName" />
         </div>
 
-        <div class="row mb-2">
-            <div class="col-8" asp-validation-summary="All"></div>
+        <div class="row mb-1">
+            <div class="col-8 text-danger" asp-validation-summary="All"></div>
             <input class="col-3" type="submit" value="Add" />
         </div>
     </form>
-    @foreach (var item in Model.Expenses)
-    {
-        <p>
-            @item.Name |@item.Amount
-            | <a asp-controller="Home" asp-action="DeleteExpense" asp-route-id="@item.Id">Delete</a>
-        </p>
-    }
+
+    <div class="my-4 menu-color p-2">
+        <h2>Expenses</h2>
+        @foreach (var item in Model.Expenses)
+        {
+            <ul class="list-group list-group-horizontal container px-0 mb-1">
+                <li class="list-group-item w-30 fw-bold">
+                    @item.Amount @{/* TODO: Add a setting where you can decide currency*/}
+                </li>
+                <li class="list-group-item w-45 fw-bold">
+                    @item.Name
+                </li>
+                <a class="list-group-item flex-fill list-delete" asp-controller="Home" asp-action="DeleteExpense" asp-route-id="@item.Id">Delete</a>
+            </ul>
+        }
+    </div>
+
+
+
+
 </div>
 @section breadcrumb{
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
