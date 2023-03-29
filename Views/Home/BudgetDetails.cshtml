@@ -1,0 +1,37 @@
+﻿@model BudgetDetailsVM;
+@{
+    ViewData["Title"] = "BudgetDetails";
+}
+<div class="container">
+    <h1>@Model.BudgetName</h1>
+
+    <div class="my-4 menu-color p-2">
+        <h2>Expenses</h2>
+        @foreach (var item in Model.Expenses)
+        {
+            <ul class="list-group list-group-horizontal container px-0 mb-1">
+                <li class="list-group-item w-30 fw-bold">
+                    @item.Amount @{
+                        /* TODO: Add a setting where you can decide currency*/
+                    }
+                </li>
+                <li class="list-group-item flex-fill fw-bold">
+                    @item.Name
+                </li>
+            </ul>
+        }
+    </div>
+</div>
+
+@{
+    // TODO: Add a total, etc
+}
+
+@section breadcrumb{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="discrete-link" asp-controller="Home" asp-action="Budget">Budgets</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit @Model.BudgetName</li>
+        </ol>
+    </nav>
+}

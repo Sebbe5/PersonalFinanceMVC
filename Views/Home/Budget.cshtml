@@ -11,6 +11,7 @@
         <p>
             @item.Name |
             <a asp-controller="Home" asp-action="EditBudget" asp-route-id="@item.Id">Edit</a> |
+            <a asp-controller="Home" asp-action="BudgetDetails" asp-route-id="@item.Id">Details</a> |
             <a asp-controller="Home" asp-action="DeleteBudget" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete &quot;@item.Name&quot;?')">Delete</a>
         </p>
     }

@@ -73,6 +73,12 @@ namespace PersonalFinanceMVC.Controllers
             dataService.DeleteExpense(id);
             return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
         }
+        
+        [HttpGet("budgetDetails")]
+        public IActionResult BudgetDetails(int id)
+        {
+            return View(dataService.GetBudgetDetails(id));
+        }
 
         
     }

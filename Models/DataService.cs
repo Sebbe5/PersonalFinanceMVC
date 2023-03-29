@@ -53,5 +53,23 @@ namespace PersonalFinanceMVC.Models
             });
             context.SaveChanges(true);
         }
+
+        internal BudgetDetailsVM GetBudgetDetails(int id)
+        {
+            BudgetDetailsVM vm = new BudgetDetailsVM();
+            vm.BudgetName = context.Budgets
+                .Select(b => new
+                {
+                    b.Id,
+                    b.Name
+                })
+                .FirstOrDefault(b => b.Id == id)
+                .Name;
+            var q = GetAllExpenses(id);
+            for (int i = 0; i < q.Length; i++)
+                vm.Expenses.Add(new BudgetDetailsVM.ExpenseItemVM { Name = q[i].Name, Amount = q[i].Money});
+            vm.Expenses = vm.Expenses.OrderByDescending(e => e.Amount).ToList();
+            return vm;
+        }
     }
 }
