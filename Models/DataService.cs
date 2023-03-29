@@ -25,7 +25,7 @@ namespace PersonalFinanceMVC.Models
             var q = GetAllExpenses(id);
             for (int i = 0; i < q.Length; i++)
                 vm.Expenses.Add(new EditBudgetVM.ExpenseItemVM { Name = q[i].Name, Amount = q[i].Money, Id = q[i].Id });
-            
+            vm.Expenses = vm.Expenses.OrderByDescending(e => e.Amount).ToList();
             return vm;
         }
 

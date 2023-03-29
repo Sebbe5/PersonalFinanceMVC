@@ -49,6 +49,16 @@ namespace PersonalFinanceMVC.Controllers
             Response.Cookies.Append("BudgetId", id.ToString());
             return View(dataService.GetBudgetNameAndExpenses(id));
         }
+        
+        [HttpPost("editBudget")]
+        public IActionResult EditBudget(EditBudgetVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View(dataService.GetBudgetNameAndExpenses(int.Parse(Request.Cookies["BudgetId"])));
+
+            dataService.AddExpense(vm, int.Parse(Request.Cookies["BudgetId"]));
+            return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
+        }
 
         [HttpGet("deleteBudget")]
         public IActionResult DeleteBudget(int id)
@@ -61,16 +71,6 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult DeleteExpense(int id)
         {
             dataService.DeleteExpense(id);
-            return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
-        }
-        
-        [HttpPost("editBudget")]
-        public IActionResult EditBudget(EditBudgetVM vm)
-        {
-            if (!ModelState.IsValid)
-                return View(dataService.GetBudgetNameAndExpenses(int.Parse(Request.Cookies["BudgetId"])));
-
-            dataService.AddExpense(vm, int.Parse(Request.Cookies["BudgetId"]));
             return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
         }
 
