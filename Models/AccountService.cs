@@ -78,14 +78,14 @@ namespace PersonalFinanceMVC.Models
             return vm;
         }
 
-        public void AddBudgetToUser(CreateBudgetVM vm)
+        public int AddBudgetToUser(CreateBudgetVM vm)
         {
-            context.Budgets.Add(new Budget
-            {
-                Name = vm.Name,
-                ApplicationUserId = userId,
-            });
-            context.SaveChanges();
+            Budget budget = new Budget();
+            budget.ApplicationUserId = userId;
+            budget.Name = vm.Name;
+            context.Budgets.Add(budget);
+            context.SaveChanges(); //The id of the budget is set here and can be returned on the next row
+            return budget.Id;
         }
     }
 }

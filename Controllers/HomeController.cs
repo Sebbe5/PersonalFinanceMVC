@@ -39,8 +39,8 @@ namespace PersonalFinanceMVC.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            accountService.AddBudgetToUser(vm);
-            return RedirectToAction(nameof(Budget));
+            int newId = accountService.AddBudgetToUser(vm);
+            return RedirectToAction(nameof(EditBudget), new {id = newId});
         }
 
         [HttpGet("editBudget")]
