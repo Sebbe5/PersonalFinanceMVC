@@ -30,3 +30,11 @@
         </p>
     }
 </div>
+@section breadcrumb{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="discrete-link" asp-controller="Home" asp-action="Budget">Budgets</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit @Model.BudgetName</li>
+        </ol>
+    </nav>
+}
