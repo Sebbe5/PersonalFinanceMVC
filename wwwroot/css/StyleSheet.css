@@ -64,4 +64,7 @@ h5 {
     .link-image{
         width: 100%;
     }
+    .lesser-container{
+        width: 90%;
+    }
 }

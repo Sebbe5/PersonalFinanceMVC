@@ -63,7 +63,17 @@ namespace PersonalFinanceMVC.Controllers
             dataService.DeleteExpense(id);
             return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
         }
+        
+        [HttpPost("editBudget")]
+        public IActionResult EditBudget(EditBudgetVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View(dataService.GetBudgetNameAndExpenses(int.Parse(Request.Cookies["BudgetId"])));
 
-        // TODO: Add Expense
+            dataService.AddExpense(vm, int.Parse(Request.Cookies["BudgetId"]));
+            return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
+        }
+
+        
     }
 }

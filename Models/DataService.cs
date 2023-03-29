@@ -43,10 +43,15 @@ namespace PersonalFinanceMVC.Models
             context.SaveChanges();
         }
 
-        public void Test()
+        internal void AddExpense(EditBudgetVM vm, int budgetId)
         {
-
+            context.Expenses.Add(new Expense
+            {
+                BudgetId = budgetId,
+                Money = vm.NewAmount,
+                Name = vm.NewName
+            });
+            context.SaveChanges(true);
         }
-
     }
 }
