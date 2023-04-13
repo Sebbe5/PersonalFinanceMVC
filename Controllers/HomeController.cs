@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceMVC.Models;
-using PersonalFinanceMVC.Views.Home;
 
 namespace PersonalFinanceMVC.Controllers
 {
@@ -21,65 +20,5 @@ namespace PersonalFinanceMVC.Controllers
         {
             return View();
         }
-
-        [HttpGet("budget")]
-        public IActionResult Budget()
-        {
-            return View(accountService.GetUserBudgets());
-        }
-
-        [HttpGet("createBudget")]
-        public IActionResult CreateBudget()
-        {
-            return View();
-        }
-
-        [HttpPost("createBudget")]
-        public IActionResult CreateBudget(CreateBudgetVM vm)
-        {
-            if (!ModelState.IsValid)
-                return View();
-            int newId = accountService.AddBudgetToUser(vm);
-            return RedirectToAction(nameof(EditBudget), new {id = newId});
-        }
-
-        [HttpGet("editBudget")]
-        public IActionResult EditBudget(int id)
-        {
-            Response.Cookies.Append("BudgetId", id.ToString());
-            return View(dataService.GetBudgetNameAndExpenses(id));
-        }
-        
-        [HttpPost("editBudget")]
-        public IActionResult EditBudget(EditBudgetVM vm)
-        {
-            if (!ModelState.IsValid)
-                return View(dataService.GetBudgetNameAndExpenses(int.Parse(Request.Cookies["BudgetId"])));
-
-            dataService.AddExpense(vm, int.Parse(Request.Cookies["BudgetId"]));
-            return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
-        }
-
-        [HttpGet("deleteBudget")]
-        public IActionResult DeleteBudget(int id)
-        {
-            dataService.DeleteBudget(id);
-            return RedirectToAction(nameof(Budget));
-        }
-
-        [HttpGet("deleteExpense")]
-        public IActionResult DeleteExpense(int id)
-        {
-            dataService.DeleteExpense(id);
-            return RedirectToAction(nameof(EditBudget), new { id = int.Parse(Request.Cookies["BudgetId"]) });
-        }
-        
-        [HttpGet("budgetDetails")]
-        public IActionResult BudgetDetails(int id)
-        {
-            return View(dataService.GetBudgetDetails(id));
-        }
-
-        
     }
 }
