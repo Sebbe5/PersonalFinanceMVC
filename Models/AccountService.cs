@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PersonalFinanceMVC.Models;
 using PersonalFinanceMVC.Models.Entities;
+using PersonalFinanceMVC.Views.Login;
 
 namespace PersonalFinanceMVC.Models
 {
@@ -26,6 +27,19 @@ namespace PersonalFinanceMVC.Models
             this.roleManager = roleManager;
             this.context = context;
             userId = userManager.GetUserId(accessor.HttpContext.User);
+        }
+
+        public async Task<string> TryLoginAsync(LoginVM viewModel)
+        {
+            SignInResult result = await signInManager.PasswordSignInAsync(
+                viewModel.Username,
+                viewModel.Password,
+                isPersistent: false,
+                lockoutOnFailure: false);
+            if (result.Succeeded)
+                return null;
+            else
+                return "login failed";
         }
     }
 }
