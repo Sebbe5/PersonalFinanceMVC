@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceMVC.Models;
 using PersonalFinanceMVC.Views.Login;
@@ -39,7 +40,7 @@ namespace PersonalFinanceMVC.Controllers
                 return View();
 
 
-           return RedirectToAction(nameof(LoginAsync).Replace("Async", string.Empty));
+            return RedirectToAction(nameof(LoginAsync).Replace("Async", string.Empty));
         }
 
         [HttpGet("login")]
@@ -67,6 +68,15 @@ namespace PersonalFinanceMVC.Controllers
             }
 
             return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
+
+        }
+
+        [HttpPost("logout")]
+        public IActionResult LogOut(LoginVM vm)
+        {
+            accountService.SignOut();
+
+            return RedirectToAction(nameof(LoginAsync).Replace("Async", string.Empty));
         }
 
     }

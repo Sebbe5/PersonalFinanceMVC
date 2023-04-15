@@ -63,5 +63,10 @@ namespace PersonalFinanceMVC.Models
 
             return result.Errors.FirstOrDefault()?.Description;
         }
+
+        internal void SignOut()
+        {
+            var result = signInManager.SignOutAsync();
+        }
     }
 }
