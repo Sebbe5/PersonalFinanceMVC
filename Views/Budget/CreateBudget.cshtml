@@ -1,0 +1,91 @@
+﻿@model CreateBudgetVM
+
+@{
+    ViewData["Title"] = "CreateBudget";
+}
+
+<h1>Create New Budget</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Budget Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Expenses:</label>
+
+        <table class="table" id="expenseTable">
+            <thead>
+                <tr>
+                    <th>Expense Name</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section EndOfBody {
+    <script>
+        
+        var amountOfExpenses = 0;
+        var table = document.getElementById("expenseTable");
+
+        // Function to add a new row for expenses
+        function addExpense() {
+            var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
+            var row = document.createElement("tr"); // Create a new row
+            row.innerHTML = `
+                    <td>
+                        <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                    </td>
+                `;
+
+            tbody.appendChild(row); // Append the row to the tbody element
+            amountOfExpenses++;
+        }
+
+        // Function to remove a row for expenses
+        function removeExpense(rowToRemove) {
+            var row = rowToRemove.parentNode.parentNode; // Get the parent of the parent of rowToRemove argument
+            table.tBodies[0].removeChild(row);
+            amountOfExpenses--;
+
+            // Update indices for remaining expenses since the order most likely is off when element is deleted
+            var rows = table.tBodies[0].getElementsByTagName("tr");
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].getElementsByTagName("input")[0].setAttribute("name", `Expenses[${i}].Name`);
+                rows[i].getElementsByTagName("input")[1].setAttribute("name", `Expenses[${i}].Amount`);
+            }
+        }
+
+        // Function to ensure that there is always a value in the amount input fields
+        function ensureValue(input) {
+            // Check if the input value is empty
+            if(input.value === ''){
+                // If it is empty, set its value to 0
+                input.value = '0';
+            }
+            else{
+                // If it is not empty, parse the input value to a number
+                // and set it back as the input value to remove leading 0
+                input.value = parseInt(input.value, 10);
+            }
+        }
+    </script>
+}

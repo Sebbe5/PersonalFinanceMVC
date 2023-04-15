@@ -55,5 +55,27 @@ namespace PersonalFinanceMVC.Models
             };
         }
 
+        internal void AddBudgetToDB(CreateBudgetVM vm)
+        {
+            // TODO: Comment what you have done
+            Budget newBudget = new Budget() { Name = vm.Name, ApplicationUserId = userId};
+            context.Budgets.Add(newBudget);
+            context.SaveChanges();
+
+            foreach (var expense in vm.Expenses)
+            {
+                if (expense.Name != null && expense.Amount != 0)
+                {
+                    context.Expenses.Add(new Expense
+                    {
+                        Name = expense.Name,
+                        Money = expense.Amount,
+                        BudgetId = newBudget.Id,
+                    });
+                }
+            }
+
+            context.SaveChanges();
+        }
     }
 }

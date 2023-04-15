@@ -26,5 +26,22 @@ namespace PersonalFinanceMVC.Controllers
             BudgetDetailsVM vm = dataService.CreateBudgetDetailsVM(id);
             return View(vm);
         }
+
+        [HttpGet("createBudget")]
+        public IActionResult CreateBudget()
+        {
+            return View();
+        }
+
+        [HttpPost("createBudget")]
+        public IActionResult CreateBudget(CreateBudgetVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            dataService.AddBudgetToDB(vm);
+
+            return RedirectToAction(nameof(Budgets));
+        }
     }
 }

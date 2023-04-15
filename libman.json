@@ -2,9 +2,7 @@
   "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
-
     {
-      "provider": "cdnjs",
       "library": "twitter-bootstrap@5.2.3",
       "destination": "wwwroot/lib/twitter-bootstrap/",
       "files": [
