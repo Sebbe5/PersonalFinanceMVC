@@ -7,11 +7,9 @@ namespace PersonalFinanceMVC.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        AccountService accountService;
         DataService dataService;
-        public HomeController(AccountService accountService, DataService dataService)
+        public HomeController(DataService dataService)
         {
-            this.accountService = accountService;
             this.dataService = dataService;
         }
 
