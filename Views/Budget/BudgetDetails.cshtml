@@ -4,5 +4,28 @@
     ViewData["Title"] = "BudgetDetails";
 }
 
-<h1>@Model.Name Details</h1>
+<h1>Budget Details</h1>
 
+<p><strong>Budget Name:</strong> @Model.Name</p>
+<hr />
+<h2>Expenses</h2>
+@if (Model.Expenses != null && Model.Expenses.Length > 0)
+{
+    <table>
+        <tr>
+            <th>Expense Name</th>
+            <th>Amount</th>
+        </tr>
+        @foreach (var expense in Model.Expenses)
+        {
+            <tr>
+                <td>@expense.Name</td>
+                <td>@expense.Amount</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No expenses found.</p>
+}

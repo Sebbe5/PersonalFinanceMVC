@@ -24,7 +24,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult BudgetDetails(int id)
         {
             BudgetDetailsVM vm = dataService.CreateBudgetDetailsVM(id);
-            return View();
+            return View(vm);
         }
     }
 }

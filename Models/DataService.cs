@@ -20,23 +20,17 @@ namespace PersonalFinanceMVC.Models
             this.userManager = userManager;
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
-
-        public Budget[] GetUserBudgets() => context.Budgets.Where(b => b.ApplicationUserId == userId).ToArray();
-
         internal BudgetsVM CreateBudgetsVM()
         {
-            // Get all budgets mathing the user ID from database
-            var budgets = GetUserBudgets();
-
             // Map budgets to BudgetItemVM objects
-            var budgetItems = budgets.Select(b => new BudgetsVM.BudgetItemVM
+            var budgetItems = context.Budgets.Where(b => b.ApplicationUserId == userId).Select(b => new BudgetsVM.BudgetItemVM
             {
                 Id = b.Id,
                 Name = b.Name,
             })
             .ToArray();
 
-            // Create the BudgetVM, set its properties and return it from the method
+            // Create the BudgetsVM, set its properties and return it from the method
             return new BudgetsVM
             {
                 Budgets = budgetItems
@@ -45,7 +39,21 @@ namespace PersonalFinanceMVC.Models
 
         internal BudgetDetailsVM CreateBudgetDetailsVM(int id)
         {
-            var budgets = GetUserBudgets();
+            // Map expenses to ExpenseItemVM objects
+            var expenseItems = context.Expenses.Where(e => e.BudgetId == id).Select(e => new BudgetDetailsVM.ExpenseItemVM
+            {
+                Name = e.Name,
+                Amount = e.Money
+            })
+            .ToArray();
+
+            // Create the BudgetDetailsVM, set its properties and return it from the method
+            return new BudgetDetailsVM
+            {
+                Name = context.Budgets.SingleOrDefault(b => b.Id == id).Name,
+                Expenses = expenseItems
+            };
         }
+
     }
 }
