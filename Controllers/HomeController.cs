@@ -13,10 +13,12 @@ namespace PersonalFinanceMVC.Controllers
             this.dataService = dataService;
         }
 
-        [HttpGet("member")]
-        public IActionResult Member()
+        [HttpGet("home")]
+        public IActionResult Home()
         {
             return View();
         }
+
+        
     }
 }

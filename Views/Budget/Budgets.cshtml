@@ -1,0 +1,24 @@
+﻿@model BudgetsVM
+
+@{
+    ViewData["Title"] = "Budgets";
+}
+
+<h1>Budgets</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var budget in Model.Budgets)
+        {
+            <tr>
+                <td>@budget.Name</td>
+                <td><a asp-action="BudgetDetails" asp-route-id="@budget.Id">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -19,7 +19,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult Register()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
+                return RedirectToAction(nameof(HomeController.Home), nameof(HomeController).Replace("Controller", string.Empty));
 
             return View();
         }
@@ -47,7 +47,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
+                return RedirectToAction(nameof(HomeController.Home), nameof(HomeController).Replace("Controller", string.Empty));
 
             return View();
         }
@@ -67,7 +67,7 @@ namespace PersonalFinanceMVC.Controllers
                 return View();
             }
 
-            return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
+            return RedirectToAction(nameof(HomeController.Home), nameof(HomeController).Replace("Controller", string.Empty));
 
         }
 
