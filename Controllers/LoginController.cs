@@ -14,32 +14,6 @@ namespace PersonalFinanceMVC.Controllers
         }
 
         [HttpGet("")]
-        [HttpGet("login")]
-        public IActionResult Login()
-        {
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
-
-            return View();
-        }
-
-        [HttpPost("")]
-        public async Task<IActionResult> LoginAsync(LoginVM vm)
-        {
-            if (!ModelState.IsValid)
-                return View(vm);
-
-            var errorMessage = await accountService.TryLoginAsync(vm);
-            if (errorMessage != null)
-            {
-                // Show error
-                ModelState.AddModelError(string.Empty, errorMessage);
-                return View(vm);
-            }
-
-            return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
-        }
-
         [HttpGet("Register")]
         public IActionResult Register()
         {
@@ -49,13 +23,51 @@ namespace PersonalFinanceMVC.Controllers
             return View();
         }
 
+        [HttpPost("")]
         [HttpPost("Register")]
-        public IActionResult Register(string hej)
+        public async Task<IActionResult> RegisterAsync(RegisterVM vm)
+        {
+            // Try to register user
+            var errorMessage = await accountService.TryRegisterAsync(vm);
+            if (errorMessage != null)
+            {
+                // Show error
+                ModelState.AddModelError(string.Empty, errorMessage);
+                return View();
+            }
+            if (!ModelState.IsValid)
+                return View();
+
+
+           return RedirectToAction(nameof(LoginAsync).Replace("Async", string.Empty));
+        }
+
+        [HttpGet("login")]
+        public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
 
             return View();
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync(LoginVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            // Try to login user
+            var errorMessage = await accountService.TryLoginAsync(vm);
+            if (errorMessage != null)
+            {
+                // Show error
+                ModelState.AddModelError(string.Empty, errorMessage);
+                return View();
+            }
+
+            return RedirectToAction(nameof(HomeController.Member), nameof(HomeController).Replace("Controller", string.Empty));
+        }
+
     }
 }

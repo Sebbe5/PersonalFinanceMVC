@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PersonalFinanceMVC;
 using PersonalFinanceMVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,3 +32,4 @@ app.UseEndpoints(o => o.MapControllers());
 app.UseStaticFiles();
 
 app.Run();
+

@@ -31,6 +31,10 @@ namespace PersonalFinanceMVC.Models
 
         public async Task<string> TryLoginAsync(LoginVM viewModel)
         {
+            if (viewModel.Password == null)
+            {
+                return null;
+            }
             SignInResult result = await signInManager.PasswordSignInAsync(
                 viewModel.Username,
                 viewModel.Password,
@@ -40,6 +44,24 @@ namespace PersonalFinanceMVC.Models
                 return null;
             else
                 return "login failed";
+        }
+
+        public async Task<string> TryRegisterAsync(RegisterVM viewModel)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = viewModel.Username,
+                Email = viewModel.Email,
+            };
+
+            if (viewModel.Password == null)
+            {
+                return null;
+            }
+            IdentityResult result = await
+                userManager.CreateAsync(user, viewModel.Password);
+
+            return result.Errors.FirstOrDefault()?.Description;
         }
     }
 }
