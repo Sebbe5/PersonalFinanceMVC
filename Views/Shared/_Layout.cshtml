@@ -9,9 +9,18 @@
 <body>
     @if (User.Identity.IsAuthenticated)
     {
-        <form asp-controller="Login" asp-action="Logout" method="post">
-            <button type="submit">Logout</button>
-        </form>
+        <nav>
+            <ul>
+                <li><a asp-controller="Home" asp-action="Home">Home</a></li>
+                <li>
+                    <form asp-controller="Login" asp-action="Logout">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        
+        
     }
     else
     {
