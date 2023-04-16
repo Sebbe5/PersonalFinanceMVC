@@ -5,6 +5,7 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Controllers
 {
+    [Authorize]
     public class BudgetController : Controller
     {
         DataService dataService;
