@@ -32,5 +32,3 @@ app.UseEndpoints(o => o.MapControllers());
 app.UseStaticFiles();
 
 app.Run();
-
-// TODO: Remove class-tags from code
