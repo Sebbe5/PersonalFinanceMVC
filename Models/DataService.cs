@@ -5,6 +5,7 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Models
 {
+    // TODO: Split up the services in several so that this service does not contain all logged in functionality
     public class DataService
     {
         UserManager<ApplicationUser> userManager;
