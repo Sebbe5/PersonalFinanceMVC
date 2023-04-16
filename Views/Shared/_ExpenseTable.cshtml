@@ -1,0 +1,54 @@
+﻿<script>
+
+    var amountOfExpenses = @(Model.Expenses != null ? @Model.Expenses.Count : 0);
+    var table = document.getElementById("expenseTable");
+
+    // Function to add a new row for expenses
+    function addExpense() {
+        var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
+        var row = document.createElement("tr"); // Create a new row
+        row.innerHTML = `
+                                <td>
+                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                                </td>
+                            `;
+
+        tbody.appendChild(row); // Append the row to the tbody element
+        amountOfExpenses++;
+    }
+
+    // Function to remove a row for expenses
+    function removeExpense(rowToRemove) {
+        var row = rowToRemove.parentNode.parentNode; // Get the parent of the parent of rowToRemove argument
+        table.tBodies[0].removeChild(row);
+        amountOfExpenses--;
+
+        // Update indices for remaining expenses since the order most likely is off when element is deleted
+        var rows = table.tBodies[0].getElementsByTagName("tr");
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].getElementsByTagName("input")[0].setAttribute("name", `Expenses[${i}].Name`);
+            rows[i].getElementsByTagName("input")[1].setAttribute("name", `Expenses[${i}].Amount`);
+        }
+    }
+
+    // Function to ensure that there is always a value in the amount input fields
+    function ensureValue(input) {
+        // Check if the input value is empty
+        if (input.value === '') {
+            // If it is empty, set its value to 0
+            input.value = '0';
+        }
+        else {
+            // If it is not empty, parse the input value to a number
+            // and set it back as the input value to remove leading 0
+            input.value = parseInt(input.value, 10);
+        }
+    }
+</script>
+
