@@ -27,7 +27,7 @@ body, html {
 }
 
 body {
-    background-color: white;
+    background-color: #e8e9ef;
 }
 
 header {
@@ -39,9 +39,6 @@ header {
 main {
     grid-area: main;
     overflow-y: auto;
-    display: flex;
-    align-items: center;
-    background-color: #e8e9ef;
 }
 
 footer {
@@ -66,9 +63,26 @@ footer {
     --bs-btn-hover-border-color: #755f56;
 }
 
-/* Sign In */
+.btn-primary {
+    --bs-btn-bg: #594035;
+    --bs-btn-color: #e8e9ef;
+    --bs-btn-border-color: #594035;
+    --bs-btn-hover-color: #e8e9ef;
+    --bs-btn-hover-bg: #755f56;
+    --bs-btn-hover-border-color: #755f56;
+    --bs-btn-active-bg: #594035;
+    --bs-btn-active-border-color: #594035;
+}
+
+/* Sign In and Register */
 .form-signin {
     max-width: 330px;
     padding: 15px;
     box-shadow: 0px 0px 15px black;
+}
+
+.flex-center {
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
