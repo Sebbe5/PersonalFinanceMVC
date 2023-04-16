@@ -17,7 +17,7 @@ builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/login");
 
 builder.Services.AddScoped<AccountService>();
 
-builder.Services.AddScoped<DataService>();
+builder.Services.AddScoped<BudgetService>();
 
 builder.Services.AddControllersWithViews();
 

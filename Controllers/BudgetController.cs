@@ -8,23 +8,23 @@ namespace PersonalFinanceMVC.Controllers
     [Authorize]
     public class BudgetController : Controller
     {
-        DataService dataService;
-        public BudgetController(DataService dataService)
+        BudgetService budgetService;
+        public BudgetController(BudgetService dataService)
         {
-            this.dataService = dataService;
+            this.budgetService = dataService;
         }
 
         [HttpGet("budgets")]
         public IActionResult Budgets()
         {
-            BudgetsVM vm = dataService.CreateBudgetsVM();
+            BudgetsVM vm = budgetService.CreateBudgetsVM();
             return View(vm);
         }
 
         [HttpGet("budgetDetails")]
         public IActionResult BudgetDetails(int id)
         {
-            BudgetDetailsVM vm = dataService.CreateBudgetDetailsVM(id);
+            BudgetDetailsVM vm = budgetService.CreateBudgetDetailsVM(id);
             return View(vm);
         }
 
@@ -40,7 +40,7 @@ namespace PersonalFinanceMVC.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            dataService.AddBudgetToDB(vm);
+            budgetService.AddBudgetToDB(vm);
 
             return RedirectToAction(nameof(Budgets));
         }
@@ -49,7 +49,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult EditBudget(int id)
         {
             Response.Cookies.Append("EditedBudgetId", id.ToString());
-            EditBudgetVM vm = dataService.CreateEditBudgetVM(id);
+            EditBudgetVM vm = budgetService.CreateEditBudgetVM(id);
             return View(vm);
         }
 
@@ -61,7 +61,7 @@ namespace PersonalFinanceMVC.Controllers
 
             int id = int.Parse(Request.Cookies["EditedBudgetId"]);
 
-            dataService.EditBudget(vm, id);
+            budgetService.EditBudget(vm, id);
 
             return RedirectToAction(nameof(BudgetDetails), new {id});
         }
@@ -70,7 +70,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult RemoveBudget(int id)
         {
 
-            dataService.RemoveBudget(id);
+            budgetService.RemoveBudget(id);
 
             return RedirectToAction(nameof(Budgets));
         }

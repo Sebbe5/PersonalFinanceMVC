@@ -5,14 +5,13 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Models
 {
-    // TODO: Split up the services in several so that this service does not contain all logged in functionality
-    public class DataService
+    public class BudgetService
     {
         UserManager<ApplicationUser> userManager;
         readonly string userId;
 
         private readonly ApplicationContext context;
-        public DataService(
+        public BudgetService(
             ApplicationContext context,
             UserManager<ApplicationUser> userManager,
             IHttpContextAccessor accessor
