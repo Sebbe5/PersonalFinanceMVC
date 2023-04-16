@@ -6,14 +6,14 @@
 
 <h1>Create New Budget</h1>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Name" class="control-label">Budget Name:</label>
+<form asp-action="Create">
+    <div>
+        <label asp-for="Name">Budget Name:</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <div>
         <label>Expenses:</label>
 
         <table class="table" id="expenseTable">
