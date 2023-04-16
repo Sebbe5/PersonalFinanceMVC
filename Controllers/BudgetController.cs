@@ -31,7 +31,8 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("createBudget")]
         public IActionResult CreateBudget()
         {
-            return View();
+            CreateBudgetVM vm = new CreateBudgetVM();
+            return View(vm);
         }
 
         [HttpPost("createBudget")]
