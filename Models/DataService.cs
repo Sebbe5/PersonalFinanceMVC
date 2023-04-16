@@ -57,11 +57,17 @@ namespace PersonalFinanceMVC.Models
 
         internal void AddBudgetToDB(CreateBudgetVM vm)
         {
-            // TODO: Comment what you have done
+            // Create an instance of a budget and set its values
             Budget newBudget = new Budget() { Name = vm.Name, ApplicationUserId = userId};
+
+            // Add the budget instance to the list of budgets in the context (for the database)
             context.Budgets.Add(newBudget);
+
+            // Save the changes and store in the database
+            // This will give the budget an ID
             context.SaveChanges();
 
+            // For each expense in the view model, create a new instance of an expense, set its values and add the instances to the list of expenses in the context (for the database)
             foreach (var expense in vm.Expenses)
             {
                 if (expense.Name != null && expense.Amount != 0)
@@ -75,6 +81,7 @@ namespace PersonalFinanceMVC.Models
                 }
             }
 
+            // Save the changes and store in the database
             context.SaveChanges();
         }
     }
