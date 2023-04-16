@@ -13,8 +13,9 @@ secondary-bg-color-3 : #594035 */
 secondary-bg-color-4 : #af9a8b */
 
 /*prime-bg-color-5 : #e8e9ef                           
-secondary-bg-color-5 : #cccdcf */     
+secondary-bg-color-5 : #cccdcf */   
 
+/* Layout */
 body, html {
     min-height: 100vh;
     display: grid;
@@ -26,22 +27,43 @@ body, html {
 }
 
 body {
-    background-color: #cccdcf;
+    background-color: white;
 }
 
 header {
     grid-area: header;
+    background-color: #2f3924;
 }
+
 
 main {
     grid-area: main;
     overflow-y: auto;
     display: flex;
     align-items: center;
+    background-color: #e8e9ef;
 }
 
 footer {
     grid-area: footer;
+    background-color: #474548;
+    color: #e8e9ef;
+}
+
+.navbar-brand {
+    color: #af9a8b;
+}
+
+.nav-link {
+    color: #e8e9ef;
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: #755f56;
+    --bs-btn-border-color: #755f56;
+    --bs-btn-hover-color: #e8e9ef;
+    --bs-btn-hover-bg: #755f56;
+    --bs-btn-hover-border-color: #755f56;
 }
 
 /* Sign In */
