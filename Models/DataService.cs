@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PersonalFinanceMVC.Models.Entities;
 using PersonalFinanceMVC.Views.Budget;
 
@@ -55,10 +56,28 @@ namespace PersonalFinanceMVC.Models
             };
         }
 
+        internal EditBudgetVM CreateEditBudgetVM(int id)
+        {
+            // Map expenses to ExpenseItemVM objects
+            var expenseItems = context.Expenses.Where(e => e.BudgetId == id).Select(e => new EditBudgetVM.ExpenseItemVM
+            {
+                Name = e.Name,
+                Amount = e.Money
+            })
+            .ToList();
+
+            // Create the EditDetailsVM, set its properties and return it from the method
+            return new EditBudgetVM
+            {
+                Name = context.Budgets.SingleOrDefault(b => b.Id == id).Name,
+                Expenses = expenseItems
+            };
+        }
+
         internal void AddBudgetToDB(CreateBudgetVM vm)
         {
             // Create an instance of a budget and set its values
-            Budget newBudget = new Budget() { Name = vm.Name, ApplicationUserId = userId};
+            Budget newBudget = new Budget() { Name = vm.Name, ApplicationUserId = userId };
 
             // Add the budget instance to the list of budgets in the context (for the database)
             context.Budgets.Add(newBudget);
@@ -68,20 +87,64 @@ namespace PersonalFinanceMVC.Models
             context.SaveChanges();
 
             // For each expense in the view model, create a new instance of an expense, set its values and add the instances to the list of expenses in the context (for the database)
-            foreach (var expense in vm.Expenses)
+            foreach (var expenseItemVM in vm.Expenses)
             {
-                if (expense.Name != null && expense.Amount != 0)
+                if (expenseItemVM.Name != null && expenseItemVM.Amount != 0)
                 {
                     context.Expenses.Add(new Expense
                     {
-                        Name = expense.Name,
-                        Money = expense.Amount,
+                        Name = expenseItemVM.Name,
+                        Money = expenseItemVM.Amount,
                         BudgetId = newBudget.Id,
                     });
                 }
             }
 
             // Save the changes and store in the database
+            context.SaveChanges();
+        }
+
+        internal void EditBudget(EditBudgetVM vm, int id)
+        {
+            // Retrieve the budget to be edited
+            var budgetToEdit = context.Budgets.Include(b => b.Expenses).SingleOrDefault(b => b.Id == id);
+
+            // Update name of budget
+            budgetToEdit.Name = vm.Name;
+
+            // Clear all expenses since it's hard to track if some expenses where deleted from the list
+            budgetToEdit.Expenses.Clear();
+
+            // Check if there are any expenses in the view model list
+            if (vm.Expenses != null)
+            {
+                foreach (var expenseItemVM in vm.Expenses)
+                {
+                    if (expenseItemVM.Name != null && expenseItemVM.Amount != 0)
+                    {
+                        // Store expense if expense already exists in relation to the budget, otherwise store null
+                        var existingExpense = budgetToEdit.Expenses.FirstOrDefault(e => e.Name == expenseItemVM.Name);
+
+                        // Check if expense already exists
+                        if (existingExpense != null)
+                        {
+                            // If expense exists, update its properties
+                            existingExpense.Money = expenseItemVM.Amount;
+                        }
+                        else
+                        {
+                            context.Expenses.Add(new Expense
+                            {
+                                Name = expenseItemVM.Name,
+                                Money = expenseItemVM.Amount,
+                                BudgetId = id,
+                            });
+
+                        }
+                    }
+                }
+            }
+
             context.SaveChanges();
         }
     }

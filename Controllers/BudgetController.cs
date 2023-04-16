@@ -43,5 +43,28 @@ namespace PersonalFinanceMVC.Controllers
 
             return RedirectToAction(nameof(Budgets));
         }
+
+        [HttpGet("editBudget")]
+        public IActionResult EditBudget(int id)
+        {
+            Response.Cookies.Append("EditedBudgetId", id.ToString());
+            EditBudgetVM vm = dataService.CreateEditBudgetVM(id);
+            return View(vm);
+        }
+
+        [HttpPost("editBudget")]
+        public IActionResult EditBudget(EditBudgetVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            int id = int.Parse(Request.Cookies["EditedBudgetId"]);
+
+            dataService.EditBudget(vm, id);
+
+            return RedirectToAction(nameof(BudgetDetails), new {id});
+        }
+
+        // TODO: Implement delete action to budgets
     }
 }
