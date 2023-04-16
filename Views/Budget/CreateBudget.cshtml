@@ -4,35 +4,37 @@
     ViewData["Title"] = "CreateBudget";
 }
 
-<h1>Create New Budget</h1>
+<div class="container mt-4 bg-white rounded">
+    <h1>Create New Budget</h1>
 
-<form asp-action="Create">
-    <div>
-        <label asp-for="Name">Budget Name:</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+    <form asp-action="Create">
+        <div>
+            <label asp-for="Name">Budget Name:</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Expenses:</label>
+        <div>
+            <label>Expenses:</label>
 
-        <table class="table table-striped" id="expenseTable">
-            <thead>
-                <tr>
-                    <th>Expense Name</th>
-                    <th>Amount</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+            <table class="table table-striped" id="expenseTable">
+                <thead>
+                    <tr>
+                        <th>Expense Name</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-        <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
-    </div>
+            <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
-</form>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 
 @section EndOfBody {
     <script>
@@ -44,16 +46,16 @@
             var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
             var row = document.createElement("tr"); // Create a new row
             row.innerHTML = `
-                                        <td>
-                                            <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
-                                        </td>
-                                        <td>
-                                            <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
-                                        </td>
-                                    `;
+                                                <td>
+                                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                                                </td>
+                                            `;
 
             tbody.appendChild(row); // Append the row to the tbody element
             amountOfExpenses++;

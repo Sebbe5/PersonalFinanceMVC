@@ -4,53 +4,55 @@
     ViewData["Title"] = "EditBudget";
 }
 
-<h1>Edit Budget</h1>
+<div class="container mt-4 bg-white rounded">
+    <h1>Edit Budget</h1>
 
-<form asp-action="Edit">
-    <div>
-        <label asp-for="Name">Budget Name:</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+    <form asp-action="Edit">
+        <div>
+            <label asp-for="Name">Budget Name:</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Expenses:</label>
+        <div>
+            <label>Expenses:</label>
 
-        <table class="table" id="expenseTable">
-            <thead>
-                <tr>
-                    <th>Expense Name</th>
-                    <th>Amount</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Expenses != null && Model.Expenses.Count > 0)
-                {
-                    for (int i = 0; i < Model.Expenses.Count; i++)
+            <table class="table" id="expenseTable">
+                <thead>
+                    <tr>
+                        <th>Expense Name</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Expenses != null && Model.Expenses.Count > 0)
                     {
-                        <tr>
-                            <td>
-                                <input type="text" name="Expenses[@i].Name" class="form-control" value="@Model.Expenses[i].Name" />
-                            </td>
-                            <td>
-                                <input type="number" name="Expenses[@i].Amount" class="form-control" value="@Model.Expenses[i].Amount" oninput="ensureValue(this)" />
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
-                            </td>
-                        </tr>
+                        for (int i = 0; i < Model.Expenses.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="text" name="Expenses[@i].Name" class="form-control" value="@Model.Expenses[i].Name" />
+                                </td>
+                                <td>
+                                    <input type="number" name="Expenses[@i].Amount" class="form-control" value="@Model.Expenses[i].Amount" oninput="ensureValue(this)" />
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
-    </div>
+            <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
-</form>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 
 @section EndOfBody {
     <script>
@@ -62,16 +64,16 @@
             var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
             var row = document.createElement("tr"); // Create a new row
             row.innerHTML = `
-                                                <td>
-                                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
-                                                </td>
-                                                <td>
-                                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
-                                                </td>
-                                            `;
+                                                        <td>
+                                                            <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                                                        </td>
+                                                    `;
 
             tbody.appendChild(row); // Append the row to the tbody element
             amountOfExpenses++;

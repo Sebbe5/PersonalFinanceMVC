@@ -4,29 +4,26 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
-
+<div class="text-center form-signin w-100 m-auto bg-white rounded">
 <form asp-action="Register">
-    <div>
-        <label asp-for="Username"></label>
+    <h1 class="h3 mb-3 ">Register</h1>
+    <div class="form-floating my-1">
         <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+        <label asp-for="Username"></label>
     </div>
-    <div>
-        <label asp-for="Email"></label>
+    <div class="form-floating my-1">
         <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <label asp-for="Email"></label>
     </div>
-    <div>
-        <label asp-for="Password"></label>
+    <div class="form-floating my-1">
         <input asp-for="Password" class="form-control" type="password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+        <label asp-for="Password"></label>
     </div>
-    <div>
-        <label asp-for="ConfirmPassword"></label>
+    <div class="form-floating my-1">
         <input asp-for="ConfirmPassword" class="form-control" type="password" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <label asp-for="ConfirmPassword"></label>
     </div>
-    <div asp-validation-summary="All"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
+</div>

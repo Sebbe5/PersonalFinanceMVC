@@ -4,28 +4,48 @@
     ViewData["Title"] = "BudgetDetails";
 }
 
-<h1>Budget Details</h1>
+<style>
+    body {
+        background-color: #f8f9fa; /* Set custom background color */
+    }
+</style>
 
-<p><strong>Budget Name:</strong> @Model.Name</p>
-<hr />
-<h2>Expenses</h2>
-@if (Model.Expenses != null && Model.Expenses.Length > 0)
-{
-    <table>
-        <tr>
-            <th>Expense Name</th>
-            <th>Amount</th>
-        </tr>
-        @foreach (var expense in Model.Expenses)
-        {
-            <tr>
-                <td>@expense.Name</td>
-                <td>@expense.Amount</td>
-            </tr>
-        }
-    </table>
-}
-else
-{
-    <p>No expenses found.</p>
-}
+<div class="container mt-4 bg-white rounded">
+    <h1>Budget Details</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p><strong>Budget Name:</strong> @Model.Name</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Expenses</h2>
+            @if (Model.Expenses != null && Model.Expenses.Length > 0)
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Expense Name</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var expense in Model.Expenses)
+                        {
+                            <tr>
+                                <td>@expense.Name</td>
+                                <td>@expense.Amount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No expenses found.</p>
+            }
+        </div>
+    </div>
+</div>

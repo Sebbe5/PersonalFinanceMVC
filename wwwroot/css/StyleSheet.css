@@ -1,1 +1,113 @@
 ﻿
+body, html {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/* COLORS */
+.prime-bg-color-1 {
+    background-color: #474548;
+}
+
+.secondary-bg-color-1 {
+    background-color: #1f1d20;
+}
+
+.prime-bg-color-2 {
+    background-color: #2f3924;
+}
+
+.secondary-bg-color-2 {
+    background-color: #191d13;
+}
+
+.prime-bg-color-3 {
+    background-color: #755f56;
+}
+
+.secondary-bg-color-3 {
+    background-color: #594035;
+}
+
+.prime-bg-color-4 {
+    background-color: #c6af99;
+}
+
+.secondary-bg-color-4 {
+    background-color: #af9a8b;
+}
+
+.prime-bg-color-5 {
+    background-color: #e8e9ef;
+}
+
+.secondary-bg-color-5 {
+    background-color: #cccdcf;
+}
+
+.prime-color-1 {
+    color: #474548;
+}
+
+.secondary-color-1 {
+    color: #1f1d20;
+}
+
+.prime-color-2 {
+    color: #2f3924;
+}
+
+.secondary-color-2 {
+    color: #191d13;
+}
+
+.prime-color-3 {
+    color: #755f56;
+}
+
+.secondary-color-3 {
+    color: #594035;
+}
+
+.prime-color-4 {
+    color: #c6af99;
+}
+
+.secondary-color-4 {
+    color: #af9a8b;
+}
+
+.prime-color-5 {
+    color: #e8e9ef;
+}
+
+.secondary-color-5 {
+    color: #cccdcf;
+}
+
+/* Sign In */
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    box-shadow: 0px 0px 15px black;
+}

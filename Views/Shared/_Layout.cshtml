@@ -5,38 +5,43 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
 </head>
-<body>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <nav class="navbar navbar-expand-lg bg-light px-2">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Home">Home</a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <form class="form-inline" asp-controller="Login" asp-action="Logout">
-                        <button type="submit" class="btn btn-outline-secondary">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-    }
-    else
-    {
-        <nav class="navbar navbar-expand-lg bg-light px-2">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Home">Home</a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Login" asp-action="Register">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Login" asp-action="Login">Login</a>
-                </li>
-            </ul>
-        </nav>
-    }
-    <div class="mx-3">
+<body class="prime-color">
+    <header class="secondary-color-2 py-2 px-2">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Home">Home</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <form class="form-inline" asp-controller="Login" asp-action="Logout">
+                            <button type="submit" class="btn btn-outline-secondary">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        }
+        else
+        {
+            <nav class="navbar navbar-expand-lg px-2">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Login" asp-action="Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Login" asp-action="Login">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        }
+    </header>
+    <main class="mx-3">
         @RenderBody()
-    </div>
+    </main>
+    <footer class="secondary-color-2 py-4 px-2">
+        <p class="m-0">&copy; 2023 A project by Sebastian Fredriksson.</p>
+    </footer>
     @RenderSection("EndOfBody", false)
     <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
 </body>
