@@ -7,7 +7,7 @@
 <div class="container mt-4 bg-white rounded">
     <h1>Edit Budget</h1>
 
-    <form asp-action="Edit">
+    <form asp-action="Edit" onkeydown="return checkEnterKey(event)">
         <div>
             <label asp-for="Name">Budget Name:</label>
             <input asp-for="Name" class="form-control" />
@@ -58,6 +58,17 @@
     <script>
         var amountOfExpenses = @(Model.Expenses != null ? @Model.Expenses.Count : 0);
         var table = document.getElementById("expenseTable");
+
+
+        // Add event listener for form's keydown event
+        function checkEnterKey(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                addExpense();
+                return false;
+            }
+            return true;
+        }
 
         // Function to add a new row for expenses
         function addExpense() {
@@ -113,7 +124,5 @@
     }
 
 @{
-    // TODO: Add autofocus to the mnost recently added expense
-    // TODO: Add the functionality of adding an expense when pressing enter instead of submitting the form
     // TODO: CSS for buttons
 }
