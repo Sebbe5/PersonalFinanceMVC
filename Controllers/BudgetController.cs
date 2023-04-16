@@ -39,7 +39,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult CreateBudget(CreateBudgetVM vm)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View(vm);
 
             budgetService.AddBudgetToDB(vm);
 
@@ -58,7 +58,7 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult EditBudget(EditBudgetVM vm)
         {
             if (!ModelState.IsValid)
-                return View();
+                return View(vm);
 
             int id = int.Parse(Request.Cookies["EditedBudgetId"]);
 

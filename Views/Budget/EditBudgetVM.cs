@@ -1,9 +1,10 @@
-﻿using PersonalFinanceMVC.Models.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PersonalFinanceMVC.Views.Budget
 {
     public class EditBudgetVM
     {
+        [Required(ErrorMessage = "Please enter a budget name.")]
         public string Name { get; set; }
         public List<ExpenseItemVM> Expenses { get; set; }
         public class ExpenseItemVM
