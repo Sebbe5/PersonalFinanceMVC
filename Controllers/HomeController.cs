@@ -4,11 +4,18 @@ using PersonalFinanceMVC.Models;
 
 namespace PersonalFinanceMVC.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
+        [Authorize]
         [HttpGet("home")]
         public IActionResult Home()
+        {
+            return View();
+        }
+
+        [HttpGet("colors")]
+        public IActionResult Colors()
         {
             return View();
         }
