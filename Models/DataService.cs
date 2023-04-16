@@ -148,5 +148,12 @@ namespace PersonalFinanceMVC.Models
 
             context.SaveChanges();
         }
+
+        internal void RemoveBudget(int id)
+        {
+            // Remove the budget and all its related expenses
+            context.Budgets.Remove(context.Budgets.SingleOrDefault(b => b.Id == id));
+            context.SaveChanges();
+        }
     }
 }

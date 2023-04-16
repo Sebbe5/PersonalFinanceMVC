@@ -66,6 +66,13 @@ namespace PersonalFinanceMVC.Controllers
             return RedirectToAction(nameof(BudgetDetails), new {id});
         }
 
-        // TODO: Implement delete action to budgets
+        [HttpPost("removeBudget")]
+        public IActionResult RemoveBudget(int id)
+        {
+
+            dataService.RemoveBudget(id);
+
+            return RedirectToAction(nameof(Budgets));
+        }
     }
 }
