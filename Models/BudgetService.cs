@@ -76,8 +76,10 @@ namespace PersonalFinanceMVC.Models
 
         internal void AddBudgetToDB(CreateBudgetVM vm)
         {
+            string name = CheckIfNameExist(vm.Name);
+
             // Create an instance of a budget and set its values
-            Budget newBudget = new Budget() { Name = vm.Name, ApplicationUserId = userId };
+            Budget newBudget = new Budget() { Name = name, ApplicationUserId = userId };
 
             // Add the budget instance to the list of budgets in the context (for the database)
             context.Budgets.Add(newBudget);
@@ -110,7 +112,8 @@ namespace PersonalFinanceMVC.Models
             var budgetToEdit = context.Budgets.Include(b => b.Expenses).SingleOrDefault(b => b.Id == id);
 
             // Update name of budget
-            budgetToEdit.Name = vm.Name;
+            
+            budgetToEdit.Name = budgetToEdit.Name == vm.Name ? budgetToEdit.Name : CheckIfNameExist(vm.Name);
 
             // Clear all expenses since it's hard to track if some expenses where deleted from the list
             budgetToEdit.Expenses.Clear();
@@ -153,6 +156,32 @@ namespace PersonalFinanceMVC.Models
             // Remove the budget and all its related expenses
             context.Budgets.Remove(context.Budgets.SingleOrDefault(b => b.Id == id));
             context.SaveChanges();
+        }
+
+        private string CheckIfNameExist(string name)
+        {
+            // Get the names of all budgets
+            var budgetNames = context.Budgets.Select(b => b.Name).ToList();
+
+            // Check if name already exist
+            bool isExisting = budgetNames.Contains(name);
+
+            int counter = 2;
+
+            // Loop until the name does not exist
+            while (isExisting)
+            {
+                // If the loop have passed the first iteration, remove the last char, other wise don't
+                if (counter > 2)
+                    name = name.Substring(0, name.Length - 1) + $"{counter}";
+                else
+                    name += $"{counter}";
+
+                isExisting = budgetNames.Contains(name);
+                counter++;
+            }
+
+            return name;
         }
     }
 }
