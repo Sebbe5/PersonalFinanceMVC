@@ -47,6 +47,10 @@ footer {
     color: #e8e9ef;
 }
 
+.container{
+    padding-bottom: 1rem;
+}
+
 .navbar-brand {
     color: #af9a8b;
 }
