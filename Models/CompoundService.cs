@@ -23,13 +23,10 @@ namespace PersonalFinanceMVC.Models
 
         internal CalculateVM UpdateCalculateVM(CalculateVM vm)
         {
-            if (vm.Compounds == 0) return vm;
             // Set necessary values
+            int compounds = 12;
             decimal principal = vm.Principal;
             decimal interestRate = vm.Rate / 100;
-            int compounds = vm.Compounds;
-            //decimal compoundAmount = principal * (decimal)Math.Pow((1 + (double)(interestRate / compounds)), (compounds * years));
-            //decimal compoundInterest = compoundAmount - principal;
 
             // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < vm.Years; i++)

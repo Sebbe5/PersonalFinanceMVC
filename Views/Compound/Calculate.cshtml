@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Calculate";
-    // TODO: Add the ability to set a reoccuring input 
+    // TODO: Add info box popups
 }
 
 
@@ -11,21 +11,18 @@
 
     <form asp-action="Calculate">
         <div>
-            <label for="principal">Principal Amount:</label>
-            <input type="number" class="form-control" id="principal" name="Principal" asp-for="Principal" step="0.01" />
+            <label asp-for="Principal">Principal Amount:</label>
+            <input type="number" class="form-control"asp-for="Principal" step="0.01" />
         </div>
         <div>
-            <label for="rate">Annual Interest Rate (%):</label>
-            <input type="number" class="form-control" id="rate" name="Rate" asp-for="Rate" step="0.01" />
+            <label asp-for="Rate">Annual Interest Rate (%):</label>
+            <input type="number" class="form-control" asp-for="Rate" step="0.01" />
         </div>
         <div>
-            <label for="years">Number of Years:</label>
-            <input type="number" class="form-control" id="years" name="Years" asp-for="Years" step="1" />
+            <label asp-for="Years">Number of Years:</label>
+            <input type="number" class="form-control" asp-for="Years" step="1" />
         </div>
-        <div>
-            <label for="compounds">Number of Compounds per Year:</label>
-            <input type="number" class="form-control" id="compounds" name="Compounds" asp-for="Compounds" step="1" />
-        </div>
+        
         <button type="submit" class="btn btn-primary mt-3">Calculate</button>
     </form>
 
