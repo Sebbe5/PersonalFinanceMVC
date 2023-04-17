@@ -24,23 +24,37 @@ namespace PersonalFinanceMVC.Models
         internal CalculateVM UpdateCalculateVM(CalculateVM vm)
         {
             // Set necessary values
-            int compounds = 12;
             decimal principal = vm.Principal;
+            decimal monthlyContributions = vm.MonthlyContribution;
+            int compounds = 12;
             decimal interestRate = vm.Rate / 100;
+            decimal ratePerMonth = interestRate / compounds;
+            decimal totalContribution = principal;
+            decimal interest = 0;
 
             // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < vm.Years; i++)
             {
-                decimal compoundAmountThisYear = principal * (decimal)Math.Pow((1 + (double)(interestRate / compounds)), (compounds));
-                var result = new CalculateVM.CompoundInterestResult
+                var result = new CalculateVM.CompoundInterestResult();
+                
+                // Set year and principal
+                result.Year = i;
+
+                // Loop through months
+                for (int j = 0; j < 12; j++)
                 {
-                    Year = i,
-                    Principal = principal,
-                    Amount = compoundAmountThisYear,
-                    Interest = compoundAmountThisYear - principal,
-                };
+                    totalContribution += monthlyContributions;
+                    interest += totalContribution * ratePerMonth;
+                }
+
+                result.Contribution = totalContribution;
+                result.Interest = interest;
+
+                result.Amount = totalContribution + interest;
+
                 vm.Results.Add(result);
-                principal = compoundAmountThisYear;
+
+                principal = result.Amount;
             }
             return vm;
         }

@@ -15,6 +15,10 @@
             <input type="number" class="form-control"asp-for="Principal" step="0.01" />
         </div>
         <div>
+            <label asp-for="MonthlyContribution">Monthly Contributions:</label>
+            <input type="number" class="form-control"asp-for="MonthlyContribution" step="0.01" />
+        </div>
+        <div>
             <label asp-for="Rate">Annual Interest Rate (%):</label>
             <input type="number" class="form-control" asp-for="Rate" step="0.01" />
         </div>
@@ -34,7 +38,7 @@
                 <thead>
                     <tr>
                         <th>Year</th>
-                        <th>Principal</th>
+                        <th>Total Contribution</th>
                         <th>Interest</th>
                         <th>Amount</th>
                     </tr>
@@ -44,7 +48,7 @@
                     {
                         <tr>
                             <td>@result.Year</td>
-                            <td>@result.Principal.ToString("C")</td>
+                            <td>@result.Contribution.ToString("C")</td>
                             <td>@result.Interest.ToString("C")</td>
                             <td>@result.Amount.ToString("C")</td>
                         </tr>
