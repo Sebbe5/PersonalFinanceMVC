@@ -1,0 +1,54 @@
+﻿@model CalculateVM
+
+@{
+    ViewData["Title"] = "Calculate";
+}
+
+
+<h1>Compound Interest Calculator</h1>
+
+<form asp-action="Calculate" method="post">
+    <div class="form-group">
+        <label for="principal">Principal Amount:</label>
+        <input type="number" class="form-control" id="principal" name="Principal" asp-for="Principal" step="0.01" />
+    </div>
+    <div class="form-group">
+        <label for="rate">Annual Interest Rate (%):</label>
+        <input type="number" class="form-control" id="rate" name="Rate" asp-for="Rate" step="0.01" />
+    </div>
+    <div class="form-group">
+        <label for="years">Number of Years:</label>
+        <input type="number" class="form-control" id="years" name="Years" asp-for="Years" step="1" />
+    </div>
+    <div class="form-group">
+        <label for="compounds">Number of Compounds per Year:</label>
+        <input type="number" class="form-control" id="compounds" name="Compounds" asp-for="Compounds" step="1" />
+    </div>
+    <button type="submit" class="btn btn-primary">Calculate</button>
+</form>
+
+@if (Model.Results != null && Model.Results.Any())
+{
+    <h2>Compound Interest Results:</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Principal</th>
+                <th>Interest</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>@result.Year</td>
+                    <td>@result.Principal.ToString("C")</td>
+                    <td>@result.Interest.ToString("C")</td>
+                    <td>@result.Amount.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

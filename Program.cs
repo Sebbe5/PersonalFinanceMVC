@@ -19,6 +19,8 @@ builder.Services.AddScoped<AccountService>();
 
 builder.Services.AddScoped<BudgetService>();
 
+builder.Services.AddScoped<CompoundService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
