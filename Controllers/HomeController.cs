@@ -5,8 +5,7 @@ using PersonalFinanceMVC.Models;
 namespace PersonalFinanceMVC.Controllers
 {
 
-    // TODO: Add the ability to store settings to a user. Such as currency...
-    
+    // TODO: Fix proper attributes for all view models
     public class HomeController : Controller
     {
         [Authorize]
