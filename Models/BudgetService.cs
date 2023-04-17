@@ -23,18 +23,20 @@ namespace PersonalFinanceMVC.Models
         }
         internal BudgetsVM CreateBudgetsVM()
         {
+
             // Map budgets to BudgetItemVM objects
             var budgetItems = context.Budgets.Where(b => b.ApplicationUserId == userId).Select(b => new BudgetsVM.BudgetItemVM
             {
                 Id = b.Id,
                 Name = b.Name,
+                TotalAmount = context.Expenses.Where(e => e.BudgetId == b.Id).Sum(e => e.Money)
             })
             .ToArray();
 
             // Create the BudgetsVM, set its properties and return it from the method
             return new BudgetsVM
             {
-                Budgets = budgetItems
+                Budgets = budgetItems,
             };
         }
 

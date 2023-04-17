@@ -12,7 +12,8 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th class="w-75">Name</th>
+                    <th class="w-50">Name</th>
+                    <th class="w-25">Total Amount</th>
                     <th ></th>
                     <th ></th>
                     <th ></th>
@@ -23,6 +24,7 @@
                 {
                     <tr>
                         <td class="align-middle">@budget.Name</td>
+                        <td class="align-middle">@budget.TotalAmount</td>
                         <td><a asp-action="BudgetDetails" asp-route-id="@budget.Id" class="btn btn-info">Details</a></td>
                         <td>
                             <a asp-action="EditBudget" asp-route-id="@budget.Id" class="btn btn-warning">Edit</a>
@@ -42,6 +44,3 @@
         <p>No budgets found.</p>
     }
 </div>
-@{
-    // TODO: Add the the total amount for the budget
-}
