@@ -43,7 +43,7 @@ namespace PersonalFinanceMVC.Models
             if (result.Succeeded)
                 return null;
             else
-                return "login failed";
+                return "Either the username or password is incorrect";
         }
 
         public async Task<string> TryRegisterAsync(RegisterVM viewModel)
