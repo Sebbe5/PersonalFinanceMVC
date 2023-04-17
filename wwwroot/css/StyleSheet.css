@@ -47,7 +47,7 @@ footer {
     color: #e8e9ef;
 }
 
-.container{
+.container {
     padding-bottom: 1rem;
 }
 
@@ -110,6 +110,26 @@ footer {
     .card-body p {
         margin: 0;
     }
+
+.message {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    background-image: linear-gradient(to bottom right, #c6af99, #af9a8b, #c6af99);
+    border-radius: 1rem;
+    color: #191d13;
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+h1 {
+    color: #1f1d20;
+}
 
 /* Sign In and Register */
 .form-signin {
