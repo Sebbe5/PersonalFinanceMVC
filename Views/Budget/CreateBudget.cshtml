@@ -17,22 +17,40 @@
         <div>
             <label>Expenses:</label>
 
-            <table class="table table-striped" id="expenseTable">
-                <thead>
-                    <tr>
-                        <th>Expense Name</th>
-                        <th>Amount</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            @if (Model.Expenses.Count > 0)
+            {
+                <table class="table table-striped" id="expenseTable">
+                    <thead>
+                        <tr>
+                            <th>Expense Name</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            }
+            else
+            {
+                <p><strong>No expenses found.</strong></p>
+            }
 
-            <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+
+            <div class="d-flex justify-content-between">
+                <div>
+                    <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+                </div>
+                <div>
+                    <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
-        <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary my-2 w-50 mx-auto" style="border-radius: 25px; padding: 10px 30px; font-size: 18px;">Create</button>
+        </div>
+
     </form>
 </div>
 
@@ -55,16 +73,16 @@
             var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
             var row = document.createElement("tr"); // Create a new row
             row.innerHTML = `
-                        <td>
-                            <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
-                        </td>
-                        <td>
-                            <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
-                        </td>
-                    `;
+                                                                                <td>
+                                                                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                                                                                </td>
+                                                                            `;
 
             tbody.appendChild(row); // Append the row to the tbody element
             amountOfExpenses++;
@@ -103,5 +121,5 @@
     </script>
 }
 @{
-    // TODO: CSS for buttons
+            // TODO: CSS for buttons
 }
