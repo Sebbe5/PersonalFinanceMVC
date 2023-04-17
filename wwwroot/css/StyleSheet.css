@@ -74,6 +74,30 @@ footer {
     --bs-btn-active-border-color: #594035;
 }
 
+.btn-info {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #c6af99;
+    --bs-btn-border-color: #c6af99;
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: #af9a8b;
+    --bs-btn-hover-border-color: #af9a8b;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #c6af99;
+    --bs-btn-active-border-color: #c6af99;
+}
+
+.btn-warning {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #cccdcf;
+    --bs-btn-border-color: #191d13;
+    --bs-btn-hover-color: #cccdcf;
+    --bs-btn-hover-bg: #191d13;
+    --bs-btn-hover-border-color: #cccdcf;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #cccdcf;
+    --bs-btn-active-border-color: #191d13;
+}
+
 .card-body {
     display: flex;
     flex-direction: column;
