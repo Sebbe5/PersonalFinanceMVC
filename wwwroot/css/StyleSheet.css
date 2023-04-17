@@ -13,7 +13,7 @@ secondary-bg-color-3 : #594035 */
 secondary-bg-color-4 : #af9a8b */
 
 /*prime-bg-color-5 : #e8e9ef                           
-secondary-bg-color-5 : #cccdcf */   
+secondary-bg-color-5 : #cccdcf */
 
 /* Layout */
 body, html {
@@ -73,6 +73,15 @@ footer {
     --bs-btn-active-bg: #594035;
     --bs-btn-active-border-color: #594035;
 }
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+    .card-body p {
+        margin: 0;
+    }
 
 /* Sign In and Register */
 .form-signin {
