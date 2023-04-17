@@ -23,6 +23,7 @@ namespace PersonalFinanceMVC.Models
 
         internal CalculateVM UpdateCalculateVM(CalculateVM vm)
         {
+            if (vm.Compounds == 0) return vm;
             // Set necessary values
             decimal principal = vm.Principal;
             decimal interestRate = vm.Rate / 100;
