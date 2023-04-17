@@ -11,11 +11,15 @@
 </style>
 
 <div class="container mt-4 bg-white rounded">
+
     <h1>Budget Details</h1>
 
     <div class="row mt-4">
-        <div class="col-md-6">
-            <p><strong>Budget Name:</strong> @Model.Name</p>
+        <div class="col-md-6 d-md-flex">
+            <p class="m-0 align-self-center"><strong>Budget Name:</strong> @Model.Name</p>
+        </div>
+        <div class="col-md-6 d-md-flex justify-content-end">
+            <a asp-action="Budgets" class="btn btn-secondary">Back to budgets</a>
         </div>
     </div>
 
@@ -48,4 +52,5 @@
             }
         </div>
     </div>
+
 </div>
