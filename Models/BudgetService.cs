@@ -53,6 +53,7 @@ namespace PersonalFinanceMVC.Models
             // Create the BudgetDetailsVM, set its properties and return it from the method
             return new BudgetDetailsVM
             {
+                Id = id, 
                 Name = context.Budgets.SingleOrDefault(b => b.Id == id).Name,
                 Expenses = expenseItems
             };

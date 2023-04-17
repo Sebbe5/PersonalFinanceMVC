@@ -2,6 +2,7 @@
 {
     public class BudgetDetailsVM
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public ExpenseItemVM[] Expenses{ get; set; }
 
