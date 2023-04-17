@@ -9,14 +9,14 @@
 </head>
 <body>
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 px-2">
+        <div class="col-md-3 mb-2 mb-md-0">
+            @{
+                // TODO: replace with logo
+            }
+            <a class="d-inline-flex link-body-emphasis text-decoration-none navbar-brand" asp-controller="Home" asp-action="Home">Home</a>
+        </div>
         @if (User.Identity.IsAuthenticated)
         {
-            <div class="col-md-3 mb-2 mb-md-0">
-                @{
-                    // TODO: replace with logo
-                }
-                <a class="d-inline-flex link-body-emphasis text-decoration-none navbar-brand" asp-controller="Home" asp-action="Home">Home</a>
-            </div>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li>
                     <a class="nav-link px-2" asp-controller="Home" asp-action="Colors">Colors</a>
@@ -40,12 +40,6 @@
         }
         else
         {
-            <div class="col-md-3 mb-2 mb-md-0">
-                @{
-                    // TODO: replace with logo
-                }
-                <a class="d-inline-flex link-body-emphasis text-decoration-none navbar-brand" asp-controller="Home" asp-action="Home">Home</a>
-            </div>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li>
                     <a class="nav-link px-2" asp-controller="Home" asp-action="Colors">Colors</a>
@@ -58,10 +52,9 @@
                 </li>
             </ul>
             <div class="col-md-3 text-end">
-                
             </div>
-            
-            
+
+
         }
     </header>
     <main class="px-3">
