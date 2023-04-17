@@ -56,8 +56,19 @@ footer {
 }
 
 .nav-link {
-    color: #e8e9ef;
+    color: #af9a8b;
 }
+
+    .nav-link:hover {
+        color: #c6af99;
+        box-shadow: inset 0 0 3px 0 #c6af99;
+        border-radius: 0.5rem;
+    }
+    .nav-link:active {
+        color: #c6af99;
+        box-shadow: inset 0 0 3px 0 #c6af99;
+        border-radius: 0.5rem;
+    }
 
 .btn-outline-secondary {
     --bs-btn-color: #755f56;
