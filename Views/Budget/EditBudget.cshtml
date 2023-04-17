@@ -45,12 +45,19 @@
                     }
                 </tbody>
             </table>
-
-            <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
+                </div>
+                <div>
+                    <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a asp-action="Budgets" class="btn btn-secondary">Cancel</a>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary my-2 w-50 mx-auto">Update</button>
+        </div>
     </form>
 </div>
 
@@ -75,16 +82,16 @@
             var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
             var row = document.createElement("tr"); // Create a new row
             row.innerHTML = `
-                                                                <td>
-                                                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
-                                                                </td>
-                                                            `;
+                                                                                <td>
+                                                                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                                                                                </td>
+                                                                            `;
 
             tbody.appendChild(row); // Append the row to the tbody element
             amountOfExpenses++;
@@ -124,5 +131,5 @@
     }
 
 @{
-    // TODO: CSS for buttons
+            // TODO: CSS for buttons
 }
