@@ -4,6 +4,9 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 {
+
+    //Add ability to remove todos
+
     public class TodoController : Controller
     {
         TodoService todoService;
