@@ -12,6 +12,7 @@ namespace PersonalFinanceMVC.Models
 
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Todo> Todos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

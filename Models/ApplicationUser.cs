@@ -8,5 +8,6 @@ namespace PersonalFinanceMVC.Models
     public class ApplicationUser : IdentityUser
     {
         public List<Budget> Budgets { get; set; }
+        public List<Todo> Todos { get; set; }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model TodoListVM
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "_FunctionPage";
+}
+
+<div class="container mt-4 bg-white rounded">
+    <h1 class="through">TODO's</h1>
+
+    <form asp-controller="Todo" asp-action="Create" method="post">
+        <div class="form-floating">
+            <input asp-for="NewTodoItem" class="form-control" />
+            <label asp-for="NewTodoItem"></label>
+            <span asp-validation-for="NewTodoItem" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Add</button>
+    </form>
+
+    <ul>
+        @foreach (var item in Model.TodoItems)
+        {
+            <li>@item</li>
+        }
+    </ul>
+</div>
