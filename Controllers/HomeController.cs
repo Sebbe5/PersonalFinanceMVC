@@ -7,6 +7,7 @@ namespace PersonalFinanceMVC.Controllers
 
     // TODO: Fix proper attributes for all view models
     // TODO: Add a todo function to the site ( a todo list is a part of a structured and bright future)
+    // TODO: Deploy to azure
     public class HomeController : Controller
     {
         [Authorize]
