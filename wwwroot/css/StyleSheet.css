@@ -64,6 +64,7 @@ footer {
         box-shadow: inset 0 0 3px 0 #c6af99;
         border-radius: 0.5rem;
     }
+
     .nav-link:active {
         color: #c6af99;
         box-shadow: inset 0 0 3px 0 #c6af99;
@@ -122,6 +123,18 @@ footer {
         margin: 0;
     }
 
+.card-footer-btns {
+    display: flex;
+}
+
+    .card-footer-btns a {
+        flex: 1;
+    }
+
+        .card-footer-btns a.btn-primary {
+            height: auto;
+        }
+
 .message {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -142,21 +155,21 @@ h1 {
     color: #1f1d20;
 }
 
-h1.through {
-    display: grid;
-    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
-    align-items: center;
-    text-align: center;
-    grid-gap: 20px;
-    width: 100%;
-    padding: 0;
-}
-
-    h1.through:before,
-    h1.through:after {
-        content: '';
-        border-top: 2px solid;
+    h1.through {
+        display: grid;
+        grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+        align-items: center;
+        text-align: center;
+        grid-gap: 20px;
+        width: 100%;
+        padding: 0;
     }
+
+        h1.through:before,
+        h1.through:after {
+            content: '';
+            border-top: 2px solid;
+        }
 
 /* Sign In and Register */
 .form-signin {

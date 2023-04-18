@@ -5,7 +5,7 @@
 <div class="container mt-5">
     <h1>Welcome @User.Identity.Name</h1>
     <div class="row mt-5">
-        <div class="col-md-4 d-flex">
+        <div class="col-lg-3 d-flex">
             <div class="card p-2 text-center w-100">
                 <img src="~/images/budget.png" />
                 <div class="card-body">
@@ -15,24 +15,24 @@
                         Stay organized and make informed financial decisions with our user-friendly Budget Tracker. Take control of your finances today!
                     </p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Budget" asp-action="Budgets" class="btn btn-primary w-100">Go to Budgets</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Budget" asp-action="Budgets" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Budgets</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 d-flex">
+        <div class="col-lg-3 d-flex">
             <div class="card p-2 text-center w-100">
                 <img src="~/images/investment.png" />
                 <div class="card-body">
                     <h5 class="card-title">Investments</h5>
                     <p>Yet to be implemented</p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Investment" asp-action="Investments" class="btn btn-primary w-100">Go to Investments</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Investment" asp-action="Investments" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Investments</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 d-flex">
+        <div class="col-lg-3 d-flex">
             <div class="card p-2 text-center w-100">
                 <img src="~/images/compound.png" />
                 <div class="card-body">
@@ -42,8 +42,20 @@
                         With easy-to-use inputs, you can quickly determine how much your savings or investments could grow with the power of compound interest!
                     </p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100">Go to Compound Interest Calculator</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100 d-flex align-items-center justify-content-center p-1">Go to Compound Interest Calculator</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 d-flex">
+            <div class="card p-2 text-center w-100">
+                <img src="~/images/Todo.png" />
+                <div class="card-body">
+                    <h5 class="card-title">Todo List</h5>
+                    <p>Yet to be implemented</p>
+                </div>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Todo" asp-action="List" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Todo List</a>
                 </div>
             </div>
         </div>
@@ -76,3 +88,22 @@
         </p>
     </div>
 </div>
+
+@section EndOfBody{
+    <script>
+        // Get all the card footers
+        const cardFooters = document.querySelectorAll('.card-footer-height');
+
+        // Get the height of the tallest card footer
+        let maxHeight = 0;
+        cardFooters.forEach((cardFooter) => {
+            const height = cardFooter.clientHeight;
+            maxHeight = Math.max(maxHeight, height);
+        });
+
+        // Set the height of all the card footers to match the tallest one
+        cardFooters.forEach((cardFooter) => {
+            cardFooter.style.height = maxHeight + 'px';
+        });
+    </script>
+}
