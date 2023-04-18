@@ -9,6 +9,14 @@
         "css/bootstrap.min.css",
         "js/bootstrap.min.js"
       ]
+    },
+    {
+      "library": "bootstrap-icons@1.10.4",
+      "destination": "wwwroot/lib/twitter-bootstrap/css/bootstrap-icons/",
+      "files": [
+        "font/bootstrap-icons.min.css",
+        "font/fonts/bootstrap-icons.woff2"
+      ]
     }
   ]
 }

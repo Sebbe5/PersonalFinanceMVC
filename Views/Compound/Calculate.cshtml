@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Calculate";
-    // TODO: Add info box popups
 }
 
 
@@ -11,22 +10,22 @@
 
     <form asp-action="Calculate">
         <div>
-            <label asp-for="Principal"></label>
-            <input type="number" class="form-control"asp-for="Principal" step="0.01" />
+            <label asp-for="Principal" class="label-with-icon" data-bs-toggle="tooltip" title="The initial amount of money you invest">Principal <i class="bi bi-question-circle"></i></label>
+            <input type="number" class="form-control" asp-for="Principal" step="0.01" />
         </div>
         <div>
-            <label asp-for="MonthlyContribution"></label>
-            <input type="number" class="form-control"asp-for="MonthlyContribution" step="0.01" />
+            <label asp-for="MonthlyContribution" class="label-with-icon" data-bs-toggle="tooltip" title="The amount of money you will invest every month">Monthly Contribution <i class="bi bi-question-circle"></i></label>
+            <input type="number" class="form-control" asp-for="MonthlyContribution" step="0.01" />
         </div>
         <div>
-            <label asp-for="Rate"></label>
+            <label asp-for="Rate" class="label-with-icon" data-bs-toggle="tooltip" title="The annual interest rate you expect to earn on your investment">Rate <i class="bi bi-question-circle"></i></label>
             <input type="number" class="form-control" asp-for="Rate" step="0.01" />
         </div>
         <div>
-            <label asp-for="Years"></label>
+            <label asp-for="Years" class="label-with-icon" data-bs-toggle="tooltip" title="The number of years you plan to invest">Years <i class="bi bi-question-circle"></i></label>
             <input type="number" class="form-control" asp-for="Years" step="1" />
         </div>
-        
+
         <button type="submit" class="btn btn-primary mt-3">Calculate</button>
     </form>
 
@@ -58,3 +57,11 @@
         </div>
     }
 </div>
+
+@section endOfBody{
+    <script>
+        $(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip()
+        })
+    </script>
+}
