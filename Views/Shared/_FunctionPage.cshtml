@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@RenderBody()
+
+<div class="container d-flex justify-content-center">
+    <h1 class="text-center through">What's next?</h1>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 d-flex">
+        <div class="card p-2 text-center w-100">
+            <img src="~/images/budget.png" />
+            <div class="card-body">
+                <h5 class="card-title">Budgets</h5>
+                <p>
+                    Welcome to our Budget Tracker! With our easy-to-use view, you can create and store budgets to efficiently manage your finances.
+                    Stay organized and make informed financial decisions with our user-friendly Budget Tracker. Take control of your finances today!
+                </p>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Budget" asp-action="Budgets" class="btn btn-primary w-100">Go to Budgets</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 d-flex">
+        <div class="card p-2 text-center w-100">
+            <img src="~/images/investment.png" />
+            <div class="card-body">
+                <h5 class="card-title">Investments</h5>
+                <p>Yet to be implemented</p>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Investment" asp-action="Investments" class="btn btn-primary w-100">Go to Investments</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 d-flex">
+        <div class="card p-2 text-center w-100">
+            <img src="~/images/compound.png" />
+            <div class="card-body">
+                <h5 class="card-title">Compound Interest Calculator</h5>
+                <p>
+                    Welcome to our Compound Interest Calculator! Our powerful tool allows you to effortlessly calculate the growth of your investments over time.
+                    With easy-to-use inputs, you can quickly determine how much your savings or investments could grow with the power of compound interest!
+                </p>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100">Go to Compound Interest Calculator</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section EndOfBody {
+    @RenderSection("EndOfBody", false);
+}
