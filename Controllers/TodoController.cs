@@ -31,7 +31,7 @@ namespace PersonalFinanceMVC.Controllers
             if (errorMessage != null)
             {
                 // Show error
-                ModelState.AddModelError(string.Empty, errorMessage);
+                TempData["Message"] = errorMessage;
                 return View(todoService.CreateTodoListVM());
             }
 

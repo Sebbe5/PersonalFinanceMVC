@@ -13,6 +13,7 @@
             <input asp-for="NewTodoItem" class="form-control" />
             <label asp-for="NewTodoItem"></label>
             <span asp-validation-for="NewTodoItem" class="text-danger"></span>
+            <span class="text-danger">@TempData["Message"]</span>
         </div>
         <button type="submit" class="btn btn-primary mt-2">Add</button>
     </form>
