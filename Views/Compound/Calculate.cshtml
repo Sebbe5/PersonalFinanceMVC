@@ -10,20 +10,24 @@
 
     <form asp-action="Calculate">
         <div>
-            <label asp-for="Principal"  data-bs-toggle="tooltip" title="The initial amount of money you invest">Principal <i class="bi bi-question-circle"></i></label>
-            <input type="number" class="form-control" asp-for="Principal" step="0.01" />
+            <label asp-for="Principal"></label>
+            <i class="bi bi-question-circle" title="The initial amount of money you invest"></i>
+            <input type="number" class="form-control" asp-for="Principal" />
         </div>
         <div>
-            <label asp-for="MonthlyContribution" data-bs-toggle="tooltip" title="The amount of money you will invest every month">Monthly Contribution <i class="bi bi-question-circle"></i></label>
-            <input type="number" class="form-control" asp-for="MonthlyContribution" step="0.01" />
+            <label asp-for="MonthlyContribution"></label>
+            <i class="bi bi-question-circle" title="The amount of money you will invest every month"></i>
+            <input type="number" class="form-control" asp-for="MonthlyContribution" />
         </div>
         <div>
-            <label asp-for="Rate" data-bs-toggle="tooltip" title="The annual interest rate you expect to earn on your investment">Rate <i class="bi bi-question-circle"></i></label>
-            <input type="number" class="form-control" asp-for="Rate" step="0.01" />
+            <label asp-for="Rate"></label>
+            <i class="bi bi-question-circle" title="The annual interest rate you expect to earn on your investment"></i>
+            <input type="number" class="form-control" asp-for="Rate" />
         </div>
         <div>
-            <label asp-for="Years" data-bs-toggle="tooltip" title="The number of years you plan to invest">Years <i class="bi bi-question-circle"></i></label>
-            <input type="number" class="form-control" asp-for="Years" step="1" />
+            <label asp-for="Years"></label>
+            <i class="bi bi-question-circle" title="The number of years you plan to invest"></i>
+            <input type="number" class="form-control" asp-for="Years" />
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Calculate</button>
@@ -36,10 +40,10 @@
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
-                        <th>@Model.Results[0].Year</th>
-                        <th>@Model.Results[0].Contribution</th>
-                        <th>@Model.Results[0].Interest</th>
-                        <th>@Model.Results[0].Amount</th>
+                        <th>Year</th>
+                        <th>Total contribution</th>
+                        <th>Interest</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
