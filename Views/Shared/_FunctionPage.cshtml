@@ -60,6 +60,23 @@
             </div>
         </div>
     }
+    @if (ViewContext.RouteData.Values["controller"].ToString() != "Todo")
+    {
+        <div class="col-md-4 d-flex">
+            <div class="card p-2 text-center w-100">
+                <img src="~/images/Todo.png" />
+                <div class="card-body">
+                    <h5 class="card-title">Compound Interest Calculator</h5>
+                    <p>
+                        Yet to be implemented
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100">Go to Compound Interest Calculator</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 
