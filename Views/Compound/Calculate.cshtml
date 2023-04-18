@@ -11,19 +11,19 @@
 
     <form asp-action="Calculate">
         <div>
-            <label asp-for="Principal">Principal Amount:</label>
+            <label asp-for="Principal"></label>
             <input type="number" class="form-control"asp-for="Principal" step="0.01" />
         </div>
         <div>
-            <label asp-for="MonthlyContribution">Monthly Contributions:</label>
+            <label asp-for="MonthlyContribution"></label>
             <input type="number" class="form-control"asp-for="MonthlyContribution" step="0.01" />
         </div>
         <div>
-            <label asp-for="Rate">Annual Interest Rate (%):</label>
+            <label asp-for="Rate"></label>
             <input type="number" class="form-control" asp-for="Rate" step="0.01" />
         </div>
         <div>
-            <label asp-for="Years">Number of Years:</label>
+            <label asp-for="Years"></label>
             <input type="number" class="form-control" asp-for="Years" step="1" />
         </div>
         
@@ -37,10 +37,10 @@
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
-                        <th>Year</th>
-                        <th>Total Contribution</th>
-                        <th>Interest</th>
-                        <th>Amount</th>
+                        <th>@Model.Results[0].Year</th>
+                        <th>@Model.Results[0].Contribution</th>
+                        <th>@Model.Results[0].Interest</th>
+                        <th>@Model.Results[0].Amount</th>
                     </tr>
                 </thead>
                 <tbody>
