@@ -2,9 +2,9 @@
     Layout = "_Layout";
 }
 
+
+
 @RenderBody()
-
-
 <div class="container row mt-5 justify-content-center mx-auto px-0">
 
     <h1 class="text-center through mb-4">What's next?</h1>
@@ -21,8 +21,8 @@
                         Stay organized and make informed financial decisions with our user-friendly Budget Tracker. Take control of your finances today!
                     </p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Budget" asp-action="Budgets" class="btn btn-primary w-100">Go to Budgets</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Budget" asp-action="Budgets" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Budgets</a>
                 </div>
             </div>
         </div>
@@ -36,8 +36,8 @@
                     <h5 class="card-title">Investments</h5>
                     <p>Yet to be implemented</p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Investment" asp-action="Investments" class="btn btn-primary w-100">Go to Investments</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Investment" asp-action="Investments" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Investments</a>
                 </div>
             </div>
         </div>
@@ -47,15 +47,15 @@
         <div class="col-md-4 d-flex">
             <div class="card p-2 text-center w-100">
                 <img src="~/images/compound.png" />
-                <div class="card-body">
+                <div class="card-body ">
                     <h5 class="card-title">Compound Interest Calculator</h5>
                     <p>
                         Welcome to our Compound Interest Calculator! Our powerful tool allows you to effortlessly calculate the growth of your investments over time.
                         With easy-to-use inputs, you can quickly determine how much your savings or investments could grow with the power of compound interest!
                     </p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100">Go to Compound Interest Calculator</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Compound Interest Calculator</a>
                 </div>
             </div>
         </div>
@@ -71,8 +71,8 @@
                         Yet to be implemented
                     </p>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100">Go to Compound Interest Calculator</a>
+                <div class="card-footer card-footer-height card-footer-btns">
+                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100 d-flex align-items-center justify-content-center p-1">Go to Compound Interest Calculator</a>
                 </div>
             </div>
         </div>
@@ -81,5 +81,24 @@
 
 
 @section EndOfBody {
-    @RenderSection("EndOfBody", false);
+
+    @RenderSection("EndOfBody", false)
+
+    <script>
+        // Get all the card footers
+        const cardFooters = document.querySelectorAll('.card-footer-height');
+
+        // Get the height of the tallest card footer
+        let maxHeight = 0;
+        cardFooters.forEach((cardFooter) => {
+            const height = cardFooter.clientHeight;
+            maxHeight = Math.max(maxHeight, height);
+        });
+
+        // Set the height of all the card footers to match the tallest one
+        cardFooters.forEach((cardFooter) => {
+            cardFooter.style.height = maxHeight + 'px';
+        });
+    </script>
+
 }
