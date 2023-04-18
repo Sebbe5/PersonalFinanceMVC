@@ -10,19 +10,19 @@
 
     <form asp-action="Calculate">
         <div>
-            <label asp-for="Principal" class="label-with-icon" data-bs-toggle="tooltip" title="The initial amount of money you invest">Principal <i class="bi bi-question-circle"></i></label>
+            <label asp-for="Principal"  data-bs-toggle="tooltip" title="The initial amount of money you invest">Principal <i class="bi bi-question-circle"></i></label>
             <input type="number" class="form-control" asp-for="Principal" step="0.01" />
         </div>
         <div>
-            <label asp-for="MonthlyContribution" class="label-with-icon" data-bs-toggle="tooltip" title="The amount of money you will invest every month">Monthly Contribution <i class="bi bi-question-circle"></i></label>
+            <label asp-for="MonthlyContribution" data-bs-toggle="tooltip" title="The amount of money you will invest every month">Monthly Contribution <i class="bi bi-question-circle"></i></label>
             <input type="number" class="form-control" asp-for="MonthlyContribution" step="0.01" />
         </div>
         <div>
-            <label asp-for="Rate" class="label-with-icon" data-bs-toggle="tooltip" title="The annual interest rate you expect to earn on your investment">Rate <i class="bi bi-question-circle"></i></label>
+            <label asp-for="Rate" data-bs-toggle="tooltip" title="The annual interest rate you expect to earn on your investment">Rate <i class="bi bi-question-circle"></i></label>
             <input type="number" class="form-control" asp-for="Rate" step="0.01" />
         </div>
         <div>
-            <label asp-for="Years" class="label-with-icon" data-bs-toggle="tooltip" title="The number of years you plan to invest">Years <i class="bi bi-question-circle"></i></label>
+            <label asp-for="Years" data-bs-toggle="tooltip" title="The number of years you plan to invest">Years <i class="bi bi-question-circle"></i></label>
             <input type="number" class="form-control" asp-for="Years" step="1" />
         </div>
 
