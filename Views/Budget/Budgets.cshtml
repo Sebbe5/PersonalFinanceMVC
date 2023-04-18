@@ -6,17 +6,17 @@
 <div class="container mt-4 bg-white rounded">
     <h1>Budgets</h1>
 
-    <a asp-action="CreateBudget" class="btn btn-primary mb-3">Create new budget</a>
     @if (Model.Budgets.Length > 0)
     {
+        <a asp-action="CreateBudget" class="btn btn-primary mb-3">Create new budget</a>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th class="w-50">Name</th>
                     <th class="w-25">Total Amount</th>
-                    <th ></th>
-                    <th ></th>
-                    <th ></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +41,18 @@
     }
     else
     {
-        <p>No budgets found.</p>
+        <div class="card my-4">
+            <div class="card-body">
+                <h2 class="card-title">Create your first budget</h2>
+                <p class="card-text">Welcome to our budgeting tool! It looks like you haven't created any budgets yet. Don't worry, it's easy to get started!</p>
+                <p class="card-text">
+                    Creating a budget is the first step to achieving your financial goals. With our tool, you can set a budget for your monthly expenses,
+                    track your spending, and see where your money is going.
+                </p>
+                <div class="card-footer mt-2">
+                    <a asp-action="CreateBudget" class="btn btn-primary w-100">Create new budget</a>
+                </div>
+            </div>
+        </div>
     }
 </div>
