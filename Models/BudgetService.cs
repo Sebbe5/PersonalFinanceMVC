@@ -25,12 +25,15 @@ namespace PersonalFinanceMVC.Models
         {
 
             // Map budgets to BudgetItemVM objects
-            var budgetItems = context.Budgets.Where(b => b.ApplicationUserId == userId).Select(b => new BudgetsVM.BudgetItemVM
-            {
-                Id = b.Id,
-                Name = b.Name,
-                TotalAmount = context.Expenses.Where(e => e.BudgetId == b.Id).Sum(e => e.Money)
-            })
+            var budgetItems = context.Budgets
+               .Include(b => b.Expenses) // Lets me have one database quey instead of two
+               .Where(b => b.ApplicationUserId == userId)
+               .Select(b => new BudgetsVM.BudgetItemVM
+               {
+                   Id = b.Id,
+                   Name = b.Name,
+                   TotalAmount = b.Expenses.Sum(e => e.Money)
+               })
             .ToArray();
 
             // Create the BudgetsVM, set its properties and return it from the method
@@ -53,7 +56,7 @@ namespace PersonalFinanceMVC.Models
             // Create the BudgetDetailsVM, set its properties and return it from the method
             return new BudgetDetailsVM
             {
-                Id = id, 
+                Id = id,
                 Name = context.Budgets.SingleOrDefault(b => b.Id == id).Name,
                 Expenses = expenseItems
             };
@@ -115,7 +118,7 @@ namespace PersonalFinanceMVC.Models
             var budgetToEdit = context.Budgets.Include(b => b.Expenses).SingleOrDefault(b => b.Id == id);
 
             // Update name of budget
-            
+
             budgetToEdit.Name = budgetToEdit.Name == vm.Name ? budgetToEdit.Name : CheckIfNameExist(vm.Name);
 
             // Clear all expenses since it's hard to track if some expenses where deleted from the list
