@@ -5,15 +5,15 @@
 @RenderBody()
 
 
-<div class="container row mt-5">
-    <div class="container d-flex justify-content-center">
-        <h1 class="text-center through">What's next?</h1>
-    </div>
+<div class="container row mt-5 justify-content-center mx-auto px-0">
+
+    <h1 class="text-center through mb-4">What's next?</h1>
+
     @if (ViewContext.RouteData.Values["controller"].ToString() != "Budget")
     {
         <div class="col-md-4 d-flex">
             <div class="card p-2 text-center w-100">
-                <img src="~/images/budget.png" />
+                <img src="~/images/budget.png" /> @*300 x 168*@
                 <div class="card-body">
                     <h5 class="card-title">Budgets</h5>
                     <p>

@@ -142,6 +142,22 @@ h1 {
     color: #1f1d20;
 }
 
+h1.through {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+    align-items: center;
+    text-align: center;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 0;
+}
+
+    h1.through:before,
+    h1.through:after {
+        content: '';
+        border-top: 2px solid;
+    }
+
 /* Sign In and Register */
 .form-signin {
     max-width: 330px;
