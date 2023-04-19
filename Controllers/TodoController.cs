@@ -4,9 +4,6 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 {
-
-    // TODO: Add ability to remove todos
-
     public class TodoController : Controller
     {
         TodoService todoService;
@@ -41,5 +38,14 @@ namespace PersonalFinanceMVC.Controllers
 
             return RedirectToAction(nameof(TodoList));
         }
+
+        [HttpPost("/deleteTodo")]
+        public IActionResult Delete(string item)
+        {
+            todoService.DeleteTodo(item);
+            return RedirectToAction(nameof(TodoList));
+        }
+
+
     }
 }

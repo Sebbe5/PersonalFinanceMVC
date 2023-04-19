@@ -50,5 +50,12 @@ namespace PersonalFinanceMVC.Models
 
             return null;
         }
+
+        internal void DeleteTodo(string name)
+        {
+            context.Todos.Remove(context.Todos.FirstOrDefault(t => t.Name == name));
+            context.SaveChanges();
+        }
+
     }
 }

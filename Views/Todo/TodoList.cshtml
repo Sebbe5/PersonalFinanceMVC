@@ -18,10 +18,29 @@
         <button type="submit" class="btn btn-primary mt-2">Add</button>
     </form>
 
-    <ul>
-        @foreach (var item in Model.TodoItems)
-        {
-            <li>@item</li>
-        }
-    </ul>
+    <div class="container todo-list my-4 rounded">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Todo:</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TodoItems)
+                {
+                    <tr>
+                        <td>@item</td>
+                        <td>
+                            <form asp-controller="Todo" asp-action="Delete">
+                                <input type="hidden" asp-for="@item" />
+                                <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
 </div>
