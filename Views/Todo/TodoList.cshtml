@@ -30,7 +30,7 @@
                 @foreach (var item in Model.TodoItems)
                 {
                     <tr>
-                        <td>@item</td>
+                        <td class="w-75">@item</td>
                         <td>
                             <form asp-controller="Todo" asp-action="Delete">
                                 <input type="hidden" asp-for="@item" />
