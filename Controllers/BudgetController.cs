@@ -5,6 +5,8 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Controllers
 {
+    // TODO: Add ability to sort budget by name (a->ö and ö->a) and amount (highest first and lowest first)
+
     [Authorize]
     public class BudgetController : Controller
     {
@@ -24,6 +26,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("budgetDetails")]
         public IActionResult BudgetDetails(int id)
         {
+            // TODO: Add the total amount to this view
             BudgetDetailsVM vm = budgetService.CreateBudgetDetailsVM(id);
             return View(vm);
         }
