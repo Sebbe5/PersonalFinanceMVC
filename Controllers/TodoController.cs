@@ -3,6 +3,9 @@ using PersonalFinanceMVC.Models;
 using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
+
+    // TODO: Add deadlines to the todo list
+    // TODO: Add the ability to sort the list in different orders
 {
     public class TodoController : Controller
     {
