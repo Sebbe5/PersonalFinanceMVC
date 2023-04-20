@@ -8,9 +8,9 @@
 <div class="container mt-4 bg-white rounded">
     <h1 class="through">TODO's</h1>
 
-    <form asp-controller="Todo" asp-action="Create" method="post">
+    <form asp-controller="Todo" asp-action="Create">
         <div class="form-floating">
-            <input asp-for="NewTodoItem" class="form-control" />
+            <input asp-for="NewTodoItem" class="form-control" autofocus/>
             <label asp-for="NewTodoItem"></label>
             <span asp-validation-for="NewTodoItem" class="text-danger"></span>
             <span class="text-danger">@TempData["Message"]</span>
@@ -33,7 +33,7 @@
                         <td class="w-75">@item</td>
                         <td>
                             <form asp-controller="Todo" asp-action="Delete">
-                                <input type="hidden" asp-for="@item" />
+                                <input type="hidden" asp-for="@item"/>
                                 <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>
                             </form>
                         </td>
