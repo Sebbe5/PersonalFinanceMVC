@@ -25,7 +25,7 @@
                 {
                     <tr>
                         <td class="align-middle">@budget.Name</td>
-                        <td class="align-middle">@budget.TotalAmount</td>
+                        <td class="align-middle">@budget.TotalAmount.ToString("C")</td>
                         <td><a asp-action="BudgetDetails" asp-route-id="@budget.Id" class="btn btn-info">Details</a></td>
                         <td>
                             <a asp-action="EditBudget" asp-route-id="@budget.Id" class="btn btn-warning">Edit</a>
