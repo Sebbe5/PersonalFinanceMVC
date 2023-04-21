@@ -55,6 +55,12 @@ namespace PersonalFinanceMVC.Controllers
             return RedirectToAction(nameof(TodoList));
         }
 
+        [HttpPost("/sortTodo")]
+        public IActionResult Sort(string sortOrder)
+        {
+            return RedirectToAction(nameof(TodoList));
+        }
+
 
     }
 }

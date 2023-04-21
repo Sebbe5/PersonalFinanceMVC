@@ -10,13 +10,13 @@
 
     <form asp-controller="Todo" asp-action="Create">
         <div class="form-floating">
-            <input asp-for="NewTodoItem" class="form-control" autofocus/>
+            <input asp-for="NewTodoItem" class="form-control" autofocus />
             <label asp-for="NewTodoItem"></label>
             <span asp-validation-for="NewTodoItem" class="text-danger"></span>
             <span class="text-danger">@TempData["Message"]</span>
         </div>
         <div class="form-floating">
-            <input asp-for="NewDeadline" class="form-control" asp-format="{0:yyyy-MM-dd HH:mm}"/>
+            <input asp-for="NewDeadline" class="form-control" asp-format="{0:yyyy-MM-dd HH:mm}" />
             <label asp-for="NewDeadline"></label>
             <span asp-validation-for="NewDeadline" class="text-danger"></span>
         </div>
@@ -27,8 +27,24 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Todo:</th>
-                    <th>Deadline:</th> <!-- added column -->
+                    <th>
+                        Todo:
+                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                            <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingName')"></i>
+                        </form>
+                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                            <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingName')"></i>
+                        </form>
+                    </th>
+                    <th>
+                        Deadline:
+                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                            <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingDate')"></i>
+                        </form>
+                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                            <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
+                        </form>
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -50,3 +66,36 @@
         </table>
     </div>
 </div>
+
+@section EndOfBody{
+    <script>
+        function subForm(sortOrder) {
+            // Get a reference to the form element by its name
+            const form = document.forms["sortForm"];
+
+            // Create a new FormData object from the form element
+            const formData = new FormData(form);
+
+            // Set the value of the sort order input element using the set() method of the FormData object
+            // The first parameter is the name of the input element, and the second parameter is the value you want to set
+            formData.set("sortOrder", sortOrder);
+
+            // Send an HTTP request to the server using the fetch() method
+            fetch(form.action, {
+                // Specify the HTTP method and request body in the options object
+                method: form.method,
+                body: formData
+            }).then(response => {
+                // Handle the response from the server
+                if (response.ok) {
+                    // If the response is successful, reload the page
+                    window.location.reload();
+                } else {
+                    // If the response is not successful, log an error message to the console
+                    console.error('Error submitting form');
+                }
+            });
+        }
+    </script>
+
+}
