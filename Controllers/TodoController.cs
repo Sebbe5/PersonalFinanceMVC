@@ -4,8 +4,15 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 
-    // TODO: Add deadlines to the todo list
+    // TODO: Add deadlines
+    // TODO: Add the ability to edit an existing todo
+    // TODO: Add categories
+    // TODO: Add a search function
+    // TODO: Add tags
+    // TODO: Add comments
+    // TODO: Add subtassks
     // TODO: Add the ability to sort the list in different orders
+    // TODO: Add a computer reminder (Probably not possible until launched
 {
     public class TodoController : Controller
     {
