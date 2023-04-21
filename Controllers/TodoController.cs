@@ -58,6 +58,9 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("/sortTodo")]
         public IActionResult Sort(string sortOrder)
         {
+            SortOrder sortPreference;
+            Enum.TryParse(sortOrder, out sortPreference);
+            todoService.UserSortSetting(sortPreference);
             return RedirectToAction(nameof(TodoList));
         }
 

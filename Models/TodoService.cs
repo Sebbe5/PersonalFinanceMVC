@@ -64,5 +64,11 @@ namespace PersonalFinanceMVC.Models
             context.SaveChanges();
         }
 
+        internal void UserSortSetting(SortOrder sortPreference)
+        {
+            userManager.Users.FirstOrDefault(u => u.Id == userId).SortingOrder = sortPreference;
+            context.SaveChanges();
+        }
+        
     }
 }
