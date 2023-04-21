@@ -4,7 +4,6 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 
-    // TODO: Add deadlines
     // TODO: Add the ability to edit an existing todo
     // TODO: Add categories
     // TODO: Add tags
