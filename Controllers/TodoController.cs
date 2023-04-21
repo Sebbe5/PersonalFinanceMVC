@@ -10,7 +10,6 @@ namespace PersonalFinanceMVC.Controllers
     // TODO: Add a search function
     // TODO: Add comments
     // TODO: Add subtassks
-    // TODO: Add the ability to sort the list in different orders
     // TODO: Add a computer reminder (Probably not possible until launched)
 {
     public class TodoController : Controller
