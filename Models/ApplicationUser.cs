@@ -9,5 +9,15 @@ namespace PersonalFinanceMVC.Models
     {
         public List<Budget> Budgets { get; set; }
         public List<Todo> Todos { get; set; }
+        public SortOrder SortingOrder { get; set; } = new SortOrder();
+
+    }
+
+    public enum SortOrder
+    {
+        AscendingName,
+        DescendingName,
+        AscendingDate,
+        DescendingDate,
     }
 }
