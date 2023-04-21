@@ -25,15 +25,38 @@ namespace PersonalFinanceMVC.Models
 
         internal TodoListVM CreateTodoListVM()
         {
-            return new TodoListVM
-            {
-                TodoItems = context.Todos.Where(t => t.ApplicationUserId == userId).Select(t => new TodoListVM.TodoItemVM
+            var todoItems = context.Todos
+                .Where(t => t.ApplicationUserId == userId)
+                .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
                     Name = t.Name,
                     Deadline = t.Deadline,
                 })
-                .ToList()
+                .ToList();
+
+            var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).SortingOrder;
+            switch (userPrefOrder)
+            {
+                case SortOrder.AscendingName:
+                    todoItems = todoItems.OrderBy(t => t.Name).ToList();
+                    break;
+                case SortOrder.DescendingName:
+                    todoItems = todoItems.OrderByDescending(t => t.Name).ToList();
+                    break;
+                case SortOrder.AscendingDate:
+                    todoItems = todoItems.OrderBy(t => t.Deadline).ToList();
+                    break;
+                case SortOrder.DescendingDate:
+                    todoItems = todoItems.OrderByDescending(t => t.Deadline).ToList();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(userPrefOrder), userPrefOrder, null);
+            }
+
+            return new TodoListVM
+            {
+                TodoItems = todoItems
             };
         }
 
@@ -69,6 +92,6 @@ namespace PersonalFinanceMVC.Models
             userManager.Users.FirstOrDefault(u => u.Id == userId).SortingOrder = sortPreference;
             context.SaveChanges();
         }
-        
+
     }
 }
