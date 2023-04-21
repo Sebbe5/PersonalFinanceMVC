@@ -50,9 +50,9 @@ namespace PersonalFinanceMVC.Controllers
         }
 
         [HttpPost("/deleteTodo")]
-        public IActionResult Delete(string item)
+        public IActionResult Delete(int id)
         {
-            todoService.DeleteTodo(item);
+            todoService.DeleteTodo(id);
             return RedirectToAction(nameof(TodoList));
         }
 

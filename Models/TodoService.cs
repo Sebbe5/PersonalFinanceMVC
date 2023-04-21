@@ -27,7 +27,13 @@ namespace PersonalFinanceMVC.Models
         {
             return new TodoListVM
             {
-                TodoItems = context.Todos.Where(t => t.ApplicationUserId == userId).Select(t => t.Name).ToList()
+                TodoItems = context.Todos.Where(t => t.ApplicationUserId == userId).Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                })
+                .ToList()
             };
         }
 
@@ -43,7 +49,8 @@ namespace PersonalFinanceMVC.Models
             context.Todos.Add(new Todo
             {
                 ApplicationUserId = userId,
-                Name = vm.NewTodoItem
+                Name = vm.NewTodoItem,
+                Deadline = vm.NewDeadline
             });
 
             context.SaveChanges();
@@ -51,9 +58,9 @@ namespace PersonalFinanceMVC.Models
             return null;
         }
 
-        internal void DeleteTodo(string name)
+        internal void DeleteTodo(int id)
         {
-            context.Todos.Remove(context.Todos.FirstOrDefault(t => t.Name == name));
+            context.Todos.Remove(context.Todos.FirstOrDefault(t => t.Id == id));
             context.SaveChanges();
         }
 
