@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalFinanceMVC.Models;
 
@@ -11,9 +12,11 @@ using PersonalFinanceMVC.Models;
 namespace PersonalFinanceMVC.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230422134315_Create TodoCategory table")]
+    partial class CreateTodoCategorytable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,32 +288,11 @@ namespace PersonalFinanceMVC.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TodoCategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("TodoCategoryId");
-
                     b.ToTable("Todos");
-                });
-
-            modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.TodoCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TodoCategory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -387,12 +369,6 @@ namespace PersonalFinanceMVC.Migrations
                     b.HasOne("PersonalFinanceMVC.Models.ApplicationUser", null)
                         .WithMany("Todos")
                         .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("PersonalFinanceMVC.Models.Entities.TodoCategory", "TodoCategory")
-                        .WithMany("Todos")
-                        .HasForeignKey("TodoCategoryId");
-
-                    b.Navigation("TodoCategory");
                 });
 
             modelBuilder.Entity("PersonalFinanceMVC.Models.ApplicationUser", b =>
@@ -405,11 +381,6 @@ namespace PersonalFinanceMVC.Migrations
             modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Budget", b =>
                 {
                     b.Navigation("Expenses");
-                });
-
-            modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.TodoCategory", b =>
-                {
-                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }

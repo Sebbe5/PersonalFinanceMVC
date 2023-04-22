@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalFinanceMVC.Models;
 
@@ -11,9 +12,11 @@ using PersonalFinanceMVC.Models;
 namespace PersonalFinanceMVC.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230422134748_Connect todo with category")]
+    partial class Connecttodowithcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,7 +288,7 @@ namespace PersonalFinanceMVC.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TodoCategoryId")
+                    b.Property<int>("TodoCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -390,7 +393,9 @@ namespace PersonalFinanceMVC.Migrations
 
                     b.HasOne("PersonalFinanceMVC.Models.Entities.TodoCategory", "TodoCategory")
                         .WithMany("Todos")
-                        .HasForeignKey("TodoCategoryId");
+                        .HasForeignKey("TodoCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TodoCategory");
                 });
