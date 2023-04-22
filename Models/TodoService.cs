@@ -35,19 +35,19 @@ namespace PersonalFinanceMVC.Models
                 })
                 .ToList();
 
-            var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).SortingOrder;
+            var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
             switch (userPrefOrder)
             {
-                case SortOrder.AscendingName:
+                case TodoSortOrder.AscendingName:
                     todoItems = todoItems.OrderBy(t => t.Name).ToList();
                     break;
-                case SortOrder.DescendingName:
+                case TodoSortOrder.DescendingName:
                     todoItems = todoItems.OrderByDescending(t => t.Name).ToList();
                     break;
-                case SortOrder.AscendingDate:
+                case TodoSortOrder.AscendingDate:
                     todoItems = todoItems.OrderBy(t => t.Deadline).ToList();
                     break;
-                case SortOrder.DescendingDate:
+                case TodoSortOrder.DescendingDate:
                     todoItems = todoItems.OrderByDescending(t => t.Deadline).ToList();
                     break;
                 default:
@@ -87,9 +87,9 @@ namespace PersonalFinanceMVC.Models
             context.SaveChanges();
         }
 
-        internal void UserSortSetting(SortOrder sortPreference)
+        internal void UserSortSetting(TodoSortOrder sortPreference)
         {
-            userManager.Users.FirstOrDefault(u => u.Id == userId).SortingOrder = sortPreference;
+            userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder = sortPreference;
             context.SaveChanges();
         }
 

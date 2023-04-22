@@ -9,11 +9,11 @@ namespace PersonalFinanceMVC.Models
     {
         public List<Budget> Budgets { get; set; }
         public List<Todo> Todos { get; set; }
-        public SortOrder SortingOrder { get; set; } = new SortOrder();
+        public TodoSortOrder TodoSortingOrder { get; set; } = new TodoSortOrder();
 
     }
 
-    public enum SortOrder
+    public enum TodoSortOrder
     {
         AscendingName,
         DescendingName,

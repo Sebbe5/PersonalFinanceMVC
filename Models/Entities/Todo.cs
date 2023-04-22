@@ -7,6 +7,7 @@
         public DateTime Deadline { get; set; }
         public string ApplicationUserId { get; set; }
 
+
         ApplicationUser ApplicationUser { get; set; }
     }
 }

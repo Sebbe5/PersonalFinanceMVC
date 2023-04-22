@@ -4,10 +4,10 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 
-    // TODO: Add the ability to edit an existing todo
-    // TODO: Add bool to the VM depending on how close to deadline a task it. Then change color of the background or something.
     // TODO: Add categories
     // TODO: Add tags
+    // TODO: Add the ability to edit an existing todo
+    // TODO: Add bool to the VM depending on how close to deadline a task it. Then change color of the background or something.
     // TODO: Add a search function
     // TODO: Add comments
     // TODO: Add subtassks
@@ -58,7 +58,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("/sortTodo")]
         public IActionResult Sort(string sortOrder)
         {
-            SortOrder sortPreference;
+            TodoSortOrder sortPreference;
             Enum.TryParse(sortOrder, out sortPreference);
             todoService.UserSortSetting(sortPreference);
             return RedirectToAction(nameof(TodoList));
