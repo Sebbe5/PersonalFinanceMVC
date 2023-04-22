@@ -8,23 +8,22 @@
 <div class="container mt-4 bg-white rounded">
     <h1 class="through">TODO's</h1>
     <div class="container">
-        
-            <form asp-controller="Todo" asp-action="Create" class="row">
-                <div class="form-floating mb-2 mb-lg-0 col-lg-5">
+        <form asp-controller="Todo" asp-action="Create">
+            <div class="row">
+                <div class="form-floating mb-2 mb-lg-0 col-lg-6">
                     <input asp-for="NewTodoItem" class="form-control" autofocus />
                     <label asp-for="NewTodoItem"></label>
                     <span asp-validation-for="NewTodoItem" class="text-danger"></span>
                     <span class="text-danger">@TempData["Message"]</span>
                 </div>
-                <div class="form-floating col-lg-5">
+                <div class="form-floating col-lg-6">
                     <input asp-for="NewDeadline" class="form-control" asp-format="{0:yyyy-MM-dd HH:mm}" />
                     <label asp-for="NewDeadline"></label>
                     <span asp-validation-for="NewDeadline" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2 mt-lg-0 col col-lg-1">Add</button>
-            </form>
-
-        
+            </div>
+        </form>
+        <button type="submit" class="btn btn-primary mt-2">Add</button>
     </div>
 
     <div class="container todo-list my-4 rounded">
