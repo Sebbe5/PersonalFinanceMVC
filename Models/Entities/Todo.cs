@@ -6,7 +6,6 @@
         public string Name { get; set; }
         public DateTime Deadline { get; set; }
         public int? TodoCategoryId { get; set; }
-        public TodoCategory TodoCategory { get; set; }
         public string ApplicationUserId { get; set; }
         ApplicationUser ApplicationUser { get; set; }
     }

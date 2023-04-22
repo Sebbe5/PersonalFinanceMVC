@@ -13,7 +13,6 @@ namespace PersonalFinanceMVC.Models
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Todo> Todos { get; set; }
-        public DbSet<TodoCategory> TodoCategory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,10 +24,7 @@ namespace PersonalFinanceMVC.Models
 
             modelBuilder.Entity<ApplicationUser>().Property(x => x.UserName).HasMaxLength(12);
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(au => au.TodoCategories)
-                .WithMany(tc => tc.ApplicationUsers)
-                .UsingEntity(j => j.ToTable("TodoCategoryApplicationUser"));
+            
         }
     }
 }
