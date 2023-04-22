@@ -15,12 +15,15 @@ namespace PersonalFinanceMVC.Views.Todo
         [DefaultValue(typeof(DateTime), "{0:yyyy-MM-dd HH:mm}")]
         public DateTime NewDeadline { get; set; } = DateTime.Now.AddHours(1);
 
+        [Display(Name = "Category", Prompt = "Category")]
+        public string NewCategory { get; set; }
         public List<TodoItemVM> TodoItems { get; set; } = new List<TodoItemVM>();
         public class TodoItemVM
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public DateTime Deadline{ get; set; }
+            public string Category { get; set; }
         }
     }
 }

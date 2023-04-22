@@ -10,18 +10,29 @@
     <div class="container">
         <form asp-controller="Todo" asp-action="Create">
             <div class="row">
-                <div class="form-floating mb-2 mb-lg-0 col-lg-6">
+                <div class="form-floating mb-2 mb-lg-0 col-lg-4">
                     <input asp-for="NewTodoItem" class="form-control" autofocus />
                     <label asp-for="NewTodoItem"></label>
                     <span asp-validation-for="NewTodoItem" class="text-danger"></span>
                     <span class="text-danger">@TempData["Message"]</span>
                 </div>
-                <div class="form-floating col-lg-6">
+                <div class="form-floating mb-2 mb-lg-0 col-lg-4">
                     <input asp-for="NewDeadline" class="form-control" asp-format="{0:yyyy-MM-dd HH:mm}" />
                     <label asp-for="NewDeadline"></label>
                     <span asp-validation-for="NewDeadline" class="text-danger"></span>
                 </div>
+                <div class="form-floating mb-2 mb-lg-0 col-lg-4">
+                    <select asp-for="NewCategory" class="form-select">
+                        <option value="">Select a category</option>
+                        <option value="Work">Work</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <label asp-for="NewCategory"></label>
+                </div>
             </div>
+            
+            
         </form>
         <button type="submit" class="btn btn-primary mt-2">Add</button>
     </div>
@@ -48,6 +59,7 @@
                             <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
                         </form>
                     </th>
+                    <th>Category:</th>
                     <th></th>
                 </tr>
             </thead>
@@ -57,6 +69,7 @@
                     <tr>
                         <td class="w-50">@item.Name</td> <!-- modified to display Name property -->
                         <td class="w-25">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</td> <!-- added column to display Deadline property -->
+                        <td>@item.Category</td>
                         <td>
                             <form asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id">
                                 <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>

@@ -32,6 +32,7 @@ namespace PersonalFinanceMVC.Models
                     Id = t.Id,
                     Name = t.Name,
                     Deadline = t.Deadline,
+                    Category = t.Category
                 })
                 .ToList();
 
@@ -64,6 +65,8 @@ namespace PersonalFinanceMVC.Models
         {
             var existingTodo = context.Todos.Where(t => t.ApplicationUserId == userId).FirstOrDefault(t => t.Name == vm.NewTodoItem);
 
+            var validStrings = new string[] { "Work", "Personal", "Other" };
+
             if (existingTodo != null)
             {
                 return "The todo already exists";
@@ -73,7 +76,8 @@ namespace PersonalFinanceMVC.Models
             {
                 ApplicationUserId = userId,
                 Name = vm.NewTodoItem,
-                Deadline = vm.NewDeadline
+                Deadline = vm.NewDeadline,
+                Category = validStrings.Contains(vm.NewCategory) ? vm.NewCategory : string.Empty,
             });
 
             context.SaveChanges();
