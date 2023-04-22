@@ -24,6 +24,11 @@ namespace PersonalFinanceMVC.Models
                 .HasColumnType(SqlDbType.Money.ToString());
 
             modelBuilder.Entity<ApplicationUser>().Property(x => x.UserName).HasMaxLength(12);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(au => au.TodoCategories)
+                .WithMany(tc => tc.ApplicationUsers)
+                .UsingEntity(j => j.ToTable("TodoCategoryApplicationUser"));
         }
     }
 }

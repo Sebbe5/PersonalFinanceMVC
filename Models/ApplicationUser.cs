@@ -10,7 +10,7 @@ namespace PersonalFinanceMVC.Models
         public List<Budget> Budgets { get; set; }
         public List<Todo> Todos { get; set; }
         public TodoSortOrder TodoSortingOrder { get; set; } = new TodoSortOrder();
-
+        public List<TodoCategory> TodoCategories { get; set; }
     }
 
     public enum TodoSortOrder
