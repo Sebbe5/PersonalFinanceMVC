@@ -29,19 +29,19 @@
                 <tr>
                     <th>
                         Todo:
-                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
                             <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingName')"></i>
                         </form>
-                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
                             <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingName')"></i>
                         </form>
                     </th>
                     <th>
                         Deadline:
-                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
                             <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingDate')"></i>
                         </form>
-                        <form asp-controller="Todo" asp-action="Sort" asp-route-sortOrder="DescendingName" class="d-inline" id="sortForm">
+                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
                             <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
                         </form>
                     </th>
