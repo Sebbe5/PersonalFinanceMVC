@@ -10,7 +10,7 @@ namespace PersonalFinanceMVC.Controllers
     // TODO: Add comments
     // TODO: Add tags
     // TODO: Add subtassks
-    // TODO: Make it like a kanban board?
+    // TODO: Make it like a board (TO DO, IN PROGRESS, DONE)
     // TODO: Add a computer reminder (Probably not possible until launched)
 {
     public class TodoController : Controller
