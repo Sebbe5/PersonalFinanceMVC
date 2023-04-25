@@ -32,9 +32,12 @@ namespace PersonalFinanceMVC.Models
                     Id = t.Id,
                     Name = t.Name,
                     Deadline = t.Deadline,
-                    Category = t.Category
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
                 })
                 .ToList();
+
+            
 
             var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
             switch (userPrefOrder)

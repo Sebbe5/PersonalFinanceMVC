@@ -64,14 +64,24 @@
             <tbody>
                 @foreach (var item in Model.TodoItems)
                 {
-                    <tr>
+                    string bgcolor;
+                    if (item.DaysToDeadline < 0)
+                        bgcolor = "rgba(255, 0, 0, 0.5)";
+                    else if (item.DaysToDeadline < 1)
+                        bgcolor = "rgba(255, 255, 0, 0.5)";
+                    else
+                        bgcolor = "inherit";
+
+                    
+                    <tr style="background-color: @bgcolor">
                         <td class="w-50">@item.Name</td> <!-- modified to display Name property -->
                         <td class="w-25">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</td> <!-- added column to display Deadline property -->
                         <td>@item.Category</td>
                         <td>
                             <form asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id">
-                                <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>
+                                <button type="submit" class="btn btn-danger btn-sm ms-2" >Remove</button>
                             </form>
+                            
                         </td>
                     </tr>
                 }
