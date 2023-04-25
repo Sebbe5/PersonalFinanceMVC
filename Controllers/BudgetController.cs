@@ -26,7 +26,6 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("budgetDetails")]
         public IActionResult BudgetDetails(int id)
         {
-            // TODO: Add the total amount to this view
             BudgetDetailsVM vm = budgetService.CreateBudgetDetailsVM(id);
             return View(vm);
         }

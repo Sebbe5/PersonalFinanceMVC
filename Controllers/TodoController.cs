@@ -5,7 +5,6 @@ using PersonalFinanceMVC.Views.Todo;
 namespace PersonalFinanceMVC.Controllers
 
     // TODO: Add the ability to edit an existing todo
-    // TODO: Add bool to the VM depending on how close to deadline a task it. Then change color of the background or something.
     // TODO: Add a search function
     // TODO: Add comments
     // TODO: Add tags
