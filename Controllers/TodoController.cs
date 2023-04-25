@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceMVC.Models;
+using PersonalFinanceMVC.Views.Budget;
 using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
@@ -51,6 +52,27 @@ namespace PersonalFinanceMVC.Controllers
         public IActionResult Delete(int id)
         {
             todoService.DeleteTodo(id);
+            return RedirectToAction(nameof(TodoList));
+        }
+
+        [HttpGet("/editTodo")]
+        public IActionResult Edit(int id)
+        {
+
+            Response.Cookies.Append("EditedTodoId", id.ToString());
+            EditVM vm = todoService.CreateEditVM(id);
+            return View(vm);
+        }
+
+        [HttpPost("/editTodo")]
+        public IActionResult Edit(EditVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            int id = int.Parse(Request.Cookies["EditedTodoId"]);
+
+            todoService.EditTodo(vm, id);
             return RedirectToAction(nameof(TodoList));
         }
 

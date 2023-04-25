@@ -36,57 +36,62 @@
     </div>
 
     <div class="container todo-list my-4 rounded">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        Todo:
-                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
-                            <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingName')"></i>
-                        </form>
-                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
-                            <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingName')"></i>
-                        </form>
-                    </th>
-                    <th>
-                        Deadline:
-                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
-                            <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingDate')"></i>
-                        </form>
-                        <form asp-controller="Todo" asp-action="Sort" class="d-inline" id="sortForm">
-                            <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
-                        </form>
-                    </th>
-                    <th>Category:</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.TodoItems)
-                {
-                    string bgcolor;
-                    if (item.DaysToDeadline < 0)
-                        bgcolor = "rgba(255, 0, 0, 0.5)";
-                    else if (item.DaysToDeadline < 1)
-                        bgcolor = "rgba(255, 255, 0, 0.5)";
-                    else
-                        bgcolor = "inherit";
-
-                    
-                    <tr style="background-color: @bgcolor">
-                        <td class="w-50">@item.Name</td> <!-- modified to display Name property -->
-                        <td class="w-25">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</td> <!-- added column to display Deadline property -->
-                        <td>@item.Category</td>
-                        <td>
-                            <form asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id">
-                                <button type="submit" class="btn btn-danger btn-sm ms-2" >Remove</button>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Todo:
+                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+                                <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingName')"></i>
                             </form>
-                            
-                        </td>
+                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+                                <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingName')"></i>
+                            </form>
+                        </th>
+                        <th>
+                            Deadline:
+                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+                                <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingDate')"></i>
+                            </form>
+                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+                                <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
+                            </form>
+                        </th>
+                        <th>Category:</th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TodoItems)
+                    {
+                        string bgcolor;
+                        if (item.DaysToDeadline < 0)
+                            bgcolor = "rgba(255, 0, 0, 0.5)";
+                        else if (item.DaysToDeadline < 1)
+                            bgcolor = "rgba(255, 255, 0, 0.5)";
+                        else
+                            bgcolor = "inherit";
+
+
+                        <tr style="background-color: @bgcolor">
+                            <td class="w-50">@item.Name</td> <!-- modified to display Name property -->
+                            <td class="w-25">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</td> <!-- added column to display Deadline property -->
+                            <td>@item.Category</td>
+                            <td>
+                                <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm ms-2">Edit</a>
+                            </td>
+                            <td>
+                                <form asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

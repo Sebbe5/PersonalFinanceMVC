@@ -101,5 +101,30 @@ namespace PersonalFinanceMVC.Models
             context.SaveChanges();
         }
 
+        internal EditVM CreateEditVM(int id)
+        {
+            return context.Todos
+                .Where(t => t.Id == id)
+                .Select(b => new EditVM
+                {
+                    Name = b.Name,
+                    Deadline = b.Deadline,
+                    Category = b.Category,
+                })
+                .SingleOrDefault();
+        }
+
+        internal void EditTodo(EditVM vm, int id)
+        {
+            var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
+
+            var validStrings = new string[] { "Work", "Personal", "Other" };
+
+            todoToEdit.Name = vm.Name;
+            todoToEdit.Deadline = vm.Deadline;
+            todoToEdit.Category = vm.Category;
+
+            context.SaveChanges();
+        }
     }
 }
