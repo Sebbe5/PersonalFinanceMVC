@@ -4,7 +4,6 @@ using PersonalFinanceMVC.Models;
 
 namespace PersonalFinanceMVC.Controllers
 {
-    // TODO: Make partial views of all the cards
     // TODO: Deploy to azure
     public class HomeController : Controller
     {
