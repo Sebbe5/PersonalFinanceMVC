@@ -26,7 +26,6 @@ namespace PersonalFinanceMVC.Models
 
             // Map budgets to BudgetItemVM objects
             var budgetItems = context.Budgets
-               .Include(b => b.Expenses) // Lets me have one database quey instead of two
                .Where(b => b.ApplicationUserId == userId)
                .Select(b => new BudgetsVM.BudgetItemVM
                {
@@ -45,39 +44,38 @@ namespace PersonalFinanceMVC.Models
 
         internal BudgetDetailsVM CreateBudgetDetailsVM(int id)
         {
-            // Map expenses to ExpenseItemVM objects
-            var expenseItems = context.Expenses.Where(e => e.BudgetId == id).Select(e => new BudgetDetailsVM.ExpenseItemVM
-            {
-                Name = e.Name,
-                Amount = e.Money
-            })
-            .ToArray();
-
-            // Create the BudgetDetailsVM, set its properties and return it from the method
-            return new BudgetDetailsVM
-            {
-                Id = id,
-                Name = context.Budgets.SingleOrDefault(b => b.Id == id).Name,
-                Expenses = expenseItems
-            };
+            return context.Budgets.Include(b => b.Expenses)
+                .Where(b => b.Id == id)
+                .Select(b => new BudgetDetailsVM
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Expenses = b.Expenses.Select(e => new BudgetDetailsVM.ExpenseItemVM
+                    {
+                        Name = e.Name,
+                        Amount = e.Money
+                    })
+                    .ToArray()
+                })
+                .SingleOrDefault();
         }
 
         internal EditBudgetVM CreateEditBudgetVM(int id)
         {
-            // Map expenses to ExpenseItemVM objects
-            var expenseItems = context.Expenses.Where(e => e.BudgetId == id).Select(e => new EditBudgetVM.ExpenseItemVM
-            {
-                Name = e.Name,
-                Amount = e.Money
-            })
-            .ToList();
 
-            // Create the EditDetailsVM, set its properties and return it from the method
-            return new EditBudgetVM
-            {
-                Name = context.Budgets.SingleOrDefault(b => b.Id == id).Name,
-                Expenses = expenseItems
-            };
+            return context.Budgets.Include(b => b.Expenses)
+                .Where (b => b.Id == id)
+                .Select(b => new EditBudgetVM
+                {
+                    Name = b.Name,
+                    Expenses = b.Expenses.Select(e => new EditBudgetVM.ExpenseItemVM
+                    {
+                        Name = e.Name,
+                        Amount = e.Money
+                    })
+                    .ToList()
+                })
+                .SingleOrDefault();
         }
 
         internal void AddBudgetToDB(CreateBudgetVM vm)
@@ -118,26 +116,24 @@ namespace PersonalFinanceMVC.Models
             var budgetToEdit = context.Budgets.Include(b => b.Expenses).SingleOrDefault(b => b.Id == id);
 
             // Update name of budget
-
             budgetToEdit.Name = budgetToEdit.Name == vm.Name ? budgetToEdit.Name : CheckIfNameExist(vm.Name);
 
             // Clear all expenses since it's hard to track if some expenses where deleted from the list
             budgetToEdit.Expenses.Clear();
 
             // Check if there are any expenses in the view model list
+            var existingExpenses = new HashSet<string>(budgetToEdit.Expenses.Select(e => e.Name));
             if (vm.Expenses != null)
             {
                 foreach (var expenseItemVM in vm.Expenses)
                 {
                     if (expenseItemVM.Name != null && expenseItemVM.Amount != 0)
                     {
-                        // Store expense if expense already exists in relation to the budget, otherwise store null
-                        var existingExpense = budgetToEdit.Expenses.FirstOrDefault(e => e.Name == expenseItemVM.Name);
-
                         // Check if expense already exists
-                        if (existingExpense != null)
+                        if (existingExpenses.Contains(expenseItemVM.Name, StringComparer.OrdinalIgnoreCase))
                         {
                             // If expense exists, update its properties
+                            var existingExpense = budgetToEdit.Expenses.First(e => String.Equals(e.Name, expenseItemVM.Name, StringComparison.OrdinalIgnoreCase));
                             existingExpense.Money = expenseItemVM.Amount;
                         }
                         else
@@ -148,7 +144,7 @@ namespace PersonalFinanceMVC.Models
                                 Money = expenseItemVM.Amount,
                                 BudgetId = id,
                             });
-
+                            existingExpenses.Add(expenseItemVM.Name);
                         }
                     }
                 }
@@ -167,7 +163,7 @@ namespace PersonalFinanceMVC.Models
         private string CheckIfNameExist(string name)
         {
             // Get the names of all budgets
-            var budgetNames = context.Budgets.Select(b => b.Name).ToList();
+            var budgetNames = new HashSet<string>(context.Budgets.Select(b => b.Name), StringComparer.OrdinalIgnoreCase);
 
             // Check if name already exist
             bool isExisting = budgetNames.Contains(name);
@@ -183,7 +179,7 @@ namespace PersonalFinanceMVC.Models
                 else
                     name += $"{counter}";
 
-                isExisting = budgetNames.Contains(name);
+                isExisting = budgetNames.Contains(name, StringComparer.OrdinalIgnoreCase);
                 counter++;
             }
 
