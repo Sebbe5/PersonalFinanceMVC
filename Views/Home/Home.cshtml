@@ -1,69 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Member";
+    ViewData["Title"] = "Home";
 }
 
 <div class="container mt-5">
     <h1 class="through">Welcome @User.Identity.Name</h1>
     <div class="row mt-5">
         <div class="col-lg-3 d-flex">
-            <div class="card p-2 text-center w-100">
-                <img src="~/images/budget.png" />
-                <div class="card-body">
-                    <h5 class="card-title">Budgets</h5>
-                    <p>
-                        Welcome to our Budget Tracker! With our easy-to-use view, you can create and store budgets to efficiently manage your finances.
-                        Stay organized and make informed financial decisions with our user-friendly Budget Tracker. Take control of your finances today!
-                    </p>
-                </div>
-                <div class="card-footer card-footer-height card-footer-btns">
-                    <a asp-controller="Budget" asp-action="Budgets" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Budgets</a>
-                </div>
-            </div>
+            <partial name="_FunctionCard" model="@(new _FunctionCardVM{Image = "/images/budget.png", Title = "Budgets", Controller = "Budget", Action = "Budgets", FunctionName = "Budgets", Description="Welcome to our Budget Tracker! With our easy-to-use view, you can create and store budgets to efficiently manage your finances. Stay organized and make informed financial decisions with our user-friendly Budget Tracker. Take control of your finances today!"})"></partial>
         </div>
         <div class="col-lg-3 d-flex">
-            <div class="card p-2 text-center w-100">
-                <img src="~/images/investment.png" />
-                <div class="card-body">
-                    <h5 class="card-title">Investments</h5>
-                    <p>Yet to be implemented</p>
-                </div>
-                <div class="card-footer card-footer-height card-footer-btns">
-                    <a asp-controller="Investment" asp-action="Investments" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Investments</a>
-                </div>
-            </div>
+            <partial name="_FunctionCard" model="@(new _FunctionCardVM{Image = "/images/investment.png", Title = "Investments", Controller = "Investment", Action = "Investments", FunctionName = "Investments", Description="Yet to be implemented"})"></partial>
         </div>
         <div class="col-lg-3 d-flex">
-            <div class="card p-2 text-center w-100">
-                <img src="~/images/compound.png" />
-                <div class="card-body">
-                    <h5 class="card-title">Compound Interest Calculator</h5>
-                    <p>
-                        Welcome to our Compound Interest Calculator! Our powerful tool allows you to effortlessly calculate the growth of your investments over time.
-                        With easy-to-use inputs, you can quickly determine how much your savings or investments could grow with the power of compound interest!
-                    </p>
-                </div>
-                <div class="card-footer card-footer-height card-footer-btns">
-                    <a asp-controller="Compound" asp-action="Calculate" class="btn btn-primary w-100 d-flex align-items-center justify-content-center p-1">Go to Compound Interest Calculator</a>
-                </div>
-            </div>
+            <partial name="_FunctionCard" model="@(new _FunctionCardVM{Image = "/images/compound.png", Title = "Compound Interest Calculator", Controller = "Compound", Action = "Calculate", FunctionName = "Compound Interest Calculator", Description="Welcome to our Compound Interest Calculator! Our powerful tool allows you to effortlessly calculate the growth of your investments over time. With easy-to-use inputs, you can quickly determine how much your savings or investments could grow with the power of compound interest!"})"></partial>
         </div>
         <div class="col-lg-3 d-flex">
-            <div class="card p-2 text-center w-100">
-                <img src="~/images/Todo.png" />
-                <div class="card-body">
-                    <h5 class="card-title">Todo List</h5>
-                    <p>
-                        Introducing our powerful Todo List function!
-                        Keep track of all your tasks and goals in one convenient location.
-                        With our user-friendly interface, you can easily add and delete your tasks. 
-                        Never forget a crucial task again.
-                        Start using our Todo List function today and increase your productivity like never before!
-                    </p>
-                </div>
-                <div class="card-footer card-footer-height card-footer-btns">
-                    <a asp-controller="Todo" asp-action="TodoList" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to Todo List</a>
-                </div>
-            </div>
+            <partial name="_FunctionCard" model="@(new _FunctionCardVM{Image = "/images/Todo.png", Title = "Todo List", Controller = "Todo", Action = "TodoList", FunctionName = "Todo List", Description="Introducing our powerful Todo List function! Keep track of all your tasks and goals in one convenient location. With our user-friendly interface, you can easily add and delete your tasks. Never forget a crucial task again. Start using our Todo List function today and increase your productivity like never before!"})"></partial>
         </div>
     </div>
     <div class="message">

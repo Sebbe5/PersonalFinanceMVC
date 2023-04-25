@@ -1,0 +1,13 @@
+﻿@model _FunctionCardVM
+
+
+<div class="card p-2 text-center w-100">
+    <img src="@Model.Image" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p>@Model.Description</p>
+    </div>
+    <div class="card-footer card-footer-height card-footer-btns">
+        <a asp-controller="@Model.Controller" asp-action="@Model.Action" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">Go to @Model.FunctionName</a>
+    </div>
+</div>
