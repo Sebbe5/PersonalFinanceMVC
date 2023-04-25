@@ -1,10 +1,14 @@
-﻿namespace PersonalFinanceMVC.Views.Budget
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PersonalFinanceMVC.Views.Budget
 {
     public class BudgetDetailsVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public ExpenseItemVM[] Expenses{ get; set; }
+        public double TotalAmount { get; set; }
+
 
         public class ExpenseItemVM
         {

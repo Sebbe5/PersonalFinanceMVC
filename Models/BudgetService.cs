@@ -55,7 +55,8 @@ namespace PersonalFinanceMVC.Models
                         Name = e.Name,
                         Amount = e.Money
                     })
-                    .ToArray()
+                    .ToArray(),
+                    TotalAmount = b.Expenses.Sum(e => e.Money)
                 })
                 .SingleOrDefault();
         }
