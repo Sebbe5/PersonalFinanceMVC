@@ -5,7 +5,6 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 
-    // TODO: Add the ability to edit an existing todo
     // TODO: Add a search function
     // TODO: Add comments
     // TODO: Add tags
