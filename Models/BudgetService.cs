@@ -164,7 +164,7 @@ namespace PersonalFinanceMVC.Models
         private string CheckIfNameExist(string name)
         {
             // Get the names of all budgets
-            var budgetNames = new HashSet<string>(context.Budgets.Select(b => b.Name), StringComparer.OrdinalIgnoreCase);
+            HashSet<string> budgetNames = new HashSet<string>(context.Budgets.Select(b => b.Name), StringComparer.OrdinalIgnoreCase);
 
             // Check if name already exist
             bool isExisting = budgetNames.Contains(name);
