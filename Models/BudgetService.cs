@@ -114,7 +114,7 @@ namespace PersonalFinanceMVC.Models
         internal void EditBudget(EditBudgetVM vm, int id)
         {
             // Retrieve the budget to be edited
-            var budgetToEdit = context.Budgets.Include(b => b.Expenses.Where(e => e.BudgetId == b.Id)).SingleOrDefault(b => b.Id == id);
+            var budgetToEdit = context.Budgets.Include(b => b.Expenses).SingleOrDefault(b => b.Id == id);
 
             // Update name of budget
             budgetToEdit.Name = budgetToEdit.Name == vm.Name ? budgetToEdit.Name : CheckIfNameExist(vm.Name);
