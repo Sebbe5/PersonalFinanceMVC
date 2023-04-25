@@ -63,11 +63,12 @@ namespace PersonalFinanceMVC.Models
 
         internal string AddTodo(TodoListVM vm)
         {
-            var existingTodo = context.Todos.Where(t => t.ApplicationUserId == userId).FirstOrDefault(t => t.Name == vm.NewTodoItem);
+            var nameOfTodos = new HashSet<string>(context.Todos.Where(t => t.ApplicationUserId == userId)
+                                                                .Select(t => t.Name), StringComparer.OrdinalIgnoreCase);
 
             var validStrings = new string[] { "Work", "Personal", "Other" };
 
-            if (existingTodo != null)
+            if (nameOfTodos.Contains(vm.NewTodoItem))
             {
                 return "The todo already exists";
             }
