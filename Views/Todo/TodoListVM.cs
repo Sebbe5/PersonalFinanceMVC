@@ -17,7 +17,9 @@ namespace PersonalFinanceMVC.Views.Todo
 
         [Display(Name = "Category", Prompt = "Category")]
         public string NewCategory { get; set; }
-        public List<TodoItemVM> TodoItems { get; set; } = new List<TodoItemVM>();
+        public List<TodoItemVM> Todos { get; set; } = new List<TodoItemVM>();
+        public List<TodoItemVM> InProgress { get; set; } = new List<TodoItemVM>();
+        public List<TodoItemVM> Done { get; set; } = new List<TodoItemVM>();
         public class TodoItemVM
         {
             public int Id { get; set; }

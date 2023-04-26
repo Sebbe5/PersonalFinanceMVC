@@ -35,6 +35,47 @@
         </form>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="status-card card">
+                    <p class="ms-2 mt-1">TO DO</p>
+                    @foreach (var item in Model.Todos)
+                    {
+                    <div class="status-card-item row justify-content-between m-1 p-2 border rounded bg-white">
+                            <p class="col-5 p-0 m-0">@item.Name</p>
+                            <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status-card card">
+                    <p class="ms-2 mt-1">IN PROGRESS</p>
+                    @foreach (var item in Model.InProgress)
+                    {
+                    <div class="status-card-item row justify-content-between m-1 p-2 border rounded bg-white">
+                            <p class="col-5 p-0 m-0">@item.Name</p>
+                            <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status-card card">
+                    <p class="ms-2 mt-1">DONE</p>
+                    @foreach (var item in Model.Done)
+                    {
+                    <div class="status-card-item row justify-content-between m-1 p-2 border rounded bg-white">
+                            <p class="col-5 p-0 m-0">@item.Name</p>
+                            <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                    </div>
+                    }
+                </div>
+            </div>
+            
+        </div>
+    </div>
     <div class="container todo-list my-4 rounded">
         <div class="table-responsive">
             <table class="table table-striped">
@@ -64,7 +105,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.TodoItems)
+                    @foreach (var item in Model.Todos)
                     {
                         string bgcolor;
                         if (item.DaysToDeadline < 0)
@@ -126,4 +167,4 @@
         }
     </script>
 
-}
+    }

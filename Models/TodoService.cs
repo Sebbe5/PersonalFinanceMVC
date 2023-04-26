@@ -25,8 +25,35 @@ namespace PersonalFinanceMVC.Models
 
         internal TodoListVM CreateTodoListVM()
         {
-            var todoItems = context.Todos
-                .Where(t => t.ApplicationUserId == userId)
+            var todos = context.Todos
+                .Where(t => t.ApplicationUserId == userId);
+
+            var todoItems = todos
+                .Where(t => t.Status == Status.ToDo)
+                .Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
+                })
+                .ToList();
+
+            var inProgressItems = todos
+                .Where(t => t.Status == Status.InProgress)
+                .Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
+                })
+                .ToList();
+
+            var doneItems = todos
+                .Where(t => t.Status == Status.Done)
                 .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
@@ -60,7 +87,9 @@ namespace PersonalFinanceMVC.Models
 
             return new TodoListVM
             {
-                TodoItems = todoItems
+                Todos = todoItems,
+                InProgress = inProgressItems,
+                Done = doneItems,
             };
         }
 
@@ -82,6 +111,7 @@ namespace PersonalFinanceMVC.Models
                 Name = vm.NewTodoItem,
                 Deadline = vm.NewDeadline,
                 Category = validStrings.Contains(vm.NewCategory) ? vm.NewCategory : string.Empty,
+                Status = Status.ToDo
             });
 
             context.SaveChanges();
