@@ -201,7 +201,10 @@
         }
 
         $(function () {
-            $(".sortable").sortable();
+            $(".sortable").sortable({
+                connectWith: ".sortable",
+                appendTo: "body",
+            });
         })
     </script>
 
