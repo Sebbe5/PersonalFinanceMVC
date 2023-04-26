@@ -8,5 +8,6 @@ namespace PersonalFinanceMVC.Views.Todo
         public string Name { get; set; }
         public DateTime Deadline { get; set; }
         public string Category { get; set; }
+        public string Status { get; set; }
     }
 }

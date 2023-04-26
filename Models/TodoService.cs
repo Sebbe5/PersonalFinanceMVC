@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceMVC.Models.Entities;
 using PersonalFinanceMVC.Views.Budget;
@@ -110,7 +111,7 @@ namespace PersonalFinanceMVC.Models
                 ApplicationUserId = userId,
                 Name = vm.NewTodoItem,
                 Deadline = vm.NewDeadline,
-                Category = validStrings.Contains(vm.NewCategory) ? vm.NewCategory : string.Empty,
+                Category = vm.NewCategory,
                 Status = Status.ToDo
             });
 
@@ -140,6 +141,7 @@ namespace PersonalFinanceMVC.Models
                     Name = b.Name,
                     Deadline = b.Deadline,
                     Category = b.Category,
+                    Status = b.Status.ToString(),
                 })
                 .SingleOrDefault();
         }
@@ -148,11 +150,15 @@ namespace PersonalFinanceMVC.Models
         {
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
-            var validStrings = new string[] { "Work", "Personal", "Other" };
 
             todoToEdit.Name = vm.Name;
             todoToEdit.Deadline = vm.Deadline;
             todoToEdit.Category = vm.Category;
+            Status newStatus;
+            // Convert to enum and ignore casing
+            Enum.TryParse(vm.Status, true,  out newStatus);
+            todoToEdit.Status = newStatus;
+            
 
             context.SaveChanges();
         }
