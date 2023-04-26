@@ -190,8 +190,13 @@ h1 {
     box-shadow: 0px 0px 15px black;
 }
 
+
+
 .status-card {
     background-color: #e8e9ef;
     opacity: 0.8;
     min-height: 150px;
+    max-height: 500px;
+    overflow-y: auto;
 }
+
