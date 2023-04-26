@@ -224,3 +224,7 @@ h1 {
 .vertical-line-yellow {
     border-left: thick solid yellow;
 }
+
+.sortable{
+    min-height: 100px;
+}
