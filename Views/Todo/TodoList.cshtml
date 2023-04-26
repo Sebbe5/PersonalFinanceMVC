@@ -35,129 +35,135 @@
         </form>
     </div>
     @*<div class="container todo-list my-4 rounded">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                            Todo:
-                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
-                                <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingName')"></i>
-                            </form>
-                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
-                                <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingName')"></i>
-                            </form>
-                        </th>
-                        <th>
-                            Deadline:
-                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
-                                <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingDate')"></i>
-                            </form>
-                            <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
-                                <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
-                            </form>
-                        </th>
-                        <th>Category:</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Todos)
-                    {
-                        string bgcolor;
-                        if (item.DaysToDeadline < 0)
-                            bgcolor = "rgba(255, 0, 0, 0.5)";
-                        else if (item.DaysToDeadline < 1)
-                            bgcolor = "rgba(255, 255, 0, 0.5)";
-                        else
-                            bgcolor = "inherit";
+    <div class="table-responsive">
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>
+    Todo:
+    <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+    <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingName')"></i>
+    </form>
+    <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+    <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingName')"></i>
+    </form>
+    </th>
+    <th>
+    Deadline:
+    <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+    <i class="bi bi-caret-up-fill ms-1" type="submit" onclick="subForm('DescendingDate')"></i>
+    </form>
+    <form asp-controller="Todo" asp-action="Sort" class="d-lg-inline" id="sortForm">
+    <i class="bi bi-caret-down-fill" type="submit" onclick="subForm('AscendingDate')"></i>
+    </form>
+    </th>
+    <th>Category:</th>
+    <th></th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Todos)
+    {
+    string bgcolor;
+    if (item.DaysToDeadline < 0)
+    bgcolor = "rgba(255, 0, 0, 0.5)";
+    else if (item.DaysToDeadline < 1)
+    bgcolor = "rgba(255, 255, 0, 0.5)";
+    else
+    bgcolor = "inherit";
 
 
-                        <tr style="background-color: @bgcolor">
-                            <td class="w-50">@item.Name</td> <!-- modified to display Name property -->
-                            <td class="w-25">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</td> <!-- added column to display Deadline property -->
-                            <td>@item.Category</td>
-                            <td>
-                                <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm ms-2">Edit</a>
-                            </td>
-                            <td>
-                                <form asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id">
-                                    <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+    <tr style="background-color: @bgcolor">
+    <td class="w-50">@item.Name</td> <!-- modified to display Name property -->
+    <td class="w-25">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</td> <!-- added column to display Deadline property -->
+    <td>@item.Category</td>
+    <td>
+    <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm ms-2">Edit</a>
+    </td>
+    <td>
+    <form asp-controller="Todo" asp-action="Delete" asp-route-id="@item.Id">
+    <button type="submit" class="btn btn-danger btn-sm ms-2">Remove</button>
+    </form>
+    </td>
+    </tr>
+    }
+    </tbody>
+    </table>
+    </div>
     </div>*@
     <div class="container mt-5">
         <div class="row kanban-container">
             <div class="col-lg-4 my-2">
-                <div class="status-card card sortable">
+                <div class="status-card card">
                     <p class="ms-2 mt-1">TO DO</p>
-                    @foreach (var item in Model.Todos)
-                    {
-                        string color = "black";
-                        if (item.Category == "Work")
-                            color = "red";
-                        else if (item.Category == "Personal")
-                            color = "blue";
-                        else if (item.Category == "Other")
-                            color = "yellow";
+                    <div class="sortable">
+                        @foreach (var item in Model.Todos)
+                        {
+                            string color = "black";
+                            if (item.Category == "Work")
+                                color = "red";
+                            else if (item.Category == "Personal")
+                                color = "blue";
+                            else if (item.Category == "Other")
+                                color = "yellow";
 
-                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset" >
-                            <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
-                                <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
-                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
-                            </div>
-                        </a>
-                    }
+                            <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
+                                <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
+                                    <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
+                                    <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                </div>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 my-2">
-                <div class="status-card card sortable">
+                <div class="status-card card">
                     <p class="ms-2 mt-1">IN PROGRESS</p>
-                    @foreach (var item in Model.InProgress)
-                    {
-                        string color = "black";
-                        if (item.Category == "Work")
-                            color = "red";
-                        else if (item.Category == "Personal")
-                            color = "blue";
-                        else if (item.Category == "Other")
-                            color = "yellow";
+                    <div class="sortable">
+                        @foreach (var item in Model.InProgress)
+                        {
+                            string color = "black";
+                            if (item.Category == "Work")
+                                color = "red";
+                            else if (item.Category == "Personal")
+                                color = "blue";
+                            else if (item.Category == "Other")
+                                color = "yellow";
 
-                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
-                            <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
-                                <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
-                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
-                            </div>
-                        </a>
-                    }
+                            <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
+                                <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
+                                    <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
+                                    <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                </div>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4 my-2">
-                <div class="status-card card sortable">
+                <div class="status-card card">
                     <p class="ms-2 mt-1">DONE</p>
-                    @foreach (var item in Model.Done)
-                    {
-                        string color = "black";
-                        if (item.Category == "Work")
-                            color = "red";
-                        else if (item.Category == "Personal")
-                            color = "blue";
-                        else if (item.Category == "Other")
-                            color = "yellow";
+                    <div class="sortable">
+                        @foreach (var item in Model.Done)
+                        {
+                            string color = "black";
+                            if (item.Category == "Work")
+                                color = "red";
+                            else if (item.Category == "Personal")
+                                color = "blue";
+                            else if (item.Category == "Other")
+                                color = "yellow";
 
-                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
-                            <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
-                                <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
-                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
-                            </div>
-                        </a>
-                    }
+                            <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
+                                <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
+                                    <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
+                                    <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                </div>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,7 +200,7 @@
             });
         }
 
-        $(function() {
+        $(function () {
             $(".sortable").sortable();
         })
     </script>
