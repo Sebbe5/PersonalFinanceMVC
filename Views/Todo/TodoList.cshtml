@@ -99,6 +99,14 @@
                     <p class="ms-2 mt-1">TO DO</p>
                     @foreach (var item in Model.Todos)
                     {
+                        string bgcolor;
+                        if (item.DaysToDeadline < 0)
+                            bgcolor = "rgba(255, 0, 0, 0.5)";
+                        else if (item.DaysToDeadline < 1)
+                            bgcolor = "rgba(255, 255, 0, 0.5)";
+                        else
+                            bgcolor = "inherit";
+
                         string color = "black";
                         if (item.Category == "Work")
                             color = "red";
@@ -110,7 +118,7 @@
                         <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
-                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                <p class="col-5 p-0 m-0 text-end" style="background-color: @bgcolor">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
                         </a>
                     }
@@ -121,6 +129,14 @@
                     <p class="ms-2 mt-1">IN PROGRESS</p>
                     @foreach (var item in Model.InProgress)
                     {
+                        string bgcolor;
+                        if (item.DaysToDeadline < 0)
+                            bgcolor = "rgba(255, 0, 0, 0.5)";
+                        else if (item.DaysToDeadline < 1)
+                            bgcolor = "rgba(255, 255, 0, 0.5)";
+                        else
+                            bgcolor = "inherit";
+
                         string color = "black";
                         if (item.Category == "Work")
                             color = "red";
@@ -132,7 +148,7 @@
                         <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
-                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                <p class="col-5 p-0 m-0 text-end" style="background-color: @bgcolor">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
                         </a>
                     }
