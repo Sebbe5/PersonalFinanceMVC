@@ -5,7 +5,6 @@ using PersonalFinanceMVC.Views.Todo;
 
 namespace PersonalFinanceMVC.Controllers
 
-    // TODO: Make it like a board (TO DO, IN PROGRESS, DONE), maybe even one for each category?
     // TODO: Add subtassks
     // TODO: Add a search function
     // TODO: Add tags
