@@ -56,7 +56,6 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/editTodo")]
         public IActionResult Edit(int id)
         {
-
             Response.Cookies.Append("EditedTodoId", id.ToString());
             EditVM vm = todoService.CreateEditVM(id);
             return View(vm);

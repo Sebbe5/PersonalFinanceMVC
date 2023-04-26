@@ -142,6 +142,7 @@ namespace PersonalFinanceMVC.Models
                     Deadline = b.Deadline,
                     Category = b.Category,
                     Status = b.Status.ToString(),
+                    Id = id
                 })
                 .SingleOrDefault();
         }

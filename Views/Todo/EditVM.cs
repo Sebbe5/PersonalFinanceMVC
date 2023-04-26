@@ -5,6 +5,7 @@ namespace PersonalFinanceMVC.Views.Todo
 {
     public class EditVM
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Deadline { get; set; }
         public string Category { get; set; }
