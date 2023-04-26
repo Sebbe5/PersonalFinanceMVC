@@ -192,13 +192,21 @@ h1 {
     overflow-y: auto;
 }
 
-
-
 .status-card {
     background-color: #e8e9ef;
     opacity: 0.8;
     min-height: 150px;
     max-height: 500px;
     overflow-y: auto;
+    height: 100%;
 }
 
+.kanban-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.col-md-4 {
+    flex-grow: 1;
+}
