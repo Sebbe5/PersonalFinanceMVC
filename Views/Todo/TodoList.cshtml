@@ -34,7 +34,7 @@
             <button type="submit" class="btn btn-primary mt-2">Add</button>
         </form>
     </div>
-    <div class="container todo-list my-4 rounded">
+    @*<div class="container todo-list my-4 rounded">
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -91,10 +91,10 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>*@
     <div class="container mt-5">
         <div class="row kanban-container">
-            <div class="col-md-4">
+            <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">TO DO</p>
                     @foreach (var item in Model.Todos)
@@ -111,13 +111,13 @@
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <div class="col-1 vertical-line-@color"></div>
                                 <p class="col-5 p-0 m-0 ">@item.Name</p>
-                                <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
                         </a>
                     }
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">IN PROGRESS</p>
                     @foreach (var item in Model.InProgress)
@@ -134,13 +134,13 @@
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <div class="col-1 vertical-line-@color"></div>
                                 <p class="col-5 p-0 m-0">@item.Name</p>
-                                <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
                         </a>
                     }
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">DONE</p>
                     @foreach (var item in Model.Done)
@@ -157,7 +157,7 @@
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <div class="col-1 vertical-line-@color"></div>
                                 <p class="col-5 p-0 m-0">@item.Name</p>
-                                <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
                         </a>
                     }
