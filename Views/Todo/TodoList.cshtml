@@ -92,16 +92,25 @@
             </table>
         </div>
     </div>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row kanban-container">
             <div class="col-md-4">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">TO DO</p>
                     @foreach (var item in Model.Todos)
                     {
+                        string color = "black";
+                        if (item.Category == "Work")
+                            color = "red";
+                        else if (item.Category == "Personal")
+                            color = "blue";
+                        else if (item.Category == "Other")
+                            color = "yellow";
+
                         <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
                             <div class="status-card-item row justify-content-between m-1 p-2 border rounded bg-white">
-                                <p class="col-5 p-0 m-0">@item.Name</p>
+                                <div class="col-1 vertical-line-@color"></div>
+                                <p class="col-5 p-0 m-0 ">@item.Name</p>
                                 <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
                         </a>
@@ -113,8 +122,17 @@
                     <p class="ms-2 mt-1">IN PROGRESS</p>
                     @foreach (var item in Model.InProgress)
                     {
+                        string color = "black";
+                        if (item.Category == "Work")
+                            color = "red";
+                        else if (item.Category == "Personal")
+                            color = "blue";
+                        else if (item.Category == "Other")
+                            color = "yellow";
+
                         <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
                             <div class="status-card-item row justify-content-between m-1 p-2 border rounded bg-white">
+                                <div class="col-1 vertical-line-@color"></div>
                                 <p class="col-5 p-0 m-0">@item.Name</p>
                                 <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>
@@ -127,8 +145,17 @@
                     <p class="ms-2 mt-1">DONE</p>
                     @foreach (var item in Model.Done)
                     {
+                        string color = "black";
+                        if (item.Category == "Work")
+                            color = "red";
+                        else if (item.Category == "Personal")
+                            color = "blue";
+                        else if (item.Category == "Other")
+                            color = "yellow";
+
                         <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
                             <div class="status-card-item row justify-content-between m-1 p-2 border rounded bg-white">
+                                <div class="col-1 vertical-line-@color"></div>
                                 <p class="col-5 p-0 m-0">@item.Name</p>
                                 <p class="col-6 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                             </div>

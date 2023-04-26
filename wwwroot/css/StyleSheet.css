@@ -210,3 +210,15 @@ h1 {
 .col-md-4 {
     flex-grow: 1;
 }
+
+.vertical-line-blue {
+    border-left: thick solid blue;
+}
+
+.vertical-line-red {
+    border-left: thick solid red;
+}
+
+.vertical-line-yellow {
+    border-left: thick solid yellow;
+}
