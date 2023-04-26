@@ -95,7 +95,7 @@
     <div class="container mt-5">
         <div class="row kanban-container">
             <div class="col-lg-4 my-2">
-                <div class="status-card card">
+                <div class="status-card card sortable">
                     <p class="ms-2 mt-1">TO DO</p>
                     @foreach (var item in Model.Todos)
                     {
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="col-lg-4 my-2">
-                <div class="status-card card">
+                <div class="status-card card sortable">
                     <p class="ms-2 mt-1">IN PROGRESS</p>
                     @foreach (var item in Model.InProgress)
                     {
@@ -129,7 +129,7 @@
                         else if (item.Category == "Other")
                             color = "yellow";
 
-                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
+                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset" draggable="true">
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
                                 <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div class="col-lg-4 my-2">
-                <div class="status-card card">
+                <div class="status-card card sortable">
                     <p class="ms-2 mt-1">DONE</p>
                     @foreach (var item in Model.Done)
                     {
@@ -151,7 +151,7 @@
                         else if (item.Category == "Other")
                             color = "yellow";
 
-                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset">
+                        <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none text-reset" draggable="true">
                             <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                 <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
                                 <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
