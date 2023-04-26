@@ -199,6 +199,8 @@ h1 {
     max-height: 500px;
     overflow-y: auto;
     height: 100%;
+    /*Hide the scrollbar when dragging element*/
+    overflow-x: hidden;
 }
 
 .kanban-container {
