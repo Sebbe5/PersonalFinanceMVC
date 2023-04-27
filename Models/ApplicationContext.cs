@@ -13,6 +13,7 @@ namespace PersonalFinanceMVC.Models
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Investment> Investments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,22 @@ namespace PersonalFinanceMVC.Models
             modelBuilder.Entity<Expense>()
                 .Property(e => e.Money)
                 .HasColumnType(SqlDbType.Money.ToString());
+
+            modelBuilder.Entity<Investment>()
+                .Property(i => i.InitialValue)
+                .HasColumnType(SqlDbType.Money.ToString());
+
+            modelBuilder.Entity<Investment>()
+                .Property(i => i.RecurringDeposit)
+                .HasColumnType(SqlDbType.Money.ToString());
+
+            modelBuilder.Entity<Investment>()
+                .Property(i => i.Value)
+                .HasColumnType(SqlDbType.Money.ToString());
+
+            modelBuilder.Entity<Investment>()
+                .Property(i => i.ExpectedAnnualInterest)
+                .HasColumnType(SqlDbType.Decimal.ToString());
 
             modelBuilder.Entity<ApplicationUser>().Property(x => x.UserName).HasMaxLength(12);
 
