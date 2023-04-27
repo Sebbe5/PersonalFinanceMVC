@@ -23,6 +23,8 @@ builder.Services.AddScoped<CompoundService>();
 
 builder.Services.AddScoped<TodoService>();
 
+builder.Services.AddScoped<InvestmentService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
