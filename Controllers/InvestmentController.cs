@@ -10,8 +10,10 @@ namespace PersonalFinanceMVC.Controllers
         {
             this.investmentService = dataService;
         }
-        public IActionResult Index()
+        [HttpGet("/investments")]
+        public IActionResult Investments()
         {
+
             return View();
         }
     }
