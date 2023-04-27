@@ -163,5 +163,16 @@ namespace PersonalFinanceMVC.Models
 
             context.SaveChanges();
         }
+
+        internal void EditStatus(int id, string status)
+        {
+            var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
+
+            Status newStatus;
+            Enum.TryParse(status, true, out newStatus);
+            todoToEdit.Status = newStatus;
+
+            context.SaveChanges();
+        }
     }
 }

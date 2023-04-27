@@ -97,7 +97,7 @@
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">TO DO</p>
-                    <div class="sortable-container">
+                    <div class="sortable-container" data-status="ToDo">
                         @foreach (var item in Model.Todos)
                         {
                             string bgcolor;
@@ -130,7 +130,7 @@
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">IN PROGRESS</p>
-                    <div class="sortable-container">
+                    <div class="sortable-container" data-status="InProgress">
                         @foreach (var item in Model.InProgress)
                         {
                             string bgcolor;
@@ -162,7 +162,7 @@
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">DONE</p>
-                    <div class="sortable-container">
+                    <div class="sortable-container" data-status="Done">
                         @foreach (var item in Model.Done)
                         {
                             string color = "black";
@@ -229,19 +229,20 @@
                 connectWith: '.sortable-container',
                 update: function (event, ui) {
                     var issue = $(ui.item);
-                    var newStatus = issue.parent().parent().data('status');
+                    var newStatus = issue.parent().data('status');
                     var issueId = issue.data('id');
-                    console.log(issue.data('id'))
+                    console.log(issueId)
+                    console.log(newStatus)
 
-                    //// Use Ajax to update the issue's status property
-                    //$.ajax({
-                    //    type: 'POST',
-                    //    url: '/Issues/UpdateStatus',
-                    //    data: {
-                    //        id: issueId,
-                    //        status: newStatus
-                    //    }
-                    //});
+                    // Use Ajax to update the issue's status property
+                    $.ajax({
+                        type: 'POST',
+                        url: '/updateStatus',
+                        data: {
+                            id: issueId,
+                            status: newStatus
+                        }
+                    });
                 },
                 appendTo: 'body',
             });

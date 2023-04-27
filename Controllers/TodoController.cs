@@ -82,6 +82,18 @@ namespace PersonalFinanceMVC.Controllers
             return RedirectToAction(nameof(TodoList));
         }
 
+        [HttpPost("/updateStatus")]
+        public ActionResult UpdateStatus(int id, string status)
+        {
+            // Update the status of the issue with the given id
+            // using the newStatus value passed in via Ajax.
+
+            todoService.EditStatus(id, status);
+
+            // Return a response indicating success or failure.
+            return Json(new { success = true });
+        }
+
 
     }
 }
