@@ -16,7 +16,7 @@
     @if (ViewContext.RouteData.Values["controller"].ToString() != "Investment")
     {
         <div class="col-md-4 d-flex">
-            <partial name="_FunctionCard" model="@(new _FunctionCardVM{Image = "/images/investment.png", Title = "Investments", Controller = "Investment", Action = "Investments", FunctionName = "Investments", Description="Yet to be implemented"})"></partial>
+            <partial name="_FunctionCard" model="@(new _FunctionCardVM{Image = "/images/investment.png", Title = "Investments", Controller = "Investment", Action = "Investments", FunctionName = "Investments", Description="Our Investments Tracker is a tool that lets you easily keep track of all your current investments. With forecasting capabilities, you can make informed decisions about your portfolio's potential. Whether you're an experienced investor or just getting started, our tool is designed to help you achieve your financial goals."})"></partial>
         </div>
     }
     @if (ViewContext.RouteData.Values["controller"].ToString() != "Compound")
