@@ -222,3 +222,8 @@ h1 {
 .vertical-line-yellow {
     border-left: thick solid yellow;
 }
+
+.sortable-container {
+    display: flex;
+    flex-direction: column;
+}
