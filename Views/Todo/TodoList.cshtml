@@ -222,18 +222,11 @@
 
 
         $(function () {
-            // Make containers sortable
-            $('.sortable-container').each(function () {
-                // Add a hidden element to each empty container
-                if ($(this).children().length === 0) {
-                    $(this).append('<div class="sortable-placeholder"></div>');
-                }
-            });
+            
 
 
             $('.sortable-container').sortable({
                 connectWith: '.sortable-container',
-                tolerance: 'pointer', // Allow dropping anywhere within the container
                 update: function (event, ui) {
                     var issue = $(ui.item);
                     var newStatus = issue.parent().parent().data('status');
