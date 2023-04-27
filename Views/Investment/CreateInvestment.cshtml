@@ -1,0 +1,60 @@
+﻿@model PersonalFinanceMVC.Views.Investment.CreateInvestmentVM
+
+@{
+    ViewData["Title"] = "Create Investment";
+    Layout = "_FunctionPage";
+}
+<div class="container bg-white rounded">
+
+
+    <h1>Create Investment</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateInvestment" id="create-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="InitialValue" class="control-label"></label>
+                    <input type="number" asp-for="InitialValue" class="form-control" value="0" oninput="ensureValue(this)" />
+                </div>
+                <div>
+                    <label asp-for="MonthlyContribution" class="control-label"></label>
+                    <input type="number" asp-for="MonthlyContribution" class="form-control" value="0" oninput="ensureValue(this)" />
+                </div>
+                <div>
+                    <label asp-for="AnnualInterest" class="control-label"></label>
+                    <input asp-for="AnnualInterest" class="form-control"/>
+                    <span asp-validation-for="AnnualInterest" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <input type="submit" form="create-form" value="Create" class="btn btn-primary" />
+        <a asp-action="Investments" class="text-decoration-none">Cancel</a>
+    </div>
+</div>
+
+@section EndoFBody{
+    <script>
+        // Function to ensure that there is always a value in the amount input fields
+        function ensureValue(input) {
+            // Check if the input value is empty
+            if (input.value === '') {
+                // If it is empty, set its value to 0
+                input.value = '0';
+            }
+            else {
+                // If it is not empty, parse the input value to a number
+                // and set it back as the input value to remove leading 0
+                input.value = parseInt(input.value, 10);
+            }
+        }
+    </script>
+}
+                    

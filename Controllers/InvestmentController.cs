@@ -20,5 +20,22 @@ namespace PersonalFinanceMVC.Controllers
             InvestmentsVM vm = investmentService.CreateInvestmentsVM();
             return View(vm);
         }
+
+        [HttpGet("/createInvestments")]
+        public IActionResult CreateInvestment()
+        {
+            return View();
+        }
+
+        [HttpPost("/createInvestments")]
+        public IActionResult CreateInvestment(CreateInvestmentVM vm)
+        {
+            if(!ModelState.IsValid)
+                return View(vm);
+
+            investmentService.AddInvestmentDB(vm);
+            
+            return RedirectToAction(nameof(Investments));
+        }
     }
 }
