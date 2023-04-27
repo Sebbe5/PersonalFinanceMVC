@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceMVC.Models;
+using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Controllers
 {
@@ -13,8 +14,8 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/investments")]
         public IActionResult Investments()
         {
-
-            return View();
+            InvestmentsVM vm = investmentService.CreateInvestmentsVM();
+            return View(vm);
         }
     }
 }
