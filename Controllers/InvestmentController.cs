@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceMVC.Models;
 using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Controllers
 {
+    [Authorize]
     public class InvestmentController : Controller
     {
         InvestmentService investmentService;
@@ -11,6 +13,7 @@ namespace PersonalFinanceMVC.Controllers
         {
             this.investmentService = dataService;
         }
+
         [HttpGet("/investments")]
         public IActionResult Investments()
         {
