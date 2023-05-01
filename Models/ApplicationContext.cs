@@ -37,7 +37,8 @@ namespace PersonalFinanceMVC.Models
 
             modelBuilder.Entity<Investment>() // TODO: Make this show decimal points (it's [18,0] per default)
                 .Property(i => i.ExpectedAnnualInterest)
-                .HasColumnType(SqlDbType.Decimal.ToString());
+                .HasColumnType(SqlDbType.Decimal.ToString())
+                .HasPrecision(18, 2);
 
             modelBuilder.Entity<ApplicationUser>().Property(x => x.UserName).HasMaxLength(12);
 
