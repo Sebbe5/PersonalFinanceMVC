@@ -10,6 +10,7 @@ namespace PersonalFinanceMVC.Views.Investment
         public double RecurringDeposit { get; set; }
         public decimal ExpectedAnnualInterest { get; set; }
         public List<double> Contributions { get; set; } = new List<double>();
-        public List<double> Profit { get; set; } = new List<double>();
+        public List<double> Profits { get; set; } = new List<double>();
+        public List<double> TotalAmounts { get; set; } = new List<double>();
     }
 }

@@ -27,6 +27,13 @@ namespace PersonalFinanceMVC.Controllers
             return View();
         }
 
+        [HttpGet("/investmentDetails")]
+        public IActionResult InvestmentDetails(int id)
+        {
+            var vm = investmentService.CreateInvestmentDetailsVM(id);
+            return View(vm);
+        }
+
         [HttpPost("/createInvestments")]
         public IActionResult CreateInvestment(CreateInvestmentVM vm)
         {

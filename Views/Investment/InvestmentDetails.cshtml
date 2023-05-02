@@ -1,0 +1,45 @@
+﻿@model InvestmentDetailsVM
+
+@{
+    Layout = "_FunctionPage";
+}
+
+<div class="container bg-white rounded py-3">
+    <div>
+        <div class="row">
+            <h2 class="col-md-6">"@Model.Name" Details</h2>
+            <div class="col-md-6 d-flex justify-content-md-end align-items-center">
+                <a asp-action="EditInvestment" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Investments" class="text-decoration-none ms-2">Cancel</a>
+            </div>
+        </div>
+        <hr />
+        <p><strong>Initial Value: </strong>@Model.InitialValue.ToString("C")</p>
+        <p><strong>Recurring Deposit: </strong>@Model.RecurringDeposit.ToString("C")</p>
+        <p><strong>Expected Annual Interest: </strong>@Model.ExpectedAnnualInterest %</p>
+    </div>
+
+    <hr />
+    <h3>Prediction for the next 50 years:</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="w-25">Year</th>
+                <th class="w-25">Total Contribution</th>
+                <th class="w-25">Total Profits</th>
+                <th class="w-25">Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < 50; i++)
+            {
+                <tr>
+                    <td>@(i+1)</td>
+                    <td>@Model.Contributions[i].ToString("C")</td>
+                    <td>@Model.Profits[i].ToString("C")</td>
+                    <td>@Model.TotalAmounts[i].ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

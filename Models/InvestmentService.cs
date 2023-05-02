@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PersonalFinanceMVC.Models.Entities;
+using PersonalFinanceMVC.Views.Compound;
 using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Models
@@ -82,6 +83,48 @@ namespace PersonalFinanceMVC.Models
             }
 
             return name;
+        }
+
+        internal InvestmentDetailsVM CreateInvestmentDetailsVM(int id)
+        {
+            var userInvestments = context.Investments
+                .Where(i => i.Id == id)
+                .Select(i => new InvestmentDetailsVM
+                {
+                    Id = id,
+                    Name = i.Name,
+                    InitialValue = i.InitialValue,
+                    RecurringDeposit = i.RecurringDeposit,
+                    ExpectedAnnualInterest = i.ExpectedAnnualInterest,
+                })
+                .FirstOrDefault();
+
+            // Set necessary values
+            double principal = userInvestments.InitialValue;
+            double monthlyContributions = userInvestments.RecurringDeposit;
+            decimal interestRate = userInvestments.ExpectedAnnualInterest / 100;
+            decimal ratePerMonth = interestRate / 12;
+            double totalContribution = principal;
+            double interest = 0;
+
+            // Fill the Results collection in the view model with the calculated results
+            for (int i = 0; i < 50; i++)
+            {
+                // Loop through months
+                for (int j = 0; j < 12; j++)
+                {
+                    totalContribution += monthlyContributions;
+                    interest += totalContribution * (double)ratePerMonth;
+                }
+
+                userInvestments.Contributions.Add(totalContribution);
+                userInvestments.Profits.Add(interest);
+
+                principal = totalContribution + interest;
+
+                userInvestments.TotalAmounts.Add(principal);
+            }
+            return userInvestments;
         }
     }
 }
