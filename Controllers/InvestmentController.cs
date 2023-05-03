@@ -27,13 +27,6 @@ namespace PersonalFinanceMVC.Controllers
             return View();
         }
 
-        [HttpGet("/investmentDetails")]
-        public IActionResult InvestmentDetails(int id)
-        {
-            var vm = investmentService.CreateInvestmentDetailsVM(id);
-            return View(vm);
-        }
-
         [HttpPost("/createInvestments")]
         public IActionResult CreateInvestment(CreateInvestmentVM vm)
         {
@@ -43,6 +36,32 @@ namespace PersonalFinanceMVC.Controllers
             investmentService.AddInvestmentDB(vm);
             
             return RedirectToAction(nameof(Investments));
+        }
+
+        [HttpGet("/editInvestments")]
+        public IActionResult EditInvestment(int id)
+        {
+            EditInvestmentVM vm = investmentService.CreateEditInvestmentVM(id);
+            Response.Cookies.Append("EditedInvestmentId", id.ToString());
+            return View(vm);
+        }
+
+        [HttpPost("/editInvestments")]
+        public IActionResult EditInvestment(EditInvestmentVM vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            int id = int.Parse(Request.Cookies["EditedInvestmentId"]);
+            investmentService.EditInvestment(vm, id);
+            return RedirectToAction(nameof(InvestmentDetails), new { id });
+        }
+
+        [HttpGet("/investmentDetails")]
+        public IActionResult InvestmentDetails(int id)
+        {
+            var vm = investmentService.CreateInvestmentDetailsVM(id);
+            return View(vm);
         }
     }
 }

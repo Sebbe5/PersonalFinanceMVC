@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PersonalFinanceMVC.Models.Entities;
 using PersonalFinanceMVC.Views.Compound;
 using PersonalFinanceMVC.Views.Investment;
@@ -113,6 +114,32 @@ namespace PersonalFinanceMVC.Models
                 investment.TotalAmounts.Add(totalContribution + interest);
             }
             return investment;
+        }
+
+        internal EditInvestmentVM CreateEditInvestmentVM(int id)
+        {
+            return context.Investments
+                .Where(i => i.Id == id)
+                .Select(i => new EditInvestmentVM
+                {
+                    Name = i.Name,
+                    InitialValue = i.InitialValue,
+                    MonthlyContribution = i.RecurringDeposit,
+                    AnnualInterest = (double)i.ExpectedAnnualInterest
+                })
+                .FirstOrDefault();
+        }
+
+        internal void EditInvestment(EditInvestmentVM vm, int id)
+        {
+            var investmentToEdit = context.Investments.SingleOrDefault(i => i.Id == id);
+
+            investmentToEdit.Name = investmentToEdit.Name == vm.Name ? investmentToEdit.Name : CheckIfNameExist(vm.Name);
+            investmentToEdit.InitialValue = vm.InitialValue;
+            investmentToEdit.RecurringDeposit = vm.MonthlyContribution;
+            investmentToEdit.ExpectedAnnualInterest = (decimal)vm.AnnualInterest;
+
+            context.SaveChanges();
         }
     }
 }
