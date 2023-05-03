@@ -63,5 +63,13 @@ namespace PersonalFinanceMVC.Controllers
             var vm = investmentService.CreateInvestmentDetailsVM(id);
             return View(vm);
         }
+
+
+        [HttpPost("/removeInvestment")]
+        public IActionResult RemoveInvestment(int id)
+        {
+            investmentService.RemoveInvestment(id);
+            return RedirectToAction(nameof(Investments));
+        }
     }
 }

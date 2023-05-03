@@ -141,5 +141,11 @@ namespace PersonalFinanceMVC.Models
 
             context.SaveChanges();
         }
+
+        internal void RemoveInvestment(int id)
+        {
+            context.Investments.Remove(context.Investments.SingleOrDefault(i => i.Id == id));
+            context.SaveChanges();
+        }
     }
 }
