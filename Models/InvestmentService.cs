@@ -5,8 +5,6 @@ using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Models
 {
-
-    // TODO: Add details view
     public class InvestmentService
     {
         UserManager<ApplicationUser> userManager;
