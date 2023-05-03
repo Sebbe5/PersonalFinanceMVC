@@ -87,8 +87,7 @@ namespace PersonalFinanceMVC.Models
 
         internal InvestmentDetailsVM CreateInvestmentDetailsVM(int id)
         {
-            var userInvestments = context.Investments
-                .Where(i => i.Id == id)
+            var investment = context.Investments
                 .Select(i => new InvestmentDetailsVM
                 {
                     Id = id,
@@ -97,34 +96,24 @@ namespace PersonalFinanceMVC.Models
                     RecurringDeposit = i.RecurringDeposit,
                     ExpectedAnnualInterest = i.ExpectedAnnualInterest,
                 })
-                .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == id);
 
-            // Set necessary values
-            double principal = userInvestments.InitialValue;
-            double monthlyContributions = userInvestments.RecurringDeposit;
-            decimal interestRate = userInvestments.ExpectedAnnualInterest / 100;
-            decimal ratePerMonth = interestRate / 12;
-            double totalContribution = principal;
+            double totalContribution = investment.InitialValue;
             double interest = 0;
 
-            // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < 50; i++)
             {
-                // Loop through months
                 for (int j = 0; j < 12; j++)
                 {
-                    totalContribution += monthlyContributions;
-                    interest += totalContribution * (double)ratePerMonth;
+                    totalContribution += investment.RecurringDeposit;
+                    interest += totalContribution * (double)(investment.ExpectedAnnualInterest/1200);
                 }
 
-                userInvestments.Contributions.Add(totalContribution);
-                userInvestments.Profits.Add(interest);
-
-                principal = totalContribution + interest;
-
-                userInvestments.TotalAmounts.Add(principal);
+                investment.Contributions.Add(totalContribution);
+                investment.Profits.Add(interest);
+                investment.TotalAmounts.Add(totalContribution + interest);
             }
-            return userInvestments;
+            return investment;
         }
     }
 }
