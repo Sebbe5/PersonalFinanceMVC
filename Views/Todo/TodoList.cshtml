@@ -1,7 +1,7 @@
 ﻿@model TodoListVM
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Todo List";
     Layout = "_FunctionPage";
 }
 
@@ -35,6 +35,9 @@
         </form>
     </div>
     <div class="container mt-5">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-secondary" id="sort-button">Sort by name</button>
+        </div>
         <div class="row kanban-container">
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
@@ -118,7 +121,7 @@
                             <a asp-controller="Todo" asp-action="Edit" asp-route-id="@item.Id" data-id="@item.Id" class="text-decoration-none text-reset issue">
                                 <div class=" row justify-content-between m-1 p-2 border rounded bg-white">
                                     <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@item.Name</p>
-                                    <p class="col-5 p-0 m-0 text-end">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+                                    <p class="col-5 p-0 m-0 text-end test">@item.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
                                 </div>
                             </a>
                         }
@@ -183,6 +186,33 @@
                 appendTo: 'body',
             });
         });
+
+        $(function () {
+            var sorted = true; // Initialize sorted variable to true
+
+            $("#sort-button").on("click", function () {
+                var containers = $(".sortable-container");
+
+                containers.each(function () {
+                    var items = $(this).find(".issue");
+
+                    // Sort items based on text content of the first <p> element inside the item div
+                    items.sort(function (a, b) {
+                        var textA = $(a).find("p:first-child").text().toUpperCase();
+                        var textB = $(b).find("p:first-child").text().toUpperCase();
+
+                        // Reverse sort order if sorted is false
+                        var sortOrder = sorted ? 1 : -1;
+
+                        // Compare textA and textB and return -1, 0, or 1 depending on the comparison result
+                        return sortOrder * ((textA < textB) ? -1 : (textA > textB) ? 1 : 0);
+                    }).appendTo($(this));
+                });
+
+                sorted = !sorted; // Toggle the value of sorted variable to indicate the current sorting order
+            });
+        });
+
     </script>
 
     }
