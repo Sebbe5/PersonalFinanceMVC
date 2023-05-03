@@ -88,6 +88,7 @@ namespace PersonalFinanceMVC.Models
         internal InvestmentDetailsVM CreateInvestmentDetailsVM(int id)
         {
             var investment = context.Investments
+                .Where(b => b.Id == id)
                 .Select(i => new InvestmentDetailsVM
                 {
                     Id = id,
@@ -96,7 +97,7 @@ namespace PersonalFinanceMVC.Models
                     RecurringDeposit = i.RecurringDeposit,
                     ExpectedAnnualInterest = i.ExpectedAnnualInterest,
                 })
-                .FirstOrDefault(i => i.Id == id);
+                .FirstOrDefault();
 
             double totalContribution = investment.InitialValue;
             double interest = 0;
