@@ -10,7 +10,11 @@
     @if (Model.Budgets.Length > 0)
     {
         <a asp-action="CreateBudget" class="btn btn-primary mb-3">Create new budget</a>
-        <table class="table table-striped">
+        <div class="row justify-content-between m-0">
+            <button class="btn btn-warning col-md-3 col-5" id="sort-name-button">Sort name by <strong>ascending</strong></button>
+            <button class="btn btn-warning col-md-3 col-5" id="sort-amount-button">Sort amount by <strong>ascending</strong></button>
+        </div>
+        <table class="table table-striped sort-table">
             <thead>
                 <tr>
                     <th class="w-50">Name</th>
@@ -23,7 +27,7 @@
             <tbody>
                 @foreach (var budget in Model.Budgets)
                 {
-                    <tr>
+                    <tr class="sort-row">
                         <td class="align-middle">@budget.Name</td>
                         <td class="align-middle">@budget.TotalAmount.ToString("C")</td>
                         <td><a asp-action="BudgetDetails" asp-route-id="@budget.Id" class="btn btn-info">Details</a></td>
@@ -57,3 +61,123 @@
         </div>
     }
 </div>
+
+@section EndOfBody{
+    <script>
+        $(function () {
+            // Set the initial sorting order to ascending.
+            var sorted = true;
+
+            // Attach a click event handler to the "Sort" button.
+            $("#sort-name-button").on("click", function () {
+                // Get all the containers with the class "sortable-container". Each container represents a status column.
+                var containers = $(".sort-table");
+
+                // Iterate over each container.
+                containers.each(function () {
+                    // Get all the items within the current container.
+                    var items = $(this).find(".sort-row");
+
+                    // Sort the items based on the text content of their first <p> element.
+                    items.sort(function (a, b) {
+                        // Get the text content of the first <p> element of the first item.
+                        var textA = $(a).find("td:first-child").text().toUpperCase();
+                        // Get the text content of the first <p> element of the second item.
+                        var textB = $(b).find("td:first-child").text().toUpperCase();
+
+                        // Determine the sort order based on the current sorting order.
+                        var sortOrder;
+                        if (sorted) {
+                            // If the current sorting order is ascending, set the sort order to 1 (ascending).
+                            sortOrder = 1;
+
+                            // Change the value of the button
+                            $("#sort-name-button")[0].innerHTML = "Sort name by <strong>descending</strong>";
+                        } else {
+                            // If the current sorting order is descending, set the sort order to -1 (descending).
+                            sortOrder = -1;
+
+                            // Change the value of the button
+                            $("#sort-name-button")[0].innerHTML = "Sort name by <strong>ascending</strong>";
+                        }
+
+                        // Compare the two text values and return the appropriate value (-1, 0, or 1) based on their relative order.
+                        var result;
+                        if (textA < textB) {
+                            result = -1;
+                        } else if (textA > textB) {
+                            result = 1;
+                        } else {
+                            result = 0;
+                        }
+
+                        // Multiply the result by the sort order to get the final sort order.
+                        return sortOrder * result;
+                        // Append the sorted items back to the current container.
+                    }).appendTo($(this));
+                });
+
+                // Toggle the value of the sorted variable to indicate the current sorting order.
+                sorted = !sorted;
+            });
+        });
+
+        $(function () {
+            // Set the initial sorting order to ascending.
+            var sorted = true;
+
+            // Attach a click event handler to the "Sort" button.
+            $("#sort-amount-button").on("click", function () {
+                // Get all the containers with the class "sortable-container". Each container represents a status column.
+                var containers = $(".sort-table");
+
+                // Iterate over each container.
+                containers.each(function () {
+                    // Get all the items within the current container.
+                    var items = $(this).find(".sort-row");
+
+                    // Sort the items based on the text content of their first <p> element.
+                    items.sort(function (a, b) {
+                        // Get the text content of the first <p> element of the first item.
+                        var textA = parseFloat($(a).find("td:nth-child(2)").text());
+                        // Get the text content of the first <p> element of the second item.
+                        var textB = parseFloat($(b).find("td:nth-child(2)").text());
+
+                        // Determine the sort order based on the current sorting order.
+                        var sortOrder;
+                        if (sorted) {
+                            // If the current sorting order is ascending, set the sort order to 1 (ascending).
+                            sortOrder = 1;
+
+                            // Change the value of the button
+                            $("#sort-amount-button")[0].innerHTML = "Sort amount by <strong>descending</strong>";
+                        } else {
+                            // If the current sorting order is descending, set the sort order to -1 (descending).
+                            sortOrder = -1;
+
+                            // Change the value of the button
+                            $("#sort-amount-button")[0].innerHTML = "Sort amount by <strong>ascending</strong>";
+                        }
+
+                        // Compare the two text values and return the appropriate value (-1, 0, or 1) based on their relative order.
+                        var result;
+                        if (textA < textB) {
+                            result = -1;
+                        } else if (textA > textB) {
+                            result = 1;
+                        } else {
+                            result = 0;
+                        }
+
+                        // Multiply the result by the sort order to get the final sort order.
+                        return sortOrder * result;
+                        // Append the sorted items back to the current container.
+                    }).appendTo($(this));
+                });
+
+                // Toggle the value of the sorted variable to indicate the current sorting order.
+                sorted = !sorted;
+            });
+        });
+    </script>
+}
