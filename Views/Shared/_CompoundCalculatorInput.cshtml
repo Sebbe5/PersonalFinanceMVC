@@ -3,5 +3,5 @@
 <div>
     <label for="@Model.Name">@Model.Title</label>
     <i class="bi bi-question-circle" title="@Model.Description"></i>
-    <input type="number" class="form-control" value="0" oninput="ensureValue(this)" data-val="true" data-val-number="The field @Model.Title must be a number." data-val-required="The @Model.Title field is required." id="@Model.Name" name="@Model.Name" /><input name="__Invariant" type="hidden" value="@Model.Name" />
+    <input type="number" class="form-control" value="@Model.Value" oninput="ensureValue(this)" data-val="true" data-val-number="The field @Model.Title must be a number." data-val-required="The @Model.Title field is required." id="@Model.Name" name="@Model.Name" /><input name="__Invariant" type="hidden" value="@Model.Name" />
 </div>
