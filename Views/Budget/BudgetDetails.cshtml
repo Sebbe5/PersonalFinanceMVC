@@ -4,20 +4,11 @@
     ViewData["Title"] = "BudgetDetails";
     Layout = "_FunctionPage";
 }
-
-<style>
-    body {
-        background-color: #f8f9fa; /* Set custom background color */
-    }
-</style>
-
 <div class="container mt-4 bg-white rounded">
-
     <div class=" d-md-flex justify-content-between align-items-center">
         <h1>Budget Details</h1>
         <a asp-action="Budgets" style="text-decoration: none;">Back to budgets</a>
     </div>
-
     <div class="row mt-4">
         <div class="d-md-flex">
             <p class="m-0 align-self-center"><strong>Budget Name:</strong> @Model.Name</p>
@@ -28,7 +19,6 @@
             <p class="m-0 align-self-center"><strong>Total Amount:</strong> @Model.TotalAmount.ToString("C")</p>
         </div>
     </div>
-
     <div class="row mt-4">
         <div class="col-md-12">
             <h2>Expenses</h2>
@@ -59,5 +49,4 @@
         </div>
     </div>
     <a asp-action="EditBudget" asp-route-id="@Model.Id" class="btn btn-warning mx-2">Edit Budget</a>
-
 </div>

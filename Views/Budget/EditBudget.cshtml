@@ -6,14 +6,12 @@
 
 <div class="container mt-4 bg-white rounded">
     <h1>Edit Budget</h1>
-
     <form asp-action="Edit" onkeydown="return checkEnterKey(event)">
         <div>
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-
         <div>
             <label>Expenses:</label>
 
@@ -49,10 +47,8 @@
                 <div>
                     <button type="button" class="btn btn-success" onclick="addExpense()">Add Expense</button>
                 </div>
-                
             </div>
         </div>
-
         <div class="d-flex justify-content-end align-items-center">
             <button type="submit" class="btn btn-primary m-2">Save</button>
             <a asp-action="Budgets" style="text-decoration: none;">Cancel</a>
@@ -64,8 +60,7 @@
     <script>
         var amountOfExpenses = @(Model.Expenses != null ? @Model.Expenses.Count : 0);
         var table = document.getElementById("expenseTable");
-
-
+        
         // Add event listener for form's keydown event
         function checkEnterKey(event) {
             if (event.keyCode === 13) {
