@@ -10,27 +10,10 @@
     <h1 class="through">Compound Interest Calculator</h1>
 
     <form asp-action="Calculate">
-        <div>
-            <label asp-for="Principal"></label>
-            <i class="bi bi-question-circle" title="The initial amount of money you invest"></i>
-            <input type="number" class="form-control" asp-for="Principal" value="0" oninput="ensureValue(this)"   />
-        </div>
-        <div>
-            <label asp-for="MonthlyContribution"></label>
-            <i class="bi bi-question-circle" title="The amount of money you will invest every month"></i>
-            <input type="number" class="form-control" asp-for="MonthlyContribution" value="0" oninput="ensureValue(this)"  />
-        </div>
-        <div>
-            <label asp-for="Rate"></label>
-            <i class="bi bi-question-circle" title="The annual interest rate you expect to earn on your investment"></i>
-            <input type="number" class="form-control" asp-for="Rate" value="0" oninput="ensureValue(this)"  />
-        </div>
-        <div>
-            <label asp-for="Years"></label>
-            <i class="bi bi-question-circle" title="The number of years you plan to invest"></i>
-            <input type="number" class="form-control" asp-for="Years" value="0" oninput="ensureValue(this)"  />
-        </div>
-
+        <partial name="_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Principal", Title = "Principal Amount" ,Description = "The initial amount of money you invest"})" />
+        <partial name="_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "MonthlyContribution", Title = "Monthly Contribution" ,Description = "The amount of money you will invest every month"})" />
+        <partial name="_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Rate", Title = "Annual interest rate (%)" ,Description = "The annual interest rate you expect to earn on your investment"})" />
+        <partial name="_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Years", Title = "Number of years" ,Description = "The number of years you plan to invest"})" />
         <button type="submit" class="btn btn-primary mt-3">Calculate</button>
     </form>
 
