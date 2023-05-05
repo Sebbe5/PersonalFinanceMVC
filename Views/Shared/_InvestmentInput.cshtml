@@ -1,0 +1,14 @@
+﻿@model _InvestmentInputVM
+
+<div>
+    <label class="control-label" for="@Model.Name">@Model.Title: </label>
+    @if (Model.InputType == "text")
+    {
+        <input class="form-control" type="@Model.InputType" data-val="true" data-val-required="A @Model.Title is required!" id="@Model.Name" name="@Model.Name" value="" />
+    }
+    else
+    {
+        <input class="form-control" type="@Model.InputType" data-val="true" data-val-required="A @Model.Title is required!" id="@Model.Name" name="@Model.Name" value="0" oninput="ensureValue(this)" />
+    }
+    <span class="text-danger field-validation-valid" data-valmsg-for="@Model.Name" data-valmsg-replace="true"></span>
+</div>
