@@ -13,25 +13,10 @@
     <div class="row">
         <div class="col-md-4">
             <form asp-action="EditInvestment" id="edit-form">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div>
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control"/>
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="InitialValue" class="control-label"></label>
-                    <input type="number" asp-for="InitialValue" class="form-control"oninput="ensureValue(this)" />
-                </div>
-                <div>
-                    <label asp-for="MonthlyContribution" class="control-label"></label>
-                    <input type="number" asp-for="MonthlyContribution" class="form-control" oninput="ensureValue(this)" />
-                </div>
-                <div>
-                    <label asp-for="AnnualInterest" class="control-label"></label>
-                    <input asp-for="AnnualInterest" class="form-control" />
-                    <span asp-validation-for="AnnualInterest" class="text-danger"></span>
-                </div>
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "Name", InputType = "text", Title = "Investment Name", Value = Model.Name})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "InitialValue", InputType = "number", Title = "Initial Amount", Value = Model.InitialValue})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "MonthlyContribution", InputType = "number", Title = "Monthly Contribution", Value = Model.MonthlyContribution})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "AnnualInterest", InputType = "text", Title = "Expected Annual Interest (%)", Value = Model.AnnualInterest})" />
             </form>
         </div>
     </div>

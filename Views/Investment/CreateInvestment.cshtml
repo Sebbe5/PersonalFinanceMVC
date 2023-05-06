@@ -9,10 +9,10 @@
     <div class="row">
         <div class="col-md-4">
             <form asp-action="CreateInvestment" id="create-form">
-                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "Name", InputType = "text", Title = "Investment Name"})" />
-                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "InitialValue", InputType = "number", Title = "Initial Amount"})" />
-                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "MonthlyContribution", InputType = "number", Title = "Monthly Contribution"})" />
-                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "AnnualInterest", InputType = "text", Title = "Expected Annual Interest (%)"})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "Name", InputType = "text", Title = "Investment Name", Value = Model.Name})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "InitialValue", InputType = "number", Title = "Initial Amount", Value = Model.InitialValue})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "MonthlyContribution", InputType = "number", Title = "Monthly Contribution", Value = Model.MonthlyContribution})" />
+                <partial name="_InvestmentInput" model="@(new _InvestmentInputVM{ Name = "AnnualInterest", InputType = "text", Title = "Expected Annual Interest (%)", Value = Model.AnnualInterest})" />
             </form>
         </div>
     </div>
