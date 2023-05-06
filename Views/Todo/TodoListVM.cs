@@ -27,6 +27,7 @@ namespace PersonalFinanceMVC.Views.Todo
             public DateTime Deadline{ get; set; }
             public string Category { get; set; }
             public double DaysToDeadline { get; set; }
+            public int Status { get; set; }
         }
     }
 }
