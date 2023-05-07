@@ -9,7 +9,6 @@ namespace PersonalFinanceMVC.Controllers
     // Add subtassks
     // Add a search function
     // Add tags
-    // Add comments
     // Add a computer reminder (Probably not possible until launched)
 {
     public class TodoController : Controller
