@@ -17,10 +17,11 @@
         <p><strong>Initial Value: </strong>@Model.InitialValue.ToString("C")</p>
         <p><strong>Recurring Deposit: </strong>@Model.RecurringDeposit.ToString("C")</p>
         <p><strong>Expected Annual Interest: </strong>@Model.ExpectedAnnualInterest %</p>
+        <p><strong>Expected Years Invested: </strong>@Model.ExpectedYearsInvested</p>
     </div>
 
     <hr />
-    <h3>Prediction for the next 50 years:</h3>
+    <h3>Prediction for the next @Model.ExpectedYearsInvested years:</h3>
     <table class="table table-striped">
         <thead>
             <tr>
