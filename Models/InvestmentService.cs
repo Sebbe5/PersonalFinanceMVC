@@ -95,6 +95,7 @@ namespace PersonalFinanceMVC.Models
                     InitialValue = i.InitialValue,
                     RecurringDeposit = i.RecurringDeposit,
                     ExpectedAnnualInterest = i.ExpectedAnnualInterest,
+                    ExpectedYearsInvested = i.ExpectedYearsInvested,
                 })
                 .FirstOrDefault();
 
