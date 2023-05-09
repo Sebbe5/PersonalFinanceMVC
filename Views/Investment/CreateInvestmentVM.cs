@@ -17,5 +17,7 @@ namespace PersonalFinanceMVC.Views.Investment
 
         [Display(Name = "Expected Annual Interest (%): ")]
         public double AnnualInterest { get; set; }
+        public int ExpectedYearsInvested { get; set; }
+
     }
 }

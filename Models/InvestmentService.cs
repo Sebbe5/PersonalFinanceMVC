@@ -50,6 +50,7 @@ namespace PersonalFinanceMVC.Models
                 Value = vm.InitialValue,
                 RecurringDeposit = vm.MonthlyContribution,
                 ExpectedAnnualInterest = (decimal)vm.AnnualInterest,
+                ExpectedYearsInvested = vm.ExpectedYearsInvested,
                 ApplicationUserId = userId,
             };
 
@@ -126,7 +127,8 @@ namespace PersonalFinanceMVC.Models
                     Name = i.Name,
                     InitialValue = i.InitialValue,
                     MonthlyContribution = i.RecurringDeposit,
-                    AnnualInterest = (double)i.ExpectedAnnualInterest
+                    AnnualInterest = (double)i.ExpectedAnnualInterest,
+                    ExpectedYearsInvested = i.ExpectedYearsInvested
                 })
                 .FirstOrDefault();
         }
@@ -139,6 +141,7 @@ namespace PersonalFinanceMVC.Models
             investmentToEdit.InitialValue = vm.InitialValue;
             investmentToEdit.RecurringDeposit = vm.MonthlyContribution;
             investmentToEdit.ExpectedAnnualInterest = (decimal)vm.AnnualInterest;
+            investmentToEdit.ExpectedYearsInvested = vm.ExpectedYearsInvested;
 
             context.SaveChanges();
         }
