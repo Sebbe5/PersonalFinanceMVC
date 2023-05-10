@@ -53,7 +53,8 @@ namespace PersonalFinanceMVC.Models
                     Expenses = b.Expenses.Select(e => new BudgetDetailsVM.ExpenseItemVM
                     {
                         Name = e.Name,
-                        Amount = e.Money
+                        Amount = e.Money,
+                        Category = e.Category != null ? e.Category : String.Empty,
                     })
                     .ToArray(),
                     TotalAmount = b.Expenses.Sum(e => e.Money)
