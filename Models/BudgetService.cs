@@ -73,7 +73,8 @@ namespace PersonalFinanceMVC.Models
                     Expenses = b.Expenses.Select(e => new EditBudgetVM.ExpenseItemVM
                     {
                         Name = e.Name,
-                        Amount = e.Money
+                        Amount = e.Money,
+                        Category = e.Category
                     })
                     .ToList()
                 })
@@ -145,6 +146,7 @@ namespace PersonalFinanceMVC.Models
                             {
                                 Name = expenseItemVM.Name,
                                 Money = expenseItemVM.Amount,
+                                Category = expenseItemVM.Category,
                                 BudgetId = id,
                             });
                             existingExpenses.Add(expenseItemVM.Name);
