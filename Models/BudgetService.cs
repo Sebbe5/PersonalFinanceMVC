@@ -89,7 +89,7 @@ namespace PersonalFinanceMVC.Models
                     case "Others":
                         categoryAmounts[9] += expense.Money;
                         break;
-                    case "Uncategorized":
+                    default:
                         categoryAmounts[10] += expense.Money;
                         break;
                 }
