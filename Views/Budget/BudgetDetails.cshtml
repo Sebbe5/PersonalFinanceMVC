@@ -11,7 +11,7 @@
         <a asp-action="Budgets" style="text-decoration: none;">Back to budgets</a>
     </div>
     <div class="row">
-        <div class="col-md-7 d-flex flex-column">
+        <div class="col-md-4 d-flex flex-column">
             <div class="row my-auto">
                 <div class="d-md-flex">
                     <p class="m-0 align-self-center"><strong>Budget Name:</strong> @Model.Name</p>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
             <canvas id="myChart"></canvas>
         </div>
     </div>
@@ -67,10 +67,11 @@
         document.addEventListener('DOMContentLoaded', function () {
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
-                type: 'pie',
+                type: 'bar',
                 data: {
                     labels: @Html.Raw(Json.Serialize(Model.Categories)),
                     datasets: [{
+                        label: 'Category Amounts',
                         data: @Html.Raw(Json.Serialize(Model.CategoryAmounts)),
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.7)',
@@ -78,8 +79,17 @@
                             'rgba(75, 192, 192, 0.7)'
                         ]
                     }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Category Amounts"
+                    }
                 }
             });
         });
     </script>
+
+
 }
