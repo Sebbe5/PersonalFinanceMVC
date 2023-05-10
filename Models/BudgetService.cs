@@ -44,33 +44,79 @@ namespace PersonalFinanceMVC.Models
 
         internal BudgetDetailsVM CreateBudgetDetailsVM(int id)
         {
-            var categories = new[] { "Product 1", "Product 2", "Product 3" };
-            var categoryAmounts = new[] { 30, 50, 20 };
-            return context.Budgets.Include(b => b.Expenses.Where(e => e.BudgetId == b.Id))
+            var budgetToReturn = context.Budgets
                 .Where(b => b.Id == id)
-                .Select(b => new BudgetDetailsVM
+                .FirstOrDefault();
+
+            var expenses = context.Expenses
+                .Where(e => e.BudgetId == budgetToReturn.Id)
+                .ToList();
+
+            var categories = new[] { "Housing", "Transportation", "Food", "Utilities", "Health and Fitness", "Entertainment", "Personal Care", "Education", "Savings", "Others", "Uncategorized" };
+            double[] categoryAmounts = new double[11];
+
+            foreach (var expense in expenses)
+            {
+                switch (expense.Category)
                 {
-                    Id = b.Id,
-                    Name = b.Name,
-                    Expenses = b.Expenses.Select(e => new BudgetDetailsVM.ExpenseItemVM
-                    {
-                        Name = e.Name,
-                        Amount = e.Money,
-                        Category = e.Category != null ? e.Category : String.Empty,
-                    })
-                    .ToArray(),
-                    TotalAmount = b.Expenses.Sum(e => e.Money),
-                    Categories = categories,
-                    CategoryAmounts = categoryAmounts
-                })
-                .SingleOrDefault();
+                    case "Housing":
+                        categoryAmounts[0] += expense.Money;
+                        break;
+                    case "Transportation":
+                        categoryAmounts[1] += expense.Money;
+                        break;
+                    case "Food":
+                        categoryAmounts[2] += expense.Money;
+                        break;
+                    case "Utilities":
+                        categoryAmounts[3] += expense.Money;
+                        break;
+                    case "Health and Fitness":
+                        categoryAmounts[4] += expense.Money;
+                        break;
+                    case "Entertainment":
+                        categoryAmounts[5] += expense.Money;
+                        break;
+                    case "Personal Care":
+                        categoryAmounts[6] += expense.Money;
+                        break;
+                    case "Education":
+                        categoryAmounts[7] += expense.Money;
+                        break;
+                    case "Savings":
+                        categoryAmounts[8] += expense.Money;
+                        break;
+                    case "Others":
+                        categoryAmounts[9] += expense.Money;
+                        break;
+                    case "Uncategorized":
+                        categoryAmounts[10] += expense.Money;
+                        break;
+                }
+            }
+
+            return new BudgetDetailsVM
+            {
+                Id = budgetToReturn.Id,
+                Name = budgetToReturn.Name,
+                Expenses = expenses.Select(e => new BudgetDetailsVM.ExpenseItemVM
+                {
+                    Name = e.Name,
+                    Amount = e.Money,
+                    Category = e.Category != null ? e.Category : string.Empty,
+                }).ToArray(),
+                TotalAmount = expenses.Sum(e => e.Money),
+                Categories = categories,
+                CategoryAmounts = categoryAmounts
+            };
+
         }
 
         internal EditBudgetVM CreateEditBudgetVM(int id)
         {
 
             return context.Budgets.Include(b => b.Expenses.Where(e => e.BudgetId == b.Id))
-                .Where (b => b.Id == id)
+                .Where(b => b.Id == id)
                 .Select(b => new EditBudgetVM
                 {
                     Name = b.Name,

@@ -3,28 +3,28 @@
 @{
     ViewData["Title"] = "BudgetDetails";
     Layout = "_FunctionPage";
-    // TODO: Add proper values to piechart
 }
 <div class="container mt-4 bg-white rounded">
     <div class=" d-flex justify-content-between align-items-center">
-        <h1>Budget Details</h1>
+        <h1 class="my-0">Budget Details</h1>
         <a asp-action="Budgets" style="text-decoration: none;">Back to budgets</a>
     </div>
+    <hr class="my-1"/>
     <div class="row">
-        <div class="col-md-4 d-flex flex-column">
-            <div class="row my-auto">
+        <div class="col-xxl-4 d-flex flex-column">
+            <div class="row my-xxl-auto my-4">
                 <div class="d-md-flex">
                     <p class="m-0 align-self-center"><strong>Budget Name:</strong> @Model.Name</p>
                 </div>
             </div>
-            <div class="row my-auto">
+            <div class="row my-xxl-auto my-4">
                 <div class="d-md-flex">
                     <p class="m-0 align-self-center"><strong>Total Amount:</strong> @Model.TotalAmount.ToString("C")</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <canvas id="myChart"></canvas>
+        <div class="col-xxl-8 chart-container">
+            <canvas style="height: 100%" id="myChart"></canvas>
         </div>
     </div>
     <div class="row mt-4">
@@ -71,20 +71,43 @@
                 data: {
                     labels: @Html.Raw(Json.Serialize(Model.Categories)),
                     datasets: [{
-                        label: 'Category Amounts',
+                        label: 'Total Amount',
                         data: @Html.Raw(Json.Serialize(Model.CategoryAmounts)),
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(75, 192, 192, 0.7)'
+                            'rgba(255, 99, 132, 0.7)',    // Housing
+                            'rgba(54, 162, 235, 0.7)',    // Transportation
+                            'rgba(75, 192, 192, 0.7)',    // Food
+                            'rgba(255, 205, 86, 0.7)',    // Utilities
+                            'rgba(153, 102, 255, 0.7)',   // Health and Fitness
+                            'rgba(255, 159, 64, 0.7)',    // Entertainment
+                            'rgba(255, 99, 32, 0.7)',     // Personal Care
+                            'rgba(128, 0, 128, 0.7)',     // Education
+                            'rgba(60, 179, 113, 0.7)',    // Savings
+                            'rgba(0, 128, 128, 0.7)',     // Others
+                            'rgba(192, 192, 192, 0.7)'    // Uncategorized
                         ]
                     }]
                 },
                 options: {
-                    legend: { display: false },
-                    title: {
-                        display: true,
-                        text: "Category Amounts"
+                    maintainAspectRatio: false, // Disable maintaining aspect ratio
+                    responsive: true, // Enable responsiveness
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: "Category Amounts"
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 20,
+                            bottom: 20
+                        }
                     }
                 }
             });

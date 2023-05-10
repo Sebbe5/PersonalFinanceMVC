@@ -9,7 +9,7 @@ namespace PersonalFinanceMVC.Views.Budget
         public ExpenseItemVM[] Expenses{ get; set; }
         public double TotalAmount { get; set; }
         public string[] Categories { get; set; }
-        public int[] CategoryAmounts { get; set; }
+        public double[] CategoryAmounts { get; set; }
 
 
         public class ExpenseItemVM

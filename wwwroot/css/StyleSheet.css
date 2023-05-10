@@ -228,3 +228,7 @@ h1 {
     flex-flow: column;
     height: 100%;
 }
+
+.chart-container {
+    height: 500px; /* Adjust the taller height for mobile screens */
+}
