@@ -31,13 +31,6 @@
       "files": [
         "jquery-ui.js"
       ]
-    },
-    {
-      "library": "Chart.js@4.3.0",
-      "destination": "wwwroot/lib/Chart.js/",
-      "files": [
-        "chart.min.js"
-      ]
     }
   ]
 }
