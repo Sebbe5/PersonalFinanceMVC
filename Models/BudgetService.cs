@@ -44,6 +44,8 @@ namespace PersonalFinanceMVC.Models
 
         internal BudgetDetailsVM CreateBudgetDetailsVM(int id)
         {
+            var categories = new[] { "Product 1", "Product 2", "Product 3" };
+            var categoryAmounts = new[] { 30, 50, 20 };
             return context.Budgets.Include(b => b.Expenses.Where(e => e.BudgetId == b.Id))
                 .Where(b => b.Id == id)
                 .Select(b => new BudgetDetailsVM
@@ -57,7 +59,9 @@ namespace PersonalFinanceMVC.Models
                         Category = e.Category != null ? e.Category : String.Empty,
                     })
                     .ToArray(),
-                    TotalAmount = b.Expenses.Sum(e => e.Money)
+                    TotalAmount = b.Expenses.Sum(e => e.Money),
+                    Categories = categories,
+                    CategoryAmounts = categoryAmounts
                 })
                 .SingleOrDefault();
         }
