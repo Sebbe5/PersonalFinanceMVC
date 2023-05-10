@@ -102,6 +102,7 @@ namespace PersonalFinanceMVC.Models
                     {
                         Name = expenseItemVM.Name,
                         Money = expenseItemVM.Amount,
+                        Category = expenseItemVM.Category,
                         BudgetId = newBudget.Id,
                     });
                 }
