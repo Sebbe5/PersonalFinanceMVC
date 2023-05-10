@@ -90,16 +90,16 @@
             var tbody = table.tBodies[0]; // Use tBodies[0] to select the first tbody element
             var row = document.createElement("tr"); // Create a new row
             row.innerHTML = `
-                                                                                                <td>
-                                                                                                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
-                                                                                                </td>
-                                                                                            `;
+                <td>
+                    <input type="text" name="Expenses[${amountOfExpenses}].Name" class="form-control" />
+                </td>
+                <td>
+                    <input type="number" name="Expenses[${amountOfExpenses}].Amount" class="form-control" value="0" oninput="ensureValue(this)"/>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>
+                </td>
+            `;
 
             tbody.appendChild(row); // Append the row to the tbody element
             amountOfExpenses++;
