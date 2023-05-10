@@ -9,7 +9,7 @@
         <h1 class="my-0">Budget Details</h1>
         <a asp-action="Budgets" style="text-decoration: none;">Back to budgets</a>
     </div>
-    <hr class="my-1"/>
+    <hr class="my-1" />
     <div class="row">
         <div class="col-xxl-4 d-flex flex-column justify-content-xxl-center">
             <div class="row my-4">
@@ -90,24 +90,10 @@
                 },
                 options: {
                     maintainAspectRatio: false, // Disable maintaining aspect ratio
-                    responsive: true, // Enable responsiveness
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: "Category Amounts"
-                        }
-                    },
-                    layout: {
-                        padding: {
-                            top: 20,
-                            bottom: 20
-                        }
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Category Amounts"
                     }
                 }
             });
