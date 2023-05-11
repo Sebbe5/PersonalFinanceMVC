@@ -13,11 +13,18 @@
                 <a asp-action="Investments" class="text-decoration-none ms-2">Cancel</a>
             </div>
         </div>
-        <hr />
-        <p><strong>Initial Value: </strong>@Model.InitialValue.ToString("C")</p>
-        <p><strong>Recurring Deposit: </strong>@Model.RecurringDeposit.ToString("C")</p>
-        <p><strong>Expected Annual Interest: </strong>@Model.ExpectedAnnualInterest %</p>
-        <p><strong>Expected Years Invested: </strong>@Model.ExpectedYearsInvested</p>
+        <hr class="my-1" />
+        <div class="row my-4">
+            <div class="col-xxl-4 d-flex flex-column justify-content-xxl-center">
+                <p><strong>Initial Value: </strong>@Model.InitialValue.ToString("C")</p>
+                <p><strong>Recurring Deposit: </strong>@Model.RecurringDeposit.ToString("C")</p>
+                <p><strong>Expected Annual Interest: </strong>@Model.ExpectedAnnualInterest %</p>
+                <p><strong>Expected Years Invested: </strong>@Model.ExpectedYearsInvested</p>
+            </div>
+            <div class="col-xxl-8 chart-container">
+                <canvas style="height: 100%" id="myChart"></canvas>
+            </div>
+        </div>
     </div>
 
     <hr />
@@ -35,7 +42,7 @@
             @for (int i = 0; i < Model.ExpectedYearsInvested; i++)
             {
                 <tr>
-                    <td>@(i+1)</td>
+                    <td>@(i + 1)</td>
                     <td>@Model.Contributions[i].ToString("C")</td>
                     <td>@Model.Profits[i].ToString("C")</td>
                     <td>@Model.TotalAmounts[i].ToString("C")</td>
@@ -45,8 +52,50 @@
     </table>
 </div>
 @section EndOfBody{
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    @{
-        // TODO: Add a line chart for the prediction.
-    }
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log(@Html.Raw(Json.Serialize(Model.TotalAmounts.Select(n => Math.Round(n)).ToArray())))
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(Model.YearLabels)),
+                    datasets: [{
+                        label: 'Total Amount',
+                        data: @Html.Raw(Json.Serialize(Model.TotalAmounts.Select(n => Math.Round(n)).ToArray())),
+                        borderColor:
+                            'rgba(54, 162, 235, 0.7)',
+                        backgroundColor:
+                            'rgba(54, 162, 235, 0.7)',
+                        fill: false
+
+
+                    },
+                    {
+                        label: 'Contribution',
+                        data: @Html.Raw(Json.Serialize(Model.Contributions.Select(n => Math.Round(n)).ToArray())),
+                        borderColor:
+                            'rgba(255, 159, 64, 0.7)',
+                        backgroundColor:
+                            'rgba(255, 159, 64, 0.7)',
+                        fill: false
+                    },
+                    {
+                        label: 'Profit',
+                        data: @Html.Raw(Json.Serialize(Model.Profits.Select(n => Math.Round(n)).ToArray())),
+                        borderColor:
+                            'rgba(60, 179, 113, 0.7)',
+                        backgroundColor:
+                            'rgba(60, 179, 113, 0.7)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false, // Disable maintaining aspect ratio
+
+                }
+            });
+        });
+    </script>
 }

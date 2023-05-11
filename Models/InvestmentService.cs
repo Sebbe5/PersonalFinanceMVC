@@ -103,7 +103,7 @@ namespace PersonalFinanceMVC.Models
             double totalContribution = investment.InitialValue;
             double interest = 0;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < investment.ExpectedYearsInvested; i++)
             {
                 for (int j = 0; j < 12; j++)
                 {
@@ -111,6 +111,7 @@ namespace PersonalFinanceMVC.Models
                     interest += totalContribution * (double)(investment.ExpectedAnnualInterest/1200);
                 }
 
+                investment.YearLabels.Add("Year " + (i + 1).ToString());
                 investment.Contributions.Add(totalContribution);
                 investment.Profits.Add(interest);
                 investment.TotalAmounts.Add(totalContribution + interest);
