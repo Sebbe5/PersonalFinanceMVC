@@ -7,7 +7,7 @@ namespace PersonalFinanceMVC.Controllers
 
     // TODO: Todo list todos
     // Add subtassks
-    // Add a search function
+    // Add a filter
     // Add tags
     // Add a computer reminder (Probably not possible until launched)
 {
