@@ -1,5 +1,7 @@
 ﻿namespace PersonalFinanceMVC.Models.Entities
 {
+
+    // TODO: Allow null for deadline
     public class Todo
     {
         public int Id { get; set; }
