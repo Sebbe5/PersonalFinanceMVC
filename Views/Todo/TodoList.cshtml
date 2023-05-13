@@ -163,8 +163,6 @@
                     var newIsToday = issue.parent().data('today');
                     var newStatus = issue.parent().data('status');
                     var issueId = issue.data('id');
-                    console.log(newIsToday)
-                    console.log(newStatus)
                     // Use Ajax to update the issue's status property
                     $.ajax({
                         type: 'POST',
