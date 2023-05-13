@@ -40,10 +40,47 @@
             <button class="btn btn-warning col-md-3 col-5" id="sort-date-button">Sort date by <strong>ascending</strong></button>
         </div>
         <div class="row kanban-container">
+            <h1 class="through mt-5">Today</h1>
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">TO DO</p>
-                    <div class="sortable-container" data-status="ToDo">
+                    <div class="sortable-container" data-status="ToDo" data-today="true">
+                        @foreach (var item in Model.TodosToday)
+                        {
+                            <partial name="_TodoItem" model="@item" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 my-2">
+                <div class="status-card card">
+                    <p class="ms-2 mt-1">IN PROGRESS</p>
+                    <div class="sortable-container" data-status="InProgress" data-today="true">
+                        @foreach (var item in Model.InProgressToday)
+                        {
+                            <partial name="_TodoItem" model="@item"/>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 my-2">
+                <div class="status-card card">
+                    <p class="ms-2 mt-1">DONE</p>
+                    <div class="sortable-container" data-status="Done" data-today="true">
+                        @foreach (var item in Model.DoneToday)
+                        {
+                            <partial name="_TodoItem" model="@item" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="row kanban-container">
+            <h1 class="through mt-5">Others</h1>
+            <div class="col-lg-4 my-2">
+                <div class="status-card card">
+                    <p class="ms-2 mt-1">TO DO</p>
+                    <div class="sortable-container" data-status="ToDo" data-today="false">
                         @foreach (var item in Model.Todos)
                         {
                             <partial name="_TodoItem" model="@item" />
@@ -54,7 +91,7 @@
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">IN PROGRESS</p>
-                    <div class="sortable-container" data-status="InProgress">
+                    <div class="sortable-container" data-status="InProgress" data-today="false">
                         @foreach (var item in Model.InProgress)
                         {
                             <partial name="_TodoItem" model="@item"/>
@@ -65,7 +102,7 @@
             <div class="col-lg-4 my-2">
                 <div class="status-card card">
                     <p class="ms-2 mt-1">DONE</p>
-                    <div class="sortable-container" data-status="Done">
+                    <div class="sortable-container" data-status="Done" data-today="false">
                         @foreach (var item in Model.Done)
                         {
                             <partial name="_TodoItem" model="@item" />
@@ -113,9 +150,11 @@
                 connectWith: '.sortable-container',
                 update: function (event, ui) {
                     var issue = $(ui.item);
+                    var newIsToday = issue.parent().data('today');
                     var newStatus = issue.parent().data('status');
                     var issueId = issue.data('id');
-
+                    console.log(newIsToday)
+                    console.log(newStatus)
                     // Use Ajax to update the issue's status property
                     $.ajax({
                         type: 'POST',
@@ -123,6 +162,15 @@
                         data: {
                             id: issueId,
                             status: newStatus
+                        }
+                    });
+                    // Use Ajax to update the issue's IsToday property
+                    $.ajax({
+                        type: 'POST',
+                        url: '/updateIsToday',
+                        data: {
+                            id: issueId,
+                            isToday: newIsToday
                         }
                     });
                 },

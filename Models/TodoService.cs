@@ -30,7 +30,20 @@ namespace PersonalFinanceMVC.Models
                 .Where(t => t.ApplicationUserId == userId);
 
             var todoItems = todos
-                .Where(t => t.Status == Status.ToDo)
+                .Where(t => t.Status == Status.ToDo & !t.IsToday)
+                .Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
+                    Status = (int)t.Status
+                })
+                .ToList();
+            
+            var todoItemsToday = todos
+                .Where(t => t.Status == Status.ToDo & t.IsToday)
                 .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
@@ -43,7 +56,20 @@ namespace PersonalFinanceMVC.Models
                 .ToList();
 
             var inProgressItems = todos
-                .Where(t => t.Status == Status.InProgress)
+                .Where(t => t.Status == Status.InProgress & !t.IsToday)
+                .Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
+                    Status = (int)t.Status
+                })
+                .ToList();
+
+            var inProgressItemsToday = todos
+                .Where(t => t.Status == Status.InProgress & t.IsToday)
                 .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
@@ -56,7 +82,20 @@ namespace PersonalFinanceMVC.Models
                 .ToList();
 
             var doneItems = todos
-                .Where(t => t.Status == Status.Done)
+                .Where(t => t.Status == Status.Done & !t.IsToday)
+                .Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
+                    Status = (int)t.Status
+                })
+                .ToList();
+
+            var doneItemsToday = todos
+                .Where(t => t.Status == Status.Done & t.IsToday)
                 .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
@@ -94,6 +133,9 @@ namespace PersonalFinanceMVC.Models
                 Todos = todoItems,
                 InProgress = inProgressItems,
                 Done = doneItems,
+                TodosToday = todoItemsToday,
+                InProgressToday = inProgressItemsToday,
+                DoneToday = doneItemsToday,
             };
         }
 
@@ -174,6 +216,15 @@ namespace PersonalFinanceMVC.Models
             Status newStatus;
             Enum.TryParse(status, true, out newStatus);
             todoToEdit.Status = newStatus;
+
+            context.SaveChanges();
+        }
+
+        internal void EditIsToday(int id, bool isToday)
+        {
+            var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
+
+            todoToEdit.IsToday = isToday;
 
             context.SaveChanges();
         }

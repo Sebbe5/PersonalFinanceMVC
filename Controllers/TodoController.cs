@@ -93,6 +93,18 @@ namespace PersonalFinanceMVC.Controllers
             // Return a response indicating success or failure.
             return Json(new { success = true });
         }
+        
+        [HttpPost("/updateIsToday")]
+        public ActionResult UpdateIsToday(int id, string isToday)
+        {
+            // Update the status of the issue with the given id
+            // using the newStatus value passed in via Ajax.
+
+            todoService.EditIsToday(id, isToday == "true");
+
+            // Return a response indicating success or failure.
+            return Json(new { success = true });
+        }
 
 
     }
