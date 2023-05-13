@@ -13,7 +13,7 @@ namespace PersonalFinanceMVC.Views.Todo
 
         [Display(Name = "Deadline")]
         [DefaultValue(typeof(DateTime), "{0:yyyy-MM-dd HH:mm}")]
-        public DateTime NewDeadline { get; set; } = DateTime.Now.AddHours(1);
+        public DateTime NewDeadline { get; set; } = DateTime.Now.AddHours(2);
 
         [Display(Name = "Category", Prompt = "Category")]
         public string NewCategory { get; set; }
