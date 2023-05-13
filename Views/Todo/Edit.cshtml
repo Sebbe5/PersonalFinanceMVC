@@ -14,7 +14,7 @@
             <div class="w-100">
                 <label asp-for="Deadline"></label>
                 <div class="d-flex align-items-center">
-                    <input id="deadlineInput" asp-for="Deadline" class="form-control w-50"/>
+                    <input id="deadlineInput" asp-for="Deadline" class="form-control w-50" asp-format="{0:yyyy-MM-dd HH:mm}" />
                     <input type="checkbox" asp-for="ForDeadline" class="ms-2" onchange="toggleDeadlineInput(this)" id="myCheckbox" />
                     <label asp-for="ForDeadline"></label>
                 </div>

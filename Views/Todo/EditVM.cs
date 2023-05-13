@@ -7,7 +7,7 @@ namespace PersonalFinanceMVC.Views.Todo
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Deadline { get; set; }
+        public DateTime Deadline { get; set; } = DateTime.Now.AddHours(2);
         public string Category { get; set; }
         public string Status { get; set; }
 
