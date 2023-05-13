@@ -157,7 +157,8 @@ namespace PersonalFinanceMVC.Models
                 Name = vm.NewTodoItem,
                 Deadline = vm.NewDeadline,
                 Category = vm.NewCategory,
-                Status = Status.ToDo
+                Status = Status.ToDo,
+                IsToday = vm.ForToday
             });
 
             context.SaveChanges();

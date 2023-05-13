@@ -31,7 +31,15 @@
                     <label asp-for="NewCategory"></label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Add</button>
+            <div class="row align-items-center mt-2">
+                <div class="col-lg-1 col-6">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <label asp-for="ForToday"></label>
+                    <input type="checkbox" asp-for="ForToday" />
+                </div>
+            </div>
         </form>
     </div>
     <div class="container mt-5">
@@ -58,7 +66,7 @@
                     <div class="sortable-container" data-status="InProgress" data-today="true">
                         @foreach (var item in Model.InProgressToday)
                         {
-                            <partial name="_TodoItem" model="@item"/>
+                            <partial name="_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
@@ -74,7 +82,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="row kanban-container">
             <h1 class="through mt-5">Others</h1>
             <div class="col-lg-4 my-2">
@@ -94,7 +102,7 @@
                     <div class="sortable-container" data-status="InProgress" data-today="false">
                         @foreach (var item in Model.InProgress)
                         {
-                            <partial name="_TodoItem" model="@item"/>
+                            <partial name="_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
