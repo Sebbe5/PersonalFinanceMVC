@@ -18,7 +18,7 @@ namespace PersonalFinanceMVC.Views.Todo
         [Display(Name = "Category", Prompt = "Category")]
         public string NewCategory { get; set; }
 
-        [Display(Name = "Do Today?")]
+        [Display(Name = "Do Today")]
         public bool ForToday { get; set; }
         public List<TodoItemVM> Todos { get; set; } = new List<TodoItemVM>();
         public List<TodoItemVM> InProgress { get; set; } = new List<TodoItemVM>();
