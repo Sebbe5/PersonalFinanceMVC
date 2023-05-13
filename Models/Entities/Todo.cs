@@ -9,6 +9,7 @@
         public DateTime Deadline { get; set; }
         public string Category { get; set; }
         public Status Status { get; set; } = new Status();
+        public bool IsToday { get; set; } = false;
         public string ApplicationUserId { get; set; }
         ApplicationUser ApplicationUser { get; set; }
     }
