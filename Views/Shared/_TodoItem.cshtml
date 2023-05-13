@@ -25,6 +25,6 @@
 <a asp-controller="Todo" asp-action="Edit" asp-route-id="@Model.Id" data-id="@Model.Id" class="text-decoration-none text-reset issue">
     <div class="row justify-content-between m-1 p-2 border rounded bg-white">
         <p class="col-5 ps-3 pe-0 m-0 vertical-line-@color ">@Model.Name</p>
-        <p class="col-5 p-0 m-0 text-end" style="background-color: @bgcolor">@Model.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
+        <p class="col-5 p-0 m-0 text-end" style="background-color: @bgcolor" @(Model.ShowDeadline ? string.Empty : "hidden")>@Model.Deadline.ToString("MM/dd/yyyy HH:mm")</p>
     </div>
 </a>

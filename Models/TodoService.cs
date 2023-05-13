@@ -38,7 +38,8 @@ namespace PersonalFinanceMVC.Models
                     Deadline = t.Deadline,
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status
+                    Status = (int)t.Status,
+                    ShowDeadline = t.NeedDeadline
                 })
                 .ToList();
             
@@ -51,7 +52,9 @@ namespace PersonalFinanceMVC.Models
                     Deadline = t.Deadline,
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status
+                    Status = (int)t.Status,
+                    ShowDeadline = false
+
                 })
                 .ToList();
 
@@ -64,7 +67,9 @@ namespace PersonalFinanceMVC.Models
                     Deadline = t.Deadline,
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status
+                    Status = (int)t.Status,
+                    ShowDeadline = t.NeedDeadline
+
                 })
                 .ToList();
 
@@ -77,7 +82,9 @@ namespace PersonalFinanceMVC.Models
                     Deadline = t.Deadline,
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status
+                    Status = (int)t.Status,
+                    ShowDeadline = false
+
                 })
                 .ToList();
 
@@ -90,7 +97,9 @@ namespace PersonalFinanceMVC.Models
                     Deadline = t.Deadline,
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status
+                    Status = (int)t.Status,
+                    ShowDeadline = t.NeedDeadline
+
                 })
                 .ToList();
 
@@ -103,7 +112,9 @@ namespace PersonalFinanceMVC.Models
                     Deadline = t.Deadline,
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status
+                    Status = (int)t.Status,
+                    ShowDeadline = false
+
                 })
                 .ToList();
 
@@ -158,7 +169,8 @@ namespace PersonalFinanceMVC.Models
                 Deadline = vm.NewDeadline,
                 Category = vm.NewCategory,
                 Status = Status.ToDo,
-                IsToday = vm.ForToday
+                IsToday = vm.ForToday,
+                NeedDeadline = vm.ForDeadline
             });
 
             context.SaveChanges();

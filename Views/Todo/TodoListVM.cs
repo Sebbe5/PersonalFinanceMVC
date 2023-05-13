@@ -20,6 +20,9 @@ namespace PersonalFinanceMVC.Views.Todo
 
         [Display(Name = "Do Today")]
         public bool ForToday { get; set; }
+
+        [Display(Name = "Use Deadline")]
+        public bool ForDeadline { get; set; }
         public List<TodoItemVM> Todos { get; set; } = new List<TodoItemVM>();
         public List<TodoItemVM> InProgress { get; set; } = new List<TodoItemVM>();
         public List<TodoItemVM> Done { get; set; } = new List<TodoItemVM>();
@@ -34,6 +37,7 @@ namespace PersonalFinanceMVC.Views.Todo
             public string Category { get; set; }
             public double DaysToDeadline { get; set; }
             public int Status { get; set; }
+            public bool ShowDeadline { get; set; }
         }
     }
 }
