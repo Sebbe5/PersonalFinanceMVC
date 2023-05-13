@@ -2,6 +2,7 @@
 {
 
     // TODO: Allow null for deadline
+    // TODO: Set today status to 0/false at midnight
     public class Todo
     {
         public int Id { get; set; }
