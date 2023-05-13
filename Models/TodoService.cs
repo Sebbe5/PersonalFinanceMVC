@@ -53,7 +53,7 @@ namespace PersonalFinanceMVC.Models
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
                     Status = (int)t.Status,
-                    ShowDeadline = false
+                    ShowDeadline = t.NeedDeadline
 
                 })
                 .ToList();
@@ -83,7 +83,7 @@ namespace PersonalFinanceMVC.Models
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
                     Status = (int)t.Status,
-                    ShowDeadline = false
+                    ShowDeadline = t.NeedDeadline
 
                 })
                 .ToList();
@@ -113,7 +113,7 @@ namespace PersonalFinanceMVC.Models
                     Category = t.Category,
                     DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
                     Status = (int)t.Status,
-                    ShowDeadline = false
+                    ShowDeadline = t.NeedDeadline
 
                 })
                 .ToList();
@@ -200,7 +200,8 @@ namespace PersonalFinanceMVC.Models
                     Deadline = b.Deadline,
                     Category = b.Category,
                     Status = b.Status.ToString(),
-                    Id = id
+                    Id = id,
+                    ForDeadline = b.NeedDeadline
                 })
                 .SingleOrDefault();
         }
@@ -217,6 +218,7 @@ namespace PersonalFinanceMVC.Models
             // Convert to enum and ignore casing
             Enum.TryParse(vm.Status, true,  out newStatus);
             todoToEdit.Status = newStatus;
+            todoToEdit.NeedDeadline = vm.ForDeadline;
             
 
             context.SaveChanges();

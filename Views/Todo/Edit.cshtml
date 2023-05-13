@@ -10,10 +10,16 @@
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div>
-            <label asp-for="Deadline"></label>
-            <input asp-for="Deadline" class="form-control" />
-            <span asp-validation-for="Deadline" class="text-danger"></span>
+        <div class="d-flex align-items-center">
+            <div class="w-100">
+                <label asp-for="Deadline"></label>
+                <div class="d-flex align-items-center">
+                    <input id="deadlineInput" asp-for="Deadline" class="form-control w-50"/>
+                    <input type="checkbox" asp-for="ForDeadline" class="ms-2" onchange="toggleDeadlineInput(this)" id="myCheckbox" />
+                    <label asp-for="ForDeadline"></label>
+                </div>
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
         </div>
         <div>
             <label asp-for="Category"></label>
@@ -46,5 +52,22 @@
     </div>
 </div>
 
+@section EndOfBody{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var checkbox = document.getElementById('myCheckbox');
+            var deadlineInput = document.getElementById('deadlineInput');
+            var isForDeadline = @(Model.ForDeadline ? "true" : "false");
 
+            deadlineInput.disabled = !checkbox.checked;
 
+            checkbox.checked = isForDeadline;
+        });
+
+        function toggleDeadlineInput(checkbox) {
+            var deadlineInput = document.getElementById('deadlineInput');
+            deadlineInput.disabled = !checkbox.checked;
+        }
+    </script>
+
+}
