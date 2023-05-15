@@ -11,6 +11,8 @@
         public Status Status { get; set; } = new Status();
         public bool IsToday { get; set; } = false;
         public bool NeedDeadline { get; set; } = false;
+        public int DaysInDone { get; set; }
+        public DateTime? DateDone { get; set; }
         public string ApplicationUserId { get; set; }
         ApplicationUser ApplicationUser { get; set; }
     }

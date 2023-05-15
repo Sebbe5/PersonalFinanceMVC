@@ -89,7 +89,7 @@ namespace PersonalFinanceMVC.Models
                 .ToList();
 
             var doneItems = todos
-                .Where(t => t.Status == Status.Done & !t.IsToday)
+                .Where(t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 1)
                 .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
@@ -210,16 +210,31 @@ namespace PersonalFinanceMVC.Models
         {
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
-
             todoToEdit.Name = vm.Name;
             todoToEdit.Deadline = vm.Deadline;
             todoToEdit.Category = vm.Category;
-            Status newStatus;
-            // Convert to enum and ignore casing
-            Enum.TryParse(vm.Status, true,  out newStatus);
-            todoToEdit.Status = newStatus;
             todoToEdit.NeedDeadline = vm.ForDeadline;
-            
+
+            // TODO: This code is used in the below method as well
+
+            Status newStatus;
+            Enum.TryParse(vm.Status, true,  out newStatus);
+
+            if (newStatus == Status.Done && todoToEdit.Status != Status.Done)
+                todoToEdit.DateDone = DateTime.Now;
+            else if (newStatus != Status.Done)
+                todoToEdit.DateDone = null;
+
+            todoToEdit.Status = newStatus;
+
+            if (todoToEdit.DateDone.HasValue)
+            {
+                todoToEdit.DaysInDone = (DateTime.Now - todoToEdit.DateDone.Value).Days;
+            }
+            else
+            {
+                todoToEdit.DaysInDone = 0;
+            }
 
             context.SaveChanges();
         }
@@ -230,7 +245,22 @@ namespace PersonalFinanceMVC.Models
 
             Status newStatus;
             Enum.TryParse(status, true, out newStatus);
+
+            if (newStatus == Status.Done && todoToEdit.Status != Status.Done)
+                todoToEdit.DateDone = DateTime.Now;
+            else if (newStatus != Status.Done)
+                todoToEdit.DateDone = null;
+
             todoToEdit.Status = newStatus;
+
+            if (todoToEdit.DateDone.HasValue)
+            {
+                todoToEdit.DaysInDone = (DateTime.Now - todoToEdit.DateDone.Value).Days;
+            }
+            else
+            {
+                todoToEdit.DaysInDone = 0;
+            }
 
             context.SaveChanges();
         }
