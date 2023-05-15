@@ -44,9 +44,9 @@
                         @foreach (var expense in Model.Expenses)
                         {
                             <tr>
-                                <td>@expense.Name</td>
-                                <td>@expense.Amount.ToString("C")</td>
-                                <td>@expense.Category</td>
+                                <td style="width: 33%">@expense.Name</td>
+                                <td style="width: 33%">@expense.Amount.ToString("C")</td>
+                                <td style="width: 33%">@expense.Category</td>
                             </tr>
                         }
                     </tbody>
