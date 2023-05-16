@@ -89,7 +89,7 @@ namespace PersonalFinanceMVC.Models
                 .ToList();
 
             var doneItems = todos
-                .Where(t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 1)
+                .Where(t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 3)
                 .Select(t => new TodoListVM.TodoItemVM
                 {
                     Id = t.Id,
