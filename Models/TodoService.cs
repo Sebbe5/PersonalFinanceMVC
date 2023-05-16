@@ -118,7 +118,17 @@ namespace PersonalFinanceMVC.Models
                 })
                 .ToList();
 
-            
+            // Update DaysInDone property for relevant Todos
+            foreach (var doneItem in doneItems)
+            {
+                var todo = context.Todos.FirstOrDefault(t => t.Id == doneItem.Id);
+                if (todo != null)
+                {
+                    todo.DaysInDone = (DateTime.Now - todo.DateDone.Value).Days;
+                    context.SaveChanges();
+                }
+            }
+
 
             var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
             switch (userPrefOrder)
