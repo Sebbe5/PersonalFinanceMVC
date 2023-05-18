@@ -6,7 +6,6 @@ using PersonalFinanceMVC.Views.Compound;
 namespace PersonalFinanceMVC.Controllers
 {
 
-    [Authorize]
     public class CompoundController : Controller
     {
         CompoundService compoundService;
