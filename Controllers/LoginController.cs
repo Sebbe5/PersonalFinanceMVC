@@ -52,14 +52,6 @@ namespace PersonalFinanceMVC.Controllers
             return View();
         }
 
-        [HttpGet("test")]
-        public IActionResult Test()
-        {
-            accountService.Test();
-
-            return RedirectToAction(nameof(Login));
-        }
-
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginVM vm)
         {

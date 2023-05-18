@@ -69,10 +69,5 @@ namespace PersonalFinanceMVC.Models
             var result = signInManager.SignOutAsync();
         }
 
-        internal void Test()
-        {
-            context.Tests.Add(new Test { Name = "It Worked!" });
-            context.SaveChanges();
-        }
     }
 }

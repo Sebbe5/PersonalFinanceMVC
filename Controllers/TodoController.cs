@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceMVC.Models;
 using PersonalFinanceMVC.Views.Budget;
 using PersonalFinanceMVC.Views.Todo;
@@ -11,6 +12,7 @@ namespace PersonalFinanceMVC.Controllers
     // Add tags
     // Add a computer reminder (Probably not possible until launched)
 {
+    [Authorize]
     public class TodoController : Controller
     {
         TodoService todoService;

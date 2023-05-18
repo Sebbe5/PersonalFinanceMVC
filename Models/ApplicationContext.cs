@@ -14,7 +14,6 @@ namespace PersonalFinanceMVC.Models
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Todo> Todos { get; set; }
         public DbSet<Investment> Investments { get; set; }
-        public DbSet<Test> Tests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
