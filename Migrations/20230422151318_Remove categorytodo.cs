@@ -17,8 +17,8 @@ namespace PersonalFinanceMVC.Migrations
             migrationBuilder.DropTable(
                 name: "TodoCategoryApplicationUser");
 
-            migrationBuilder.DropTable(
-                name: "TodoCategory");
+            //migrationBuilder.DropTable(
+            //    name: "TodoCategory");
 
             migrationBuilder.DropIndex(
                 name: "IX_Todos_TodoCategoryId",
