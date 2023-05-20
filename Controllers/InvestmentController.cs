@@ -5,6 +5,8 @@ using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Controllers
 {
+
+    // TODO: Add a calculator for how much you need to deposit each month in order to reach a certain goal
     [Authorize]
     public class InvestmentController : Controller
     {
