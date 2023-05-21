@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public double Money { get; set; }
         public string? Category { get; set; }
+        public bool IsActive { get; set; }
         public int BudgetId { get; set; }
         public Budget Budget { get; set; }
     }
