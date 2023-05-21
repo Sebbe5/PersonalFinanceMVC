@@ -13,6 +13,7 @@ namespace PersonalFinanceMVC.Views.Budget
             public string Name { get; set; }
             public double Amount { get; set; }
             public string Category { get; set; }
+            public bool IsActive { get; set; }
         }
     }
 }

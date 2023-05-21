@@ -19,6 +19,8 @@
                     <tr>
                         <th>Expense Name</th>
                         <th>Amount</th>
+                        <th>Category</th>
+                        <th style="text-align:center">Active</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -48,6 +50,9 @@
                                         <option value="Savings">Savings</option>
                                         <option value="Others">Others</option>
                                     </select>
+                                </td>
+                                <td style="text-align:center; vertical-align:middle">
+                                    <input asp-for="Expenses[i].IsActive"/>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" onclick="removeExpense(this)">Remove</button>

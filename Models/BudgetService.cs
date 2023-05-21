@@ -124,7 +124,8 @@ namespace PersonalFinanceMVC.Models
                     {
                         Name = e.Name,
                         Amount = e.Money,
-                        Category = e.Category
+                        Category = e.Category,
+                        IsActive = e.IsActive
                     })
                     .ToList()
                 })
@@ -197,6 +198,7 @@ namespace PersonalFinanceMVC.Models
                                 Name = expenseItemVM.Name,
                                 Money = expenseItemVM.Amount,
                                 Category = expenseItemVM.Category,
+                                IsActive = expenseItemVM.IsActive,
                                 BudgetId = id,
                             });
                             existingExpenses.Add(expenseItemVM.Name);
