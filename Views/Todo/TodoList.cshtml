@@ -57,7 +57,7 @@
                     <div class="sortable-container" data-status="ToDo" data-today="true">
                         @foreach (var item in Model.TodosToday)
                         {
-                            <partial name="_TodoItem" model="@item" />
+                            <partial name="Todo/_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="sortable-container" data-status="InProgress" data-today="true">
                         @foreach (var item in Model.InProgressToday)
                         {
-                            <partial name="_TodoItem" model="@item" />
+                            <partial name="Todo/_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                     <div class="sortable-container" data-status="Done" data-today="true">
                         @foreach (var item in Model.DoneToday)
                         {
-                            <partial name="_TodoItem" model="@item" />
+                            <partial name="Todo/_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="sortable-container" data-status="ToDo" data-today="false">
                         @foreach (var item in Model.Todos)
                         {
-                            <partial name="_TodoItem" model="@item" />
+                            <partial name="Todo/_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="sortable-container" data-status="InProgress" data-today="false">
                         @foreach (var item in Model.InProgress)
                         {
-                            <partial name="_TodoItem" model="@item" />
+                            <partial name="Todo/_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     <div class="sortable-container" data-status="Done" data-today="false">
                         @foreach (var item in Model.Done)
                         {
-                            <partial name="_TodoItem" model="@item" />
+                            <partial name="Todo/_TodoItem" model="@item" />
                         }
                     </div>
                 </div>
