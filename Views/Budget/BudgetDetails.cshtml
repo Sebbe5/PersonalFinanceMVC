@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "BudgetDetails";
     Layout = "_FunctionPage";
-    // TODO: Add checkbox if expense if active (at the moment, you might want to bing it back in the future and therefor not remove it)
+    string inactiveStyling = "text-decoration:line-through;text-decoration-color:red;text-decoration-thickness:3px;opacity:50%;";
     // TODO: Add sorting to the table
 }
 <div class="container mt-4 bg-white rounded">
@@ -45,7 +45,7 @@
                     <tbody>
                         @foreach (var expense in Model.Expenses)
                         {
-                            <tr>
+                            <tr style="@(expense.IsActive ? string.Empty : inactiveStyling)">
                                 <td style="width: 33%">@expense.Name</td>
                                 <td style="width: 33%">@expense.Amount.ToString("C")</td>
                                 <td style="width: 33%">@expense.Category</td>

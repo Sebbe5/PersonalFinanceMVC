@@ -31,7 +31,7 @@ namespace PersonalFinanceMVC.Models
                {
                    Id = b.Id,
                    Name = b.Name,
-                   TotalAmount = b.Expenses.Sum(e => e.Money)
+                   TotalAmount = b.Expenses.Where(e => e.IsActive).Sum(e => e.Money)
                })
             .ToArray();
 
@@ -57,42 +57,46 @@ namespace PersonalFinanceMVC.Models
 
             foreach (var expense in expenses)
             {
-                switch (expense.Category)
+                if (expense.IsActive)
                 {
-                    case "Housing":
-                        categoryAmounts[0] += expense.Money;
-                        break;
-                    case "Transportation":
-                        categoryAmounts[1] += expense.Money;
-                        break;
-                    case "Food":
-                        categoryAmounts[2] += expense.Money;
-                        break;
-                    case "Utilities":
-                        categoryAmounts[3] += expense.Money;
-                        break;
-                    case "Health and Fitness":
-                        categoryAmounts[4] += expense.Money;
-                        break;
-                    case "Entertainment":
-                        categoryAmounts[5] += expense.Money;
-                        break;
-                    case "Personal Care":
-                        categoryAmounts[6] += expense.Money;
-                        break;
-                    case "Education":
-                        categoryAmounts[7] += expense.Money;
-                        break;
-                    case "Savings":
-                        categoryAmounts[8] += expense.Money;
-                        break;
-                    case "Others":
-                        categoryAmounts[9] += expense.Money;
-                        break;
-                    default:
-                        categoryAmounts[10] += expense.Money;
-                        break;
+                    switch (expense.Category)
+                    {
+                        case "Housing":
+                            categoryAmounts[0] += expense.Money;
+                            break;
+                        case "Transportation":
+                            categoryAmounts[1] += expense.Money;
+                            break;
+                        case "Food":
+                            categoryAmounts[2] += expense.Money;
+                            break;
+                        case "Utilities":
+                            categoryAmounts[3] += expense.Money;
+                            break;
+                        case "Health and Fitness":
+                            categoryAmounts[4] += expense.Money;
+                            break;
+                        case "Entertainment":
+                            categoryAmounts[5] += expense.Money;
+                            break;
+                        case "Personal Care":
+                            categoryAmounts[6] += expense.Money;
+                            break;
+                        case "Education":
+                            categoryAmounts[7] += expense.Money;
+                            break;
+                        case "Savings":
+                            categoryAmounts[8] += expense.Money;
+                            break;
+                        case "Others":
+                            categoryAmounts[9] += expense.Money;
+                            break;
+                        default:
+                            categoryAmounts[10] += expense.Money;
+                            break;
+                    }
                 }
+
             }
 
             return new BudgetDetailsVM
@@ -104,8 +108,9 @@ namespace PersonalFinanceMVC.Models
                     Name = e.Name,
                     Amount = e.Money,
                     Category = e.Category != null ? e.Category : string.Empty,
+                    IsActive = e.IsActive,
                 }).ToArray(),
-                TotalAmount = expenses.Sum(e => e.Money),
+                TotalAmount = expenses.Where(e => e.IsActive).Sum(e => e.Money),
                 Categories = categories,
                 CategoryAmounts = categoryAmounts
             };
