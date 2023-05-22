@@ -55,12 +55,61 @@ namespace PersonalFinanceMVC.Models
         internal _GoalCalculatorVM Update_GoalCalculatorVM(_GoalCalculatorVM vm)
         {
             // TODO: Fixa matten
-            decimal annualInterestRate = vm.Rate / 100;
-            int totalMonths = vm.Years * 12;
+            var a = vm.Goal;
+            var p = vm.Principal;
+            var r = vm.Rate / 100;
+            var t = vm.Years;
+            var n = 12;
 
-            vm.MonthlyContribution = (vm.Goal - vm.Principal * (decimal)Math.Pow(1 + (double)annualInterestRate, vm.Years)) / (totalMonths);
-            
+            decimal epsilon = 0.01m; // Toleransnivå för approximation
+            decimal lowerBound = 0; // Nedre gräns för insättningsbeloppet
+            decimal upperBound = a; // Övre gräns för insättningsbeloppet
+            decimal PMT = 0;
+
+            int maxIterations = 1000; // Maximal antal iterationer
+            decimal maxDifference = 0.01m; // Maximal differens mellan de nedre och övre gränserna
+
+            int iterations = 0; // Räknare för antal iterationer
+
+            // Bisektionsmetoden för att approximera PMT
+            while (Math.Abs(a - CalculateFutureValue(p, r, t, n, PMT)) > epsilon)
+            {
+                PMT = (lowerBound + upperBound) / 2;
+
+                decimal futureValue = CalculateFutureValue(p, r, t, n, PMT);
+
+                if (futureValue > a)
+                {
+                    upperBound = PMT;
+                }
+                else
+                {
+                    lowerBound = PMT;
+                }
+
+                iterations++;
+
+                // Avsluta loopen om maxIterations nås eller om differensen mellan de nedre och övre gränserna är för liten
+                if (iterations >= maxIterations || Math.Abs(upperBound - lowerBound) < maxDifference)
+                {
+                    break;
+                }
+            }
+
+            vm.MonthlyContribution = PMT;
             return vm;
+        }
+
+        public static decimal CalculateFutureValue(decimal P, decimal r, int t, int n, decimal PMT)
+        {
+            decimal futureValue = P * (decimal)Math.Pow(1 + (double)(r / n), n * t);
+
+            for (int i = 1; i <= t * n; i++)
+            {
+                futureValue += PMT * (decimal)Math.Pow(1 + (double)(r / n), n * t - i);
+            }
+
+            return futureValue;
         }
     }
 }
