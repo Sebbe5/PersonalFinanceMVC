@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PersonalFinanceMVC.Models;
+using PersonalFinanceMVC.Views.Compound;
 using PersonalFinanceMVC.Views.Shared.Compound;
 
 namespace PersonalFinanceMVC.Controllers
@@ -17,7 +18,8 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/calculate")]
         public IActionResult Calculate()
         {
-            return View();
+            CalculateVM vm =  new CalculateVM { CalculatorUsed = Request.Cookies["LastCalculator"] };
+            return View(vm);
         }
 
         [HttpGet("/PredictionCalculator")]
@@ -47,6 +49,7 @@ namespace PersonalFinanceMVC.Controllers
                 Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
             };
             Response.Cookies.Append("_PredictionCalculatorVM", serializedVm, cookieOptions);
+            Response.Cookies.Append("LastCalculator", "prediction", cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
 
@@ -78,6 +81,7 @@ namespace PersonalFinanceMVC.Controllers
                 Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
             };
             Response.Cookies.Append("_GoalCalculatorVM", serializedVm, cookieOptions);
+            Response.Cookies.Append("LastCalculator", "goal", cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
     }

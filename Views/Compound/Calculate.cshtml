@@ -1,6 +1,9 @@
-﻿@{
+﻿@model CalculateVM
+
+@{
     ViewData["Title"] = "Calculate";
     Layout = "_FunctionPage";
+    string calculatorUsed = Model.CalculatorUsed != null ? Model.CalculatorUsed : string.Empty;
 }
 
 <div class="container">
@@ -33,11 +36,21 @@
         const predictionCalculatorBtn = document.getElementById("predictionCalculatorBtn")
         const goalCalculatorBtn = document.getElementById("goalCalculatorBtn")
 
-        fetch("/PredictionCalculator", {
-            method: "GET",
-        })
-            .then(result => result.text())
-            .then(html => calculatorDiv.innerHTML = html);
+        if ('@calculatorUsed' === 'goal') {
+            fetch("/GoalCalculator", {
+                method: "GET",
+            })
+                .then(result => result.text())
+                .then(html => calculatorDiv.innerHTML = html);
+        }
+        else {
+            fetch("/PredictionCalculator", {
+                method: "GET",
+            })
+                .then(result => result.text())
+                .then(html => calculatorDiv.innerHTML = html);
+        }
+
 
         predictionCalculatorBtn.addEventListener("click", () => {
             fetch("/PredictionCalculator", {
