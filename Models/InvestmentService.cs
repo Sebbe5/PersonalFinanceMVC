@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceMVC.Models.Entities;
-using PersonalFinanceMVC.Views.Compound;
 using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Models

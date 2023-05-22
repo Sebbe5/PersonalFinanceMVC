@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PersonalFinanceMVC.Models;
-using PersonalFinanceMVC.Views.Compound;
+using PersonalFinanceMVC.Views.Shared.Compound;
 
 namespace PersonalFinanceMVC.Controllers
 {
@@ -27,19 +27,19 @@ namespace PersonalFinanceMVC.Controllers
 
             if (!string.IsNullOrEmpty(serializedVm))
             {
-                var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
+                var vm = JsonConvert.DeserializeObject<_PredictionCalculatorVM>(serializedVm);
                 vm = compoundService.UpdateCalculateVM(vm);
                 return PartialView("Compound/_PredictionCalculator", vm);
             }
             else
             {
-                CalculateVM vm = new CalculateVM();
+                _PredictionCalculatorVM vm = new _PredictionCalculatorVM();
                 return PartialView("Compound/_PredictionCalculator", vm);
             }
         }
 
         [HttpPost("/PredictionCalculator")]
-        public IActionResult PredictionCalculator(CalculateVM vm)
+        public IActionResult PredictionCalculator(_PredictionCalculatorVM vm)
         {
             string serializedVm = JsonConvert.SerializeObject(vm);
             var cookieOptions = new CookieOptions
@@ -57,18 +57,18 @@ namespace PersonalFinanceMVC.Controllers
 
             if (!string.IsNullOrEmpty(serializedVm))
             {
-                var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
+                var vm = JsonConvert.DeserializeObject<_PredictionCalculatorVM>(serializedVm);
                 return PartialView("Compound/_GoalCalculator", vm);
             }
             else
             {
-                CalculateVM vm = new CalculateVM();
+                _PredictionCalculatorVM vm = new _PredictionCalculatorVM();
                 return PartialView("Compound/_GoalCalculator", vm);
             }
         }
 
         [HttpPost("/GoalCalculator")]
-        public IActionResult GoalCalculator(CalculateVM vm)
+        public IActionResult GoalCalculator(_PredictionCalculatorVM vm)
         {
             vm = compoundService.UpdateCalculateVM(vm);
             string serializedVm = JsonConvert.SerializeObject(vm);

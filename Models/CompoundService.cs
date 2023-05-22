@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using PersonalFinanceMVC.Views.Compound;
+using PersonalFinanceMVC.Views.Shared.Compound;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PersonalFinanceMVC.Models
@@ -21,7 +21,7 @@ namespace PersonalFinanceMVC.Models
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
 
-        internal CalculateVM UpdateCalculateVM(CalculateVM vm)
+        internal _PredictionCalculatorVM UpdateCalculateVM(_PredictionCalculatorVM vm)
         {
             // Set necessary values
             decimal principal = vm.Principal;
@@ -33,7 +33,7 @@ namespace PersonalFinanceMVC.Models
             // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < vm.Years; i++)
             {
-                var result = new CalculateVM.CompoundInterestResult();
+                var result = new _PredictionCalculatorVM.CompoundInterestResult();
 
                 // Set year and principal
                 result.Year = i + 1;

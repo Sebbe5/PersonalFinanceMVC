@@ -1,19 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PersonalFinanceMVC.Views.Compound
+﻿namespace PersonalFinanceMVC.Views.Shared.Compound
 {
-    public class CalculateVM
+    public class _PredictionCalculatorVM
     {
-        [Display(Name = "Principal Amount")]
         public decimal Principal { get; set; }
 
-        [Display(Name = "Monthly Contribution")]
         public decimal MonthlyContribution { get; set; }
 
-        [Display(Name = "Annual interest rate (%)")]
         public decimal Rate { get; set; }
 
-        [Display(Name = "Number of years")]
         public int Years { get; set; }
 
         public List<CompoundInterestResult> Results { get; set; } = new List<CompoundInterestResult>();
