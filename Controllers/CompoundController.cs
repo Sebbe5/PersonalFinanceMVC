@@ -6,7 +6,6 @@ using PersonalFinanceMVC.Views.Compound;
 
 namespace PersonalFinanceMVC.Controllers
 {
-    // TODO: Add the choice to save as investment
     public class CompoundController : Controller
     {
         CompoundService compoundService;
