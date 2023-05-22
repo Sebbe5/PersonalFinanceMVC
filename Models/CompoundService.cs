@@ -54,7 +54,6 @@ namespace PersonalFinanceMVC.Models
 
         internal _GoalCalculatorVM Update_GoalCalculatorVM(_GoalCalculatorVM vm)
         {
-            // TODO: Fixa matten
             var a = vm.Goal;
             var p = vm.Principal;
             var r = vm.Rate / 100;
