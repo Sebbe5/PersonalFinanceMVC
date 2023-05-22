@@ -5,11 +5,14 @@
     Layout = "_FunctionPage";
 }
 
-<button id="predictionCalculatorBtn">Compound Interest Calculator</button>
-<button id="goalCalculatorBtn">Compound Goal Calculator</button>
+<div class="container">
+    <div class="row mb-0">
+        <button class="col-6 p-3" id="predictionCalculatorBtn">Compound Interest Calculator</button>
+        <button class="col-6 p-3" id="goalCalculatorBtn">Compound Goal Calculator</button>
+    </div>
+</div>
 
-<div class="container mt-4 mb-4 bg-white rounded" id="calculatorDiv">
-
+<div class="container mt-2 mb-4 bg-white rounded" id="calculatorDiv">
 </div>
 
 @section EndOfBody{
@@ -42,16 +45,16 @@
             fetch("/PredictionCalculator", {
                 method: "GET",
             })
-            .then(result => result.text())
-            .then(html => calculatorDiv.innerHTML = html);
+                .then(result => result.text())
+                .then(html => calculatorDiv.innerHTML = html);
         })
 
         goalCalculatorBtn.addEventListener("click", () => {
             fetch("/GoalCalculator", {
                 method: "GET",
             })
-            .then(result => result.text())
-            .then(html => calculatorDiv.innerHTML = html);
+                .then(result => result.text())
+                .then(html => calculatorDiv.innerHTML = html);
         })
     </script>
 
