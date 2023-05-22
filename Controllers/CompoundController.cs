@@ -40,6 +40,7 @@ namespace PersonalFinanceMVC.Controllers
             if (!string.IsNullOrEmpty(serializedVm))
             {
                 var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
+                vm = compoundService.UpdateCalculateVM(vm);
                 return PartialView("Compound/_PredictionCalculator", vm);
             }
             else
@@ -52,7 +53,6 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("/PredictionCalculator")]
         public IActionResult PredictionCalculator(CalculateVM vm)
         {
-            vm = compoundService.UpdateCalculateVM(vm);
             string serializedVm = JsonConvert.SerializeObject(vm);
             var cookieOptions = new CookieOptions
             {
