@@ -6,7 +6,6 @@ using PersonalFinanceMVC.Views.Compound;
 
 namespace PersonalFinanceMVC.Controllers
 {
-    // TODO: Add a calculator for how much you need to deposit each month in order to reach a certain goal
     // TODO: Add the choice to save as investment
     public class CompoundController : Controller
     {
