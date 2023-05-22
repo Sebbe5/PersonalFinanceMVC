@@ -7,6 +7,7 @@ using PersonalFinanceMVC.Views.Todo;
 namespace PersonalFinanceMVC.Controllers
 
     // TODO: Todo list todos
+    // Add description (where you can put links and such)
     // Add subtassks
     // Add a filter
     // Add tags
