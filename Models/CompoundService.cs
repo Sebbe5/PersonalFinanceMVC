@@ -26,35 +26,28 @@ namespace PersonalFinanceMVC.Models
             // Set necessary values
             decimal principal = vm.Principal;
             decimal monthlyContributions = vm.MonthlyContribution;
-            int compounds = 12;
             decimal interestRate = vm.Rate / 100;
-            decimal ratePerMonth = interestRate / compounds;
             decimal totalContribution = principal;
-            decimal interest = 0;
+            decimal totalInterest = 0;
 
             // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < vm.Years; i++)
             {
                 var result = new CalculateVM.CompoundInterestResult();
-                
+
                 // Set year and principal
-                result.Year = i;
+                result.Year = i + 1;
 
-                // Loop through months
-                for (int j = 0; j < 12; j++)
-                {
-                    totalContribution += monthlyContributions;
-                    interest += totalContribution * ratePerMonth;
-                }
-
-                result.Contribution = totalContribution;
+                decimal interest = (totalContribution + totalInterest) * interestRate;
                 result.Interest = interest;
+                totalInterest += interest;
 
-                result.Amount = totalContribution + interest;
+                totalContribution += monthlyContributions * 12;
+                result.Contribution = totalContribution;
+
+                result.Amount = totalContribution + totalInterest;
 
                 vm.Results.Add(result);
-
-                principal = result.Amount;
             }
             return vm;
         }

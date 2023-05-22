@@ -101,20 +101,19 @@ namespace PersonalFinanceMVC.Models
                 .FirstOrDefault();
 
             double totalContribution = investment.InitialValue;
-            double interest = 0;
+            double totalInterest = 0;
 
             for (int i = 0; i < investment.ExpectedYearsInvested; i++)
             {
-                for (int j = 0; j < 12; j++)
-                {
-                    totalContribution += investment.RecurringDeposit;
-                    interest += totalContribution * (double)(investment.ExpectedAnnualInterest/1200);
-                }
-
                 investment.YearLabels.Add("Year " + (i + 1).ToString());
+
+                totalInterest += (totalInterest + totalContribution) * (double)(investment.ExpectedAnnualInterest / 100);
+                investment.Profits.Add(totalInterest);
+
+                totalContribution += investment.RecurringDeposit * 12;
                 investment.Contributions.Add(totalContribution);
-                investment.Profits.Add(interest);
-                investment.TotalAmounts.Add(totalContribution + interest);
+
+                investment.TotalAmounts.Add(totalContribution + totalInterest);
             }
             return investment;
         }

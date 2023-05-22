@@ -17,18 +17,10 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/calculate")]
         public IActionResult Calculate()
         {
-            string serializedVm = Request.Cookies["CalculateVM"];
 
-            if (!string.IsNullOrEmpty(serializedVm))
-            {
-                var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
-                return View(vm);
-            }
-            else
-            {
-                CalculateVM vm = new CalculateVM();
-                return View(vm);
-            }
+            CalculateVM vm = new CalculateVM();
+            return View(vm);
+
 
         }
 
