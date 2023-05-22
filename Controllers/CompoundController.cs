@@ -17,11 +17,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/calculate")]
         public IActionResult Calculate()
         {
-
-            CalculateVM vm = new CalculateVM();
-            return View(vm);
-
-
+            return View();
         }
 
         [HttpGet("/PredictionCalculator")]
