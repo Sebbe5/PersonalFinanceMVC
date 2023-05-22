@@ -63,5 +63,35 @@ namespace PersonalFinanceMVC.Controllers
             Response.Cookies.Append("CalculateVM", serializedVm, cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
+
+        [HttpGet("/GoalCalculator")]
+        public IActionResult GoalCalculator()
+        {
+            string serializedVm = Request.Cookies["CalculateVM"] as string;
+
+            if (!string.IsNullOrEmpty(serializedVm))
+            {
+                var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
+                return PartialView("Compound/_GoalCalculator", vm);
+            }
+            else
+            {
+                CalculateVM vm = new CalculateVM();
+                return PartialView("Compound/_GoalCalculator", vm);
+            }
+        }
+
+        [HttpPost("/GoalCalculator")]
+        public IActionResult GoalCalculator(CalculateVM vm)
+        {
+            vm = compoundService.UpdateCalculateVM(vm);
+            string serializedVm = JsonConvert.SerializeObject(vm);
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
+            };
+            Response.Cookies.Append("CalculateVM", serializedVm, cookieOptions);
+            return RedirectToAction(nameof(Calculate));
+        }
     }
 }

@@ -5,7 +5,8 @@
     Layout = "_FunctionPage";
 }
 
-<button id="calculatorToggler">Compound Interest Calculator</button>
+<button id="predictionCalculatorBtn">Compound Interest Calculator</button>
+<button id="goalCalculatorBtn">Compound Goal Calculator</button>
 
 <div class="container mt-4 mb-4 bg-white rounded" id="calculatorDiv">
 
@@ -28,10 +29,25 @@
         }
 
         const calculatorDiv = document.getElementById("calculatorDiv")
-        const calculatorToggler = document.getElementById("calculatorToggler")
+        const predictionCalculatorBtn = document.getElementById("predictionCalculatorBtn")
+        const goalCalculatorBtn = document.getElementById("goalCalculatorBtn")
 
-        calculatorToggler.addEventListener("click", () => {
+        fetch("/PredictionCalculator", {
+            method: "GET",
+        })
+            .then(result => result.text())
+            .then(html => calculatorDiv.innerHTML = html);
+
+        predictionCalculatorBtn.addEventListener("click", () => {
             fetch("/PredictionCalculator", {
+                method: "GET",
+            })
+            .then(result => result.text())
+            .then(html => calculatorDiv.innerHTML = html);
+        })
+
+        goalCalculatorBtn.addEventListener("click", () => {
+            fetch("/GoalCalculator", {
                 method: "GET",
             })
             .then(result => result.text())
