@@ -23,12 +23,12 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/PredictionCalculator")]
         public IActionResult PredictionCalculator()
         {
-            string serializedVm = Request.Cookies["CalculateVM"] as string;
+            string serializedVm = Request.Cookies["_PredictionCalculatorVM"] as string;
 
             if (!string.IsNullOrEmpty(serializedVm))
             {
                 var vm = JsonConvert.DeserializeObject<_PredictionCalculatorVM>(serializedVm);
-                vm = compoundService.UpdateCalculateVM(vm);
+                vm = compoundService.Update_PredictionCalculatorVM(vm);
                 return PartialView("Compound/_PredictionCalculator", vm);
             }
             else
@@ -46,37 +46,38 @@ namespace PersonalFinanceMVC.Controllers
             {
                 Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
             };
-            Response.Cookies.Append("CalculateVM", serializedVm, cookieOptions);
+            Response.Cookies.Append("_PredictionCalculatorVM", serializedVm, cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
 
         [HttpGet("/GoalCalculator")]
         public IActionResult GoalCalculator()
         {
-            string serializedVm = Request.Cookies["CalculateVM"] as string;
+            string serializedVm = Request.Cookies["_GoalCalculatorVM"] as string;
 
             if (!string.IsNullOrEmpty(serializedVm))
             {
-                var vm = JsonConvert.DeserializeObject<_PredictionCalculatorVM>(serializedVm);
+                var vm = JsonConvert.DeserializeObject<_GoalCalculatorVM>(serializedVm);
+                vm = compoundService.Update_GoalCalculatorVM(vm);
+
                 return PartialView("Compound/_GoalCalculator", vm);
             }
             else
             {
-                _PredictionCalculatorVM vm = new _PredictionCalculatorVM();
+                _GoalCalculatorVM vm = new _GoalCalculatorVM();
                 return PartialView("Compound/_GoalCalculator", vm);
             }
         }
 
         [HttpPost("/GoalCalculator")]
-        public IActionResult GoalCalculator(_PredictionCalculatorVM vm)
+        public IActionResult GoalCalculator(_GoalCalculatorVM vm)
         {
-            vm = compoundService.UpdateCalculateVM(vm);
             string serializedVm = JsonConvert.SerializeObject(vm);
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
             };
-            Response.Cookies.Append("CalculateVM", serializedVm, cookieOptions);
+            Response.Cookies.Append("_GoalCalculatorVM", serializedVm, cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
     }

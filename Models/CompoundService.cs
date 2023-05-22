@@ -21,7 +21,7 @@ namespace PersonalFinanceMVC.Models
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
 
-        internal _PredictionCalculatorVM UpdateCalculateVM(_PredictionCalculatorVM vm)
+        internal _PredictionCalculatorVM Update_PredictionCalculatorVM(_PredictionCalculatorVM vm)
         {
             // Set necessary values
             decimal principal = vm.Principal;
@@ -49,6 +49,17 @@ namespace PersonalFinanceMVC.Models
 
                 vm.Results.Add(result);
             }
+            return vm;
+        }
+
+        internal _GoalCalculatorVM Update_GoalCalculatorVM(_GoalCalculatorVM vm)
+        {
+            // TODO: Fixa matten
+            decimal annualInterestRate = vm.Rate / 100;
+            int totalMonths = vm.Years * 12;
+
+            vm.MonthlyContribution = (vm.Goal - vm.Principal * (decimal)Math.Pow(1 + (double)annualInterestRate, vm.Years)) / (totalMonths);
+            
             return vm;
         }
     }

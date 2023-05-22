@@ -1,1 +1,15 @@
-﻿This is a test
+﻿@model _GoalCalculatorVM
+
+<h1 class="through">Compound Goal Calculator</h1>
+
+
+<form asp-action="GoalCalculator">
+    <partial name="Compound/_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Principal", Value=(int)Model.Principal, Title = "Principal Amount" ,Description = "The initial amount of money you invest"})" />
+    <partial name="Compound/_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Rate",Value=(int)Model.Rate, Title = "Annual interest rate (%)" ,Description = "The annual interest rate you expect to earn on your investment"})" />
+    <partial name="Compound/_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Years",Value=Model.Years, Title = "Number of years" ,Description = "The number of years you plan to invest"})" />
+    <partial name="Compound/_CompoundCalculatorInput" model="@(new _CompoundCalculatorInputVM{Name = "Goal",Value=(int)Model.Goal, Title = "Goal Amount" ,Description = "The amount you which to have after the given amount of years"})" />
+    <button type="submit" class="btn btn-primary mt-3">Calculate</button>
+</form>
+<div>
+    <h2 class="text-center"><strong>Monthly contribution required:</strong> @Model.MonthlyContribution.ToString("C")</h2>
+</div>
