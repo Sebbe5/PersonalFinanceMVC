@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PersonalFinanceMVC.Models;
 using PersonalFinanceMVC.Views.Compound;
 
@@ -18,15 +19,49 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/calculate")]
         public IActionResult Calculate()
         {
-            CalculateVM vm = new CalculateVM();
-            return View(vm);
+            string serializedVm = Request.Cookies["CalculateVM"];
+
+            if (!string.IsNullOrEmpty(serializedVm))
+            {
+                var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
+                return View(vm);
+            }
+            else
+            {
+                CalculateVM vm = new CalculateVM();
+                return View(vm);
+            }
+
         }
 
-        [HttpPost("/calculate")]
-        public IActionResult Calculate(CalculateVM vm)
+        [HttpGet("/PredictionCalculator")]
+        public IActionResult PredictionCalculator()
+        {
+            string serializedVm = Request.Cookies["CalculateVM"] as string;
+
+            if (!string.IsNullOrEmpty(serializedVm))
+            {
+                var vm = JsonConvert.DeserializeObject<CalculateVM>(serializedVm);
+                return PartialView("Compound/_PredictionCalculator", vm);
+            }
+            else
+            {
+                CalculateVM vm = new CalculateVM();
+                return PartialView("Compound/_PredictionCalculator", vm);
+            }
+        }
+
+        [HttpPost("/PredictionCalculator")]
+        public IActionResult PredictionCalculator(CalculateVM vm)
         {
             vm = compoundService.UpdateCalculateVM(vm);
-            return View(vm);
+            string serializedVm = JsonConvert.SerializeObject(vm);
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
+            };
+            Response.Cookies.Append("CalculateVM", serializedVm, cookieOptions);
+            return RedirectToAction(nameof(Calculate));
         }
     }
 }
