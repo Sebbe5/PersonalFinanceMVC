@@ -225,34 +225,19 @@ namespace PersonalFinanceMVC.Models
             todoToEdit.Category = vm.Category;
             todoToEdit.NeedDeadline = vm.ForDeadline;
 
-            // TODO: This code is used in the below method as well
-
-            Status newStatus;
-            Enum.TryParse(vm.Status, true,  out newStatus);
-
-            if (newStatus == Status.Done && todoToEdit.Status != Status.Done)
-                todoToEdit.DateDone = DateTime.Now;
-            else if (newStatus != Status.Done)
-                todoToEdit.DateDone = null;
-
-            todoToEdit.Status = newStatus;
-
-            if (todoToEdit.DateDone.HasValue)
-            {
-                todoToEdit.DaysInDone = (DateTime.Now - todoToEdit.DateDone.Value).Days;
-            }
-            else
-            {
-                todoToEdit.DaysInDone = 0;
-            }
-
+            UpdateStatusAndCheckWhenDone(vm.Status, todoToEdit);
             context.SaveChanges();
         }
 
         internal void EditStatus(int id, string status)
         {
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
+            UpdateStatusAndCheckWhenDone(status, todoToEdit);
+            context.SaveChanges();
+        }
 
+        private static void UpdateStatusAndCheckWhenDone(string status, Todo todoToEdit)
+        {
             Status newStatus;
             Enum.TryParse(status, true, out newStatus);
 
@@ -271,8 +256,6 @@ namespace PersonalFinanceMVC.Models
             {
                 todoToEdit.DaysInDone = 0;
             }
-
-            context.SaveChanges();
         }
 
         internal void EditIsToday(int id, bool isToday)
