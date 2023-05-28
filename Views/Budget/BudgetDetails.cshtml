@@ -4,7 +4,6 @@
     ViewData["Title"] = "BudgetDetails";
     Layout = "_FunctionPage";
     string inactiveStyling = "text-decoration:line-through;text-decoration-color:red;text-decoration-thickness:3px;opacity:50%;";
-    // TODO: Add sorting to the table
 }
 <div class="container mt-4 bg-white rounded">
     <div class=" d-flex justify-content-between align-items-center">
@@ -34,12 +33,12 @@
             <h2 class="through mt-4">Expenses</h2>
             @if (Model.Expenses != null && Model.Expenses.Length > 0)
             {
-                <table class="table table-striped">
+                <table class="table table-striped" id="myTable">
                     <thead>
                         <tr>
-                            <th>Expense Name</th>
-                            <th>Amount</th>
-                            <th>Category</th>
+                            <th onclick="sortTable(0)">Expense Name</th>
+                            <th onclick="sortTable(1)">Amount</th>
+                            <th onclick="sortTable(2)">Category</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,6 +100,51 @@
             });
         });
     </script>
+    <script>
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("myTable");
+            switching = true;
 
+            while (switching) {
+                switching = false;
+
+                var rows = table.rows;
+
+                for (var i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+
+                    if (columnIndex === 1) {
+                        x = rows[i].getElementsByTagName("td")[columnIndex]
+                        y = rows[i + 1].getElementsByTagName("td")[columnIndex]
+
+                        var cleanedAmount1 = parseFloat(x.innerHTML.replace(/[^\d.,]/g, '').replace(',', '.'));
+                        var cleanedAmount2 = parseFloat(y.innerHTML.replace(/[^\d.,]/g, '').replace(',', '.'));
+
+                        if(cleanedAmount1 < cleanedAmount2){
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    else {
+                        x = rows[i].getElementsByTagName("td")[columnIndex]
+                        y = rows[i + 1].getElementsByTagName("td")[columnIndex]
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+
+
+
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
 
 }
