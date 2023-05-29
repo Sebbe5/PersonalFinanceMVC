@@ -4,7 +4,6 @@
     ViewData["Title"] = "BudgetDetails";
     Layout = "_FunctionPage";
     string inactiveStyling = "text-decoration:line-through;text-decoration-color:red;text-decoration-thickness:3px;opacity:50%;";
-    // TODO: Make table headers look clickable (since they are)
     // TODO: Add sort in other direction when clicked again
 }
 <div class="container mt-4 bg-white rounded">
@@ -38,9 +37,16 @@
                 <table class="table table-striped" id="myTable">
                     <thead>
                         <tr>
-                            <th onclick="sortTable(0)">Expense Name</th>
-                            <th onclick="sortTable(1)">Amount</th>
-                            <th onclick="sortTable(2)">Category</th>
+                            <th onclick="sortTable(0)">
+                                <p class="clickable">Expense Name</p>
+                            </th>
+                            <th  onclick="sortTable(1)">
+                                <p class="clickable">Amount</p>
+                            </th>
+                            <th  onclick="sortTable(2)">
+                                <p class="clickable">Category</p>
+                            </th>
+                            
                         </tr>
                     </thead>
                     <tbody>

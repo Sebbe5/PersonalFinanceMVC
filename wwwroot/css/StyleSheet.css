@@ -171,21 +171,21 @@ h1 {
             border-top: 2px solid;
         }
 
-    h2.through {
-        display: grid;
-        grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
-        align-items: center;
-        text-align: center;
-        grid-gap: 20px;
-        width: 100%;
-        padding: 0;
-    }
+h2.through {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+    align-items: center;
+    text-align: center;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 0;
+}
 
-        h2.through:before,
-        h2.through:after {
-            content: '';
-            border-top: 2px solid;
-        }
+    h2.through:before,
+    h2.through:after {
+        content: '';
+        border-top: 2px solid;
+    }
 
 .form-signin {
     max-width: 330px;
@@ -248,3 +248,14 @@ h1 {
 .chart-container {
     height: 500px; /* Adjust the taller height for mobile screens */
 }
+
+.clickable {
+    display: inline;
+    padding: 3px;
+    text-decoration: underline;
+}
+
+    .clickable:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
