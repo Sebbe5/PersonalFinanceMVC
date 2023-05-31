@@ -211,7 +211,8 @@ namespace PersonalFinanceMVC.Models
                     Category = b.Category,
                     Status = b.Status.ToString(),
                     Id = id,
-                    ForDeadline = b.NeedDeadline
+                    ForDeadline = b.NeedDeadline,
+                    Description = b.Description
                 })
                 .SingleOrDefault();
         }
@@ -224,6 +225,7 @@ namespace PersonalFinanceMVC.Models
             todoToEdit.Deadline = vm.Deadline;
             todoToEdit.Category = vm.Category;
             todoToEdit.NeedDeadline = vm.ForDeadline;
+            todoToEdit.Description = vm.Description;
 
             UpdateStatusAndCheckWhenDone(vm.Status, todoToEdit);
             context.SaveChanges();

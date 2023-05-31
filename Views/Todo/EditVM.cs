@@ -13,5 +13,6 @@ namespace PersonalFinanceMVC.Views.Todo
 
         [Display(Name = "Use Deadline")]
         public bool ForDeadline { get; set; }
+        public string Description { get; set; }
     }
 }
