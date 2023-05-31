@@ -4,7 +4,6 @@ using PersonalFinanceMVC.Models;
 
 namespace PersonalFinanceMVC.Controllers
 {
-    // TODO: Deploy to azure
     public class HomeController : Controller
     {
         [Authorize]

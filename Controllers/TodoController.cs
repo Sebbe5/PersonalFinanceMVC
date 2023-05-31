@@ -11,8 +11,6 @@ namespace PersonalFinanceMVC.Controllers
     // Add subtassks
     // Add a filter
     // Add tags
-    // Add a computer reminder (Probably not possible until launched)
-    // Add an update for date in done whenever the todo list is loaded
 {
     [Authorize]
     public class TodoController : Controller
