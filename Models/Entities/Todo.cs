@@ -11,6 +11,7 @@
         public bool NeedDeadline { get; set; } = false;
         public int DaysInDone { get; set; }
         public DateTime? DateDone { get; set; }
+        public string? Description { get; set; }
         public string ApplicationUserId { get; set; }
         ApplicationUser ApplicationUser { get; set; }
     }
