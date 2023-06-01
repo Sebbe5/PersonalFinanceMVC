@@ -70,7 +70,6 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("removeBudget")]
         public IActionResult RemoveBudget(int id)
         {
-
             budgetService.RemoveBudget(id);
 
             return RedirectToAction(nameof(Budgets));

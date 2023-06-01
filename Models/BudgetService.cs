@@ -23,37 +23,32 @@ namespace PersonalFinanceMVC.Models
         }
         internal BudgetsVM CreateBudgetsVM()
         {
-
             // Map budgets to BudgetItemVM objects
-            var budgetItems = context.Budgets
-               .Where(b => b.ApplicationUserId == userId)
-               .Select(b => new BudgetsVM.BudgetItemVM
-               {
-                   Id = b.Id,
-                   Name = b.Name,
-                   TotalAmount = b.Expenses.Where(e => e.IsActive).Sum(e => e.Money)
-               })
+            var budgetItems = GetUserBudgets().Select(b => new BudgetsVM.BudgetItemVM
+            {
+                Id = b.Id,
+                Name = b.Name,
+                TotalAmount = b.Expenses.Where(e => e.IsActive).Sum(e => e.Money)
+            })
             .ToArray();
 
             // Create the BudgetsVM, set its properties and return it from the method
-            return new BudgetsVM
-            {
-                Budgets = budgetItems,
-            };
+            return new BudgetsVM { Budgets = budgetItems };
         }
+
 
         internal BudgetDetailsVM CreateBudgetDetailsVM(int id)
         {
-            var budgetToReturn = context.Budgets
-                .Where(b => b.Id == id)
-                .FirstOrDefault();
+            // Fetch budget
+            var budgetToReturn = GetBudgetById(id);
 
-            var expenses = context.Expenses
-                .Where(e => e.BudgetId == budgetToReturn.Id)
-                .ToList();
+            // Fetch budget expenses
+            var expenses = GetExpenses(budgetToReturn);
 
+            // TODO: Continue cleanup here. Maybe make a category class and a many to many relation to expenses in the DB?
             var categories = new[] { "Housing", "Transportation", "Food", "Utilities", "Health and Fitness", "Entertainment", "Personal Care", "Education", "Savings", "Others", "Uncategorized" };
-            double[] categoryAmounts = new double[11];
+            double[] categoryAmounts = new double[categories.Count()];
+            
 
             foreach (var expense in expenses)
             {
@@ -247,5 +242,9 @@ namespace PersonalFinanceMVC.Models
 
             return name;
         }
+        private List<Expense> GetExpenses(Budget budgetToReturn) =>context.Expenses.Where(e => e.BudgetId == budgetToReturn.Id).ToList();
+        private Budget GetBudgetById(int id) => context.Budgets.Where(b => b.Id == id).FirstOrDefault();
+        private IQueryable<Budget> GetUserBudgets() => context.Budgets.Where(b => b.ApplicationUserId == userId);
+        
     }
 }
