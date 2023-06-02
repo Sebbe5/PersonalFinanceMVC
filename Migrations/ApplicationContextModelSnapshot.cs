@@ -241,7 +241,7 @@ namespace PersonalFinanceMVC.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Budgets");
+                    b.ToTable("Budgets", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Expense", b =>
@@ -271,7 +271,7 @@ namespace PersonalFinanceMVC.Migrations
 
                     b.HasIndex("BudgetId");
 
-                    b.ToTable("Expenses");
+                    b.ToTable("Expenses", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Investment", b =>
@@ -308,7 +308,7 @@ namespace PersonalFinanceMVC.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Investments");
+                    b.ToTable("Investments", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinanceMVC.Models.Entities.Todo", b =>
@@ -334,9 +334,6 @@ namespace PersonalFinanceMVC.Migrations
                     b.Property<DateTime>("Deadline")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsToday")
                         .HasColumnType("bit");
 
@@ -353,7 +350,7 @@ namespace PersonalFinanceMVC.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Todos");
+                    b.ToTable("Todos", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
