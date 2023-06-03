@@ -21,6 +21,7 @@ namespace PersonalFinanceMVC.Models
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
 
+        // TODO: Continue clean up here
         internal _PredictionCalculatorVM Update_PredictionCalculatorVM(_PredictionCalculatorVM vm)
         {
             // Set necessary values
