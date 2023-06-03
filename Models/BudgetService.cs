@@ -35,8 +35,6 @@ namespace PersonalFinanceMVC.Models
             // Create the BudgetsVM, set its properties and return it from the method
             return new BudgetsVM { Budgets = budgetItems };
         }
-
-
         internal BudgetDetailsVM CreateBudgetDetailsVM(int id)
         {
             // Fetch budget
@@ -45,55 +43,14 @@ namespace PersonalFinanceMVC.Models
             // Fetch budget expenses
             var expenses = GetExpenses(budgetToReturn);
 
-            // TODO: Continue cleanup here. Maybe make a category class and a many to many relation to expenses in the DB?
+            // Create categories (create model for this in the future)
             var categories = new[] { "Housing", "Transportation", "Food", "Utilities", "Health and Fitness", "Entertainment", "Personal Care", "Education", "Savings", "Others", "Uncategorized" };
             double[] categoryAmounts = new double[categories.Count()];
-            
 
-            foreach (var expense in expenses)
-            {
-                if (expense.IsActive)
-                {
-                    switch (expense.Category)
-                    {
-                        case "Housing":
-                            categoryAmounts[0] += expense.Money;
-                            break;
-                        case "Transportation":
-                            categoryAmounts[1] += expense.Money;
-                            break;
-                        case "Food":
-                            categoryAmounts[2] += expense.Money;
-                            break;
-                        case "Utilities":
-                            categoryAmounts[3] += expense.Money;
-                            break;
-                        case "Health and Fitness":
-                            categoryAmounts[4] += expense.Money;
-                            break;
-                        case "Entertainment":
-                            categoryAmounts[5] += expense.Money;
-                            break;
-                        case "Personal Care":
-                            categoryAmounts[6] += expense.Money;
-                            break;
-                        case "Education":
-                            categoryAmounts[7] += expense.Money;
-                            break;
-                        case "Savings":
-                            categoryAmounts[8] += expense.Money;
-                            break;
-                        case "Others":
-                            categoryAmounts[9] += expense.Money;
-                            break;
-                        default:
-                            categoryAmounts[10] += expense.Money;
-                            break;
-                    }
-                }
+            // Sort and sum expenses in categories
+            SortAndSumExpenses(expenses, categoryAmounts);
 
-            }
-
+            // Return view model
             return new BudgetDetailsVM
             {
                 Id = budgetToReturn.Id,
@@ -109,12 +66,10 @@ namespace PersonalFinanceMVC.Models
                 Categories = categories,
                 CategoryAmounts = categoryAmounts
             };
-
         }
-
         internal EditBudgetVM CreateEditBudgetVM(int id)
         {
-
+            // Return view model from budget table included with expense table
             return context.Budgets.Include(b => b.Expenses.Where(e => e.BudgetId == b.Id))
                 .Where(b => b.Id == id)
                 .Select(b => new EditBudgetVM
@@ -131,10 +86,10 @@ namespace PersonalFinanceMVC.Models
                 })
                 .SingleOrDefault();
         }
-
         internal void AddBudgetToDB(CreateBudgetVM vm)
         {
-            string name = CheckIfNameExist(vm.Name);
+            // Check if name exists
+            string name = AlterNonUniqueName(vm.Name);
 
             // Create an instance of a budget and set its values
             Budget newBudget = new Budget() { Name = name, ApplicationUserId = userId };
@@ -164,24 +119,71 @@ namespace PersonalFinanceMVC.Models
             // Save the changes and store in the database
             context.SaveChanges();
         }
-
         internal void EditBudget(EditBudgetVM vm, int id)
         {
             // Retrieve the budget to be edited
             var budgetToEdit = context.Budgets.Include(b => b.Expenses).SingleOrDefault(b => b.Id == id);
 
             // Update name of budget
-            budgetToEdit.Name = budgetToEdit.Name == vm.Name ? budgetToEdit.Name : CheckIfNameExist(vm.Name);
+            budgetToEdit.Name = budgetToEdit.Name == vm.Name ? budgetToEdit.Name : AlterNonUniqueName(vm.Name);
 
             // Clear all expenses since it's hard to track if some expenses where deleted from the list
             budgetToEdit.Expenses.Clear();
 
-            // Check if there are any expenses in the view model list
+            // Fetch the names of all existing expenses of the budget to be edited
             var existingExpenses = new HashSet<string>(budgetToEdit.Expenses.Select(e => e.Name));
+
+            ValidateExpense(vm, id, budgetToEdit, existingExpenses);
+
+            // Save DB changes
+            context.SaveChanges();
+        }
+        internal void RemoveBudget(int id)
+        {
+            // Remove the budget and all its related expenses
+            context.Budgets.Remove(context.Budgets.SingleOrDefault(b => b.Id == id));
+
+            // Save changes to DB
+            context.SaveChanges();
+        }
+        private string AlterNonUniqueName(string name)
+        {
+            // Get the names of all budgets
+            HashSet<string> budgetNames = new HashSet<string>(context.Budgets.Select(b => b.Name), StringComparer.OrdinalIgnoreCase);
+
+            // Check if name already exist
+            bool isExisting = budgetNames.Contains(name);
+
+            // Declaring the number that will be appended to the name if the name already exists
+            int NumberToAppend = 2;
+
+            // Loop until the name does not exist
+            while (isExisting)
+            {
+                // If the loop have passed the first iteration, remove the last char, other wise don't
+                if (NumberToAppend > 2)
+                    name = name.Substring(0, name.Length - 1) + $"{NumberToAppend}";
+                else
+                    name += $"{NumberToAppend}";
+
+                isExisting = budgetNames.Contains(name, StringComparer.OrdinalIgnoreCase);
+                NumberToAppend++;
+            }
+
+            return name;
+        }
+        private List<Expense> GetExpenses(Budget budgetToReturn) => context.Expenses.Where(e => e.BudgetId == budgetToReturn.Id).ToList();
+        private Budget GetBudgetById(int id) => context.Budgets.Where(b => b.Id == id).FirstOrDefault();
+        private IQueryable<Budget> GetUserBudgets() => context.Budgets.Where(b => b.ApplicationUserId == userId);
+        private void ValidateExpense(EditBudgetVM vm, int id, Budget budgetToEdit, HashSet<string> existingExpenses)
+        {
+            // Check if there are any expenses in the view model list
             if (vm.Expenses != null)
             {
+                // Loop through each expense in the view model
                 foreach (var expenseItemVM in vm.Expenses)
                 {
+                    // Check if the name of an expense exists and that the amount of the expense is not 0
                     if (expenseItemVM.Name != null && expenseItemVM.Amount != 0)
                     {
                         // Check if expense already exists
@@ -193,6 +195,7 @@ namespace PersonalFinanceMVC.Models
                         }
                         else
                         {
+                            // If expense does not exist, add to DB
                             context.Expenses.Add(new Expense
                             {
                                 Name = expenseItemVM.Name,
@@ -201,50 +204,44 @@ namespace PersonalFinanceMVC.Models
                                 IsActive = expenseItemVM.IsActive,
                                 BudgetId = id,
                             });
+
+                            // Add expense to DB table
                             existingExpenses.Add(expenseItemVM.Name);
                         }
                     }
                 }
             }
-
-            context.SaveChanges();
         }
-
-        internal void RemoveBudget(int id)
+        private static void SortAndSumExpenses(List<Expense> expenses, double[] categoryAmounts)
         {
-            // Remove the budget and all its related expenses
-            context.Budgets.Remove(context.Budgets.SingleOrDefault(b => b.Id == id));
-            context.SaveChanges();
-        }
-
-        private string CheckIfNameExist(string name)
-        {
-            // Get the names of all budgets
-            HashSet<string> budgetNames = new HashSet<string>(context.Budgets.Select(b => b.Name), StringComparer.OrdinalIgnoreCase);
-
-            // Check if name already exist
-            bool isExisting = budgetNames.Contains(name);
-
-            int counter = 2;
-
-            // Loop until the name does not exist
-            while (isExisting)
+            Dictionary<string, int> categoryIndices = new Dictionary<string, int>()
             {
-                // If the loop have passed the first iteration, remove the last char, other wise don't
-                if (counter > 2)
-                    name = name.Substring(0, name.Length - 1) + $"{counter}";
-                else
-                    name += $"{counter}";
+                { "Housing", 0 },
+                { "Transportation", 1 },
+                { "Food", 2 },
+                { "Utilities", 3 },
+                { "Health and Fitness", 4 },
+                { "Entertainment", 5 },
+                { "Personal Care", 6 },
+                { "Education", 7 },
+                { "Savings", 8 },
+                { "Others", 9 }
+            };
 
-                isExisting = budgetNames.Contains(name, StringComparer.OrdinalIgnoreCase);
-                counter++;
+            foreach (var expense in expenses)
+            {
+                if (expense.IsActive)
+                {
+                    if (categoryIndices.TryGetValue(expense.Category, out int categoryIndex))
+                    {
+                        categoryAmounts[categoryIndex] += expense.Money;
+                    }
+                    else
+                    {
+                        categoryAmounts[10] += expense.Money;
+                    }
+                }
             }
-
-            return name;
         }
-        private List<Expense> GetExpenses(Budget budgetToReturn) =>context.Expenses.Where(e => e.BudgetId == budgetToReturn.Id).ToList();
-        private Budget GetBudgetById(int id) => context.Budgets.Where(b => b.Id == id).FirstOrDefault();
-        private IQueryable<Budget> GetUserBudgets() => context.Budgets.Where(b => b.ApplicationUserId == userId);
-        
     }
 }
