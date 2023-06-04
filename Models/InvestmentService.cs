@@ -22,6 +22,7 @@ namespace PersonalFinanceMVC.Models
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
 
+        // TODO: Continue clean up here
         internal InvestmentsVM CreateInvestmentsVM()
         {
             var investments = context.Investments
