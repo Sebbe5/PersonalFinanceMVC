@@ -21,30 +21,25 @@ namespace PersonalFinanceMVC.Models
             this.userManager = userManager;
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
-
-        // TODO: Continue clean up here
         internal InvestmentsVM CreateInvestmentsVM()
         {
-            var investments = GetUserInvestments().Select(i => new InvestmentsVM.InvestmentItemVM
-            {
-                Id = i.Id,
-                Name = i.Name,
-                Value = i.Value,
-            })
+            // Fetch user investments and convert them to an InvestmentItemVM
+            var investments = GetUserInvestments()
+                .Select(i => new InvestmentsVM.InvestmentItemVM
+                {
+                    Id = i.Id,
+                    Name = i.Name,
+                    Value = i.Value,
+                })
                 .ToList();
 
+            // Return view model
             return new InvestmentsVM
             {
                 Investments = investments
             };
         }
-
-        private IQueryable<Investment> GetUserInvestments()
-        {
-            return context.Investments
-                            .Where(i => i.ApplicationUserId == userId);
-        }
-
+        // TODO: Continue clean up here
         internal void AddInvestmentDB(CreateInvestmentVM vm)
         {
             Investment newInvestment = new Investment
@@ -155,5 +150,6 @@ namespace PersonalFinanceMVC.Models
             context.Investments.Remove(context.Investments.SingleOrDefault(i => i.Id == id));
             context.SaveChanges();
         }
+        private IQueryable<Investment> GetUserInvestments() => context.Investments.Where(i => i.ApplicationUserId == userId);
     }
 }
