@@ -25,20 +25,24 @@ namespace PersonalFinanceMVC.Models
         // TODO: Continue clean up here
         internal InvestmentsVM CreateInvestmentsVM()
         {
-            var investments = context.Investments
-                .Where(i => i.ApplicationUserId == userId)
-                .Select(i => new InvestmentsVM.InvestmentItemVM
-                {
-                    Id = i.Id,
-                    Name = i.Name,
-                    Value = i.Value,
-                })
+            var investments = GetUserInvestments().Select(i => new InvestmentsVM.InvestmentItemVM
+            {
+                Id = i.Id,
+                Name = i.Name,
+                Value = i.Value,
+            })
                 .ToList();
 
             return new InvestmentsVM
             {
                 Investments = investments
             };
+        }
+
+        private IQueryable<Investment> GetUserInvestments()
+        {
+            return context.Investments
+                            .Where(i => i.ApplicationUserId == userId);
         }
 
         internal void AddInvestmentDB(CreateInvestmentVM vm)
