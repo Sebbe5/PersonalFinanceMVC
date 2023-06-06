@@ -23,7 +23,7 @@ namespace PersonalFinanceMVC.Models
             this.userManager = userManager;
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
-
+        // TODO: Continue clean up here
         internal TodoListVM CreateTodoListVM()
         {
             var todos = context.Todos
