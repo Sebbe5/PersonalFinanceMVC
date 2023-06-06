@@ -39,9 +39,9 @@ namespace PersonalFinanceMVC.Models
                 Investments = investments
             };
         }
-        // TODO: Continue clean up here
         internal void AddInvestmentDB(CreateInvestmentVM vm)
         {
+            // Create new investment
             Investment newInvestment = new Investment
             {
                 Name = CheckIfNameExist(vm.Name),
@@ -53,11 +53,77 @@ namespace PersonalFinanceMVC.Models
                 ApplicationUserId = userId,
             };
 
+            // Add investment to DB list of investments
             context.Investments.Add(newInvestment);
+
+            // Save changes to DB
+            context.SaveChanges();
+        }
+        internal InvestmentDetailsVM CreateInvestmentDetailsVM(int id)
+        {
+            var investment = GetUserInvestments()
+                .Select(i => new InvestmentDetailsVM
+                {
+                    Id = id,
+                    Name = i.Name,
+                    InitialValue = i.InitialValue,
+                    RecurringDeposit = i.RecurringDeposit,
+                    ExpectedAnnualInterest = i.ExpectedAnnualInterest,
+                    ExpectedYearsInvested = i.ExpectedYearsInvested,
+                })
+                .FirstOrDefault();
+
+            double totalContribution = investment.InitialValue;
+            double totalInterest = 0;
+            CreateInvestmentPredictionList(investment, ref totalContribution, ref totalInterest);
+            return investment;
+        }
+        internal EditInvestmentVM CreateEditInvestmentVM(int id)
+        {
+            return GetUserInvestments()
+                .Select(i => new EditInvestmentVM
+                {
+                    Name = i.Name,
+                    InitialValue = i.InitialValue,
+                    MonthlyContribution = i.RecurringDeposit,
+                    AnnualInterest = (double)i.ExpectedAnnualInterest,
+                    ExpectedYearsInvested = i.ExpectedYearsInvested
+                })
+                .FirstOrDefault();
+        }
+        internal void EditInvestment(EditInvestmentVM vm, int id)
+        {
+            var investmentToEdit = context.Investments.SingleOrDefault(i => i.Id == id);
+
+            investmentToEdit.Name = investmentToEdit.Name == vm.Name ? investmentToEdit.Name : CheckIfNameExist(vm.Name);
+            investmentToEdit.InitialValue = vm.InitialValue;
+            investmentToEdit.RecurringDeposit = vm.MonthlyContribution;
+            investmentToEdit.ExpectedAnnualInterest = (decimal)vm.AnnualInterest;
+            investmentToEdit.ExpectedYearsInvested = vm.ExpectedYearsInvested;
 
             context.SaveChanges();
         }
+        internal void RemoveInvestment(int id)
+        {
+            context.Investments.Remove(context.Investments.SingleOrDefault(i => i.Id == id));
+            context.SaveChanges();
+        }
+        private IQueryable<Investment> GetUserInvestments() => context.Investments.Where(i => i.ApplicationUserId == userId);
+        private static void CreateInvestmentPredictionList(InvestmentDetailsVM investment, ref double totalContribution, ref double totalInterest)
+        {
+            for (int i = 0; i < investment.ExpectedYearsInvested; i++)
+            {
+                investment.YearLabels.Add("Year " + (i + 1).ToString());
 
+                totalInterest += (totalInterest + totalContribution) * (double)(investment.ExpectedAnnualInterest / 100);
+                investment.Profits.Add(totalInterest);
+
+                totalContribution += investment.RecurringDeposit * 12;
+                investment.Contributions.Add(totalContribution);
+
+                investment.TotalAmounts.Add(totalContribution + totalInterest);
+            }
+        }
         private string CheckIfNameExist(string name)
         {
             // Get the names of all budgets
@@ -83,73 +149,5 @@ namespace PersonalFinanceMVC.Models
 
             return name;
         }
-
-        internal InvestmentDetailsVM CreateInvestmentDetailsVM(int id)
-        {
-            var investment = context.Investments
-                .Where(b => b.Id == id)
-                .Select(i => new InvestmentDetailsVM
-                {
-                    Id = id,
-                    Name = i.Name,
-                    InitialValue = i.InitialValue,
-                    RecurringDeposit = i.RecurringDeposit,
-                    ExpectedAnnualInterest = i.ExpectedAnnualInterest,
-                    ExpectedYearsInvested = i.ExpectedYearsInvested,
-                })
-                .FirstOrDefault();
-
-            double totalContribution = investment.InitialValue;
-            double totalInterest = 0;
-
-            for (int i = 0; i < investment.ExpectedYearsInvested; i++)
-            {
-                investment.YearLabels.Add("Year " + (i + 1).ToString());
-
-                totalInterest += (totalInterest + totalContribution) * (double)(investment.ExpectedAnnualInterest / 100);
-                investment.Profits.Add(totalInterest);
-
-                totalContribution += investment.RecurringDeposit * 12;
-                investment.Contributions.Add(totalContribution);
-
-                investment.TotalAmounts.Add(totalContribution + totalInterest);
-            }
-            return investment;
-        }
-
-        internal EditInvestmentVM CreateEditInvestmentVM(int id)
-        {
-            return context.Investments
-                .Where(i => i.Id == id)
-                .Select(i => new EditInvestmentVM
-                {
-                    Name = i.Name,
-                    InitialValue = i.InitialValue,
-                    MonthlyContribution = i.RecurringDeposit,
-                    AnnualInterest = (double)i.ExpectedAnnualInterest,
-                    ExpectedYearsInvested = i.ExpectedYearsInvested
-                })
-                .FirstOrDefault();
-        }
-
-        internal void EditInvestment(EditInvestmentVM vm, int id)
-        {
-            var investmentToEdit = context.Investments.SingleOrDefault(i => i.Id == id);
-
-            investmentToEdit.Name = investmentToEdit.Name == vm.Name ? investmentToEdit.Name : CheckIfNameExist(vm.Name);
-            investmentToEdit.InitialValue = vm.InitialValue;
-            investmentToEdit.RecurringDeposit = vm.MonthlyContribution;
-            investmentToEdit.ExpectedAnnualInterest = (decimal)vm.AnnualInterest;
-            investmentToEdit.ExpectedYearsInvested = vm.ExpectedYearsInvested;
-
-            context.SaveChanges();
-        }
-
-        internal void RemoveInvestment(int id)
-        {
-            context.Investments.Remove(context.Investments.SingleOrDefault(i => i.Id == id));
-            context.SaveChanges();
-        }
-        private IQueryable<Investment> GetUserInvestments() => context.Investments.Where(i => i.ApplicationUserId == userId);
     }
 }
