@@ -5,6 +5,7 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Controllers
 {
+    // TODO: Go through all services and views and comment the code
     [Authorize]
     public class BudgetController : Controller
     {
