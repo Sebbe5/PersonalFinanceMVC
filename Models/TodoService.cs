@@ -23,101 +23,52 @@ namespace PersonalFinanceMVC.Models
             this.userManager = userManager;
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
-        // TODO: Continue clean up here
         internal TodoListVM CreateTodoListVM()
         {
-            var todos = context.Todos
-                .Where(t => t.ApplicationUserId == userId);
+            var todos = GetUserTodos();
 
-            var todoItems = todos
-                .Where(t => t.Status == Status.ToDo & !t.IsToday)
-                .Select(t => new TodoListVM.TodoItemVM
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Deadline = t.Deadline,
-                    Category = t.Category,
-                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status,
-                    ShowDeadline = t.NeedDeadline
-                })
-                .ToList();
-            
-            var todoItemsToday = todos
-                .Where(t => t.Status == Status.ToDo & t.IsToday)
-                .Select(t => new TodoListVM.TodoItemVM
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Deadline = t.Deadline,
-                    Category = t.Category,
-                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status,
-                    ShowDeadline = t.NeedDeadline
+            var todoItems = GetFilteredTodos(todos, t => t.Status == Status.ToDo && !t.IsToday);
+            var todoItemsToday = GetFilteredTodos(todos, t => t.Status == Status.ToDo & t.IsToday);
+            var inProgressItems = GetFilteredTodos(todos, t => t.Status == Status.InProgress & !t.IsToday);
+            var inProgressItemsToday = GetFilteredTodos(todos, t => t.Status == Status.InProgress & t.IsToday);
+            var doneItems = GetFilteredTodos(todos, t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 3);
+            var doneItemsToday = GetFilteredTodos(todos, t => t.Status == Status.Done & t.IsToday);
 
-                })
-                .ToList();
+            UpdateDaysInDone(doneItems);
 
-            var inProgressItems = todos
-                .Where(t => t.Status == Status.InProgress & !t.IsToday)
-                .Select(t => new TodoListVM.TodoItemVM
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Deadline = t.Deadline,
-                    Category = t.Category,
-                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status,
-                    ShowDeadline = t.NeedDeadline
+            var sortedTodoItems = SortTodoItems(todoItems);
 
-                })
-                .ToList();
+            return new TodoListVM
+            {
+                Todos = sortedTodoItems,
+                InProgress = inProgressItems,
+                Done = doneItems,
+                TodosToday = todoItemsToday,
+                InProgressToday = inProgressItemsToday,
+                DoneToday = doneItemsToday,
+            };
+        }
 
-            var inProgressItemsToday = todos
-                .Where(t => t.Status == Status.InProgress & t.IsToday)
-                .Select(t => new TodoListVM.TodoItemVM
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Deadline = t.Deadline,
-                    Category = t.Category,
-                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status,
-                    ShowDeadline = t.NeedDeadline
+        private List<TodoListVM.TodoItemVM> SortTodoItems(List<TodoListVM.TodoItemVM> todoItems)
+        {
+            var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
+            switch (userPrefOrder)
+            {
+                case TodoSortOrder.AscendingName:
+                    return todoItems.OrderBy(t => t.Name).ToList();
+                case TodoSortOrder.DescendingName:
+                    return todoItems.OrderByDescending(t => t.Name).ToList();
+                case TodoSortOrder.AscendingDate:
+                    return todoItems.OrderBy(t => t.Deadline).ToList();
+                case TodoSortOrder.DescendingDate:
+                    return todoItems.OrderByDescending(t => t.Deadline).ToList();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(userPrefOrder), userPrefOrder, null);
+            }
+        }
 
-                })
-                .ToList();
-
-            var doneItems = todos
-                .Where(t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 3)
-                .Select(t => new TodoListVM.TodoItemVM
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Deadline = t.Deadline,
-                    Category = t.Category,
-                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status,
-                    ShowDeadline = t.NeedDeadline
-
-                })
-                .ToList();
-
-            var doneItemsToday = todos
-                .Where(t => t.Status == Status.Done & t.IsToday)
-                .Select(t => new TodoListVM.TodoItemVM
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Deadline = t.Deadline,
-                    Category = t.Category,
-                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
-                    Status = (int)t.Status,
-                    ShowDeadline = t.NeedDeadline
-
-                })
-                .ToList();
-
+        private void UpdateDaysInDone(List<TodoListVM.TodoItemVM> doneItems)
+        {
             // Update DaysInDone property for relevant Todos
             foreach (var doneItem in doneItems)
             {
@@ -128,36 +79,29 @@ namespace PersonalFinanceMVC.Models
                     context.SaveChanges();
                 }
             }
+        }
 
+        private static List<TodoListVM.TodoItemVM> GetFilteredTodos(IQueryable<Todo> todos, Func<Todo, bool> filter)
+        {
+            return todos
+                .Where(filter)
+                .Select(t => new TodoListVM.TodoItemVM
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Deadline = t.Deadline,
+                    Category = t.Category,
+                    DaysToDeadline = (t.Deadline - DateTime.Now).TotalDays,
+                    Status = (int)t.Status,
+                    ShowDeadline = t.NeedDeadline
+                })
+                .ToList();
+        }
 
-            var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
-            switch (userPrefOrder)
-            {
-                case TodoSortOrder.AscendingName:
-                    todoItems = todoItems.OrderBy(t => t.Name).ToList();
-                    break;
-                case TodoSortOrder.DescendingName:
-                    todoItems = todoItems.OrderByDescending(t => t.Name).ToList();
-                    break;
-                case TodoSortOrder.AscendingDate:
-                    todoItems = todoItems.OrderBy(t => t.Deadline).ToList();
-                    break;
-                case TodoSortOrder.DescendingDate:
-                    todoItems = todoItems.OrderByDescending(t => t.Deadline).ToList();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(userPrefOrder), userPrefOrder, null);
-            }
-
-            return new TodoListVM
-            {
-                Todos = todoItems,
-                InProgress = inProgressItems,
-                Done = doneItems,
-                TodosToday = todoItemsToday,
-                InProgressToday = inProgressItemsToday,
-                DoneToday = doneItemsToday,
-            };
+        private IQueryable<Todo> GetUserTodos()
+        {
+            return context.Todos
+                            .Where(t => t.ApplicationUserId == userId);
         }
 
         internal string AddTodo(TodoListVM vm)
