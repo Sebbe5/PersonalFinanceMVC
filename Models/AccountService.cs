@@ -48,6 +48,7 @@ namespace PersonalFinanceMVC.Models
 
         public async Task<string> TryRegisterAsync(RegisterVM viewModel)
         {
+            // TODO: Start commenting here
             var user = new ApplicationUser
             {
                 UserName = viewModel.Username,
