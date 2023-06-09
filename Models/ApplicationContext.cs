@@ -8,6 +8,7 @@ namespace PersonalFinanceMVC.Models
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
+        // TODO: Continue commenting here
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
         public DbSet<Budget> Budgets { get; set; }
