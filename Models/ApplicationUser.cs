@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalFinanceMVC.Models
 {
+    // TODO: COntinue commenting here
     public class ApplicationUser : IdentityUser
     {
         public List<Budget> Budgets { get; set; }
