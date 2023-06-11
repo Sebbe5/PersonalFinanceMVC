@@ -7,6 +7,8 @@ namespace PersonalFinanceMVC.Models
 {
     public class BudgetService
     {
+        // TODO: Continue commenting here
+
         UserManager<ApplicationUser> userManager;
         readonly string userId;
 
