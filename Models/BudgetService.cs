@@ -7,8 +7,6 @@ namespace PersonalFinanceMVC.Models
 {
     public class BudgetService
     {
-        // TODO: Continue commenting here
-
         UserManager<ApplicationUser> userManager;
         readonly string userId;
 
@@ -168,6 +166,8 @@ namespace PersonalFinanceMVC.Models
                 else
                     name += $"{NumberToAppend}";
 
+                // Check if the 'name' variable exists in the 'budgetNames' collection
+                // using a case-insensitive comparison
                 isExisting = budgetNames.Contains(name, StringComparer.OrdinalIgnoreCase);
                 NumberToAppend++;
             }
@@ -216,6 +216,7 @@ namespace PersonalFinanceMVC.Models
         }
         private static void SortAndSumExpenses(List<Expense> expenses, double[] categoryAmounts)
         {
+            // TODO: Continue commenting here
             Dictionary<string, int> categoryIndices = new Dictionary<string, int>()
             {
                 { "Housing", 0 },
