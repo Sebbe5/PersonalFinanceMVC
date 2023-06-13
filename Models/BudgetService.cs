@@ -216,7 +216,7 @@ namespace PersonalFinanceMVC.Models
         }
         private static void SortAndSumExpenses(List<Expense> expenses, double[] categoryAmounts)
         {
-            // TODO: Continue commenting here
+            // Define a dictionary to map category names to their corresponding index in the categoryAmounts array
             Dictionary<string, int> categoryIndices = new Dictionary<string, int>()
             {
                 { "Housing", 0 },
@@ -231,20 +231,26 @@ namespace PersonalFinanceMVC.Models
                 { "Others", 9 }
             };
 
+            // Iterate over each expense
             foreach (var expense in expenses)
             {
+                // Check if the expense is active
                 if (expense.IsActive)
                 {
+                    // Check if the category exists in the categoryIndices dictionary
                     if (categoryIndices.TryGetValue(expense.Category, out int categoryIndex))
                     {
+                        // If the category exists, increment the corresponding categoryAmounts index
                         categoryAmounts[categoryIndex] += expense.Money;
                     }
                     else
                     {
+                        // If the category doesn't exist in the dictionary, increment the "Others" category at index 10
                         categoryAmounts[10] += expense.Money;
                     }
                 }
             }
         }
+
     }
 }
