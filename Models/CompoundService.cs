@@ -21,18 +21,20 @@ namespace PersonalFinanceMVC.Models
             userId = userManager.GetUserId(accessor.HttpContext.User);
         }
 
-        // TODO: Fortsätt kommentera här
         internal _PredictionCalculatorVM Update_PredictionCalculatorVM(_PredictionCalculatorVM vm)
         {
             // Set necessary values
-            decimal principal = vm.Principal;
-            decimal monthlyContributions = vm.MonthlyContribution;
-            decimal interestRate = vm.Rate / 100;
-            decimal totalContribution = principal;
-            decimal totalInterest = 0;
+            decimal principal = vm.Principal; // Starting value
+            decimal monthlyContributions = vm.MonthlyContribution; // Monthly contribution
+            decimal interestRate = vm.Rate / 100; // Expected interest rate
+            decimal totalContribution = principal; // Total Contribution
+            decimal totalInterest = 0; // Total Interest
+
+            // Fill the results list of the VM
             FillResults(vm, monthlyContributions, interestRate, ref totalContribution, ref totalInterest);
             return vm;
         }
+        // TODO: Continue commenting here
         internal _GoalCalculatorVM Update_GoalCalculatorVM(_GoalCalculatorVM vm)
         {
             var a = vm.Goal;
