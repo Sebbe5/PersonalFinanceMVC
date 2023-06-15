@@ -34,14 +34,13 @@ namespace PersonalFinanceMVC.Models
             FillResults(vm, monthlyContributions, interestRate, ref totalContribution, ref totalInterest);
             return vm;
         }
-        // TODO: Continue commenting here
         internal _GoalCalculatorVM Update_GoalCalculatorVM(_GoalCalculatorVM vm)
         {
-            var a = vm.Goal;
-            var p = vm.Principal;
-            var r = vm.Rate / 100;
-            var t = vm.Years;
-            var n = 12;
+            var a = vm.Goal; // Goal amount on investment
+            var p = vm.Principal; // Starting amount of investment
+            var r = vm.Rate / 100; //Expected interest rate
+            var t = vm.Years; // Amount of years to invest
+            var n = 12; // Amount of iterations (equal to the amount of months in a year)
 
             decimal epsilon = 0.01m; // Toleransnivå för approximation
             decimal lowerBound = 0; // Nedre gräns för insättningsbeloppet
@@ -60,6 +59,7 @@ namespace PersonalFinanceMVC.Models
         }
         public static decimal CalculateFutureValue(decimal P, decimal r, int t, int n, decimal PMT)
         {
+            // TODO: Continue commenting here
             decimal futureValue = P * (decimal)Math.Pow(1 + (double)(r / n), n * t);
 
             for (int i = 1; i <= t * n; i++)
