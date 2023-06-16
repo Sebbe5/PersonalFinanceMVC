@@ -59,9 +59,9 @@ namespace PersonalFinanceMVC.Models
         }
         public static decimal CalculateFutureValue(decimal P, decimal r, int t, int n, decimal PMT)
         {
-            // TODO: Continue commenting here
+            // Calculate future value formula
             decimal futureValue = P * (decimal)Math.Pow(1 + (double)(r / n), n * t);
-
+            // TODO: Continue commenting here
             for (int i = 1; i <= t * n; i++)
             {
                 futureValue += PMT * (decimal)Math.Pow(1 + (double)(r / n), n * t - i);
