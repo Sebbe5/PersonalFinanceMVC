@@ -36,15 +36,15 @@ namespace PersonalFinanceMVC.Models
         }
         internal _GoalCalculatorVM Update_GoalCalculatorVM(_GoalCalculatorVM vm)
         {
-            var a = vm.Goal; // Goal amount on investment
-            var p = vm.Principal; // Starting amount of investment
-            var r = vm.Rate / 100; //Expected interest rate
-            var t = vm.Years; // Amount of years to invest
+            var goal = vm.Goal; // Goal amount on investment
+            var principal = vm.Principal; // Starting amount of investment
+            var intertestRate = vm.Rate / 100; //Expected interest rate
+            var years = vm.Years; // Amount of years to invest
             var n = 12; // Amount of iterations (equal to the amount of months in a year)
 
             decimal epsilon = 0.01m; // Toleransnivå för approximation
             decimal lowerBound = 0; // Nedre gräns för insättningsbeloppet
-            decimal upperBound = a; // Övre gräns för insättningsbeloppet
+            decimal upperBound = goal; // Övre gräns för insättningsbeloppet
             decimal PMT = 0;
 
             int maxIterations = 1000; // Maximal antal iterationer
@@ -52,7 +52,7 @@ namespace PersonalFinanceMVC.Models
 
             int iterations = 0; // Räknare för antal iterationer
 
-            BisectionMethod(a, p, r, t, n, epsilon, ref lowerBound, ref upperBound, ref PMT, maxIterations, maxDifference, ref iterations);
+            BisectionMethod(goal, principal, intertestRate, years, n, epsilon, ref lowerBound, ref upperBound, ref PMT, maxIterations, maxDifference, ref iterations);
 
             vm.MonthlyContribution = PMT;
             return vm;
