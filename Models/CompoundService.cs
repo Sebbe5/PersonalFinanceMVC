@@ -61,7 +61,8 @@ namespace PersonalFinanceMVC.Models
         {
             // Calculate future value formula
             decimal futureValue = P * (decimal)Math.Pow(1 + (double)(r / n), n * t);
-            // TODO: Continue commenting here
+
+            // Loop Through future values
             for (int i = 1; i <= t * n; i++)
             {
                 futureValue += PMT * (decimal)Math.Pow(1 + (double)(r / n), n * t - i);
@@ -107,6 +108,7 @@ namespace PersonalFinanceMVC.Models
             // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < vm.Years; i++)
             {
+                // TODO: Continue commenting here
                 var result = new _PredictionCalculatorVM.CompoundInterestResult();
 
                 // Set year and principal
