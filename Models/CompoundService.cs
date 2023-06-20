@@ -108,12 +108,13 @@ namespace PersonalFinanceMVC.Models
             // Fill the Results collection in the view model with the calculated results
             for (int i = 0; i < vm.Years; i++)
             {
-                // TODO: Continue commenting here
+                // Create an instance of CompoundInterestResults
                 var result = new _PredictionCalculatorVM.CompoundInterestResult();
 
                 // Set year and principal
                 result.Year = i + 1;
 
+                // TODO: Continue commenting here
                 decimal interest = (totalContribution + totalInterest) * interestRate;
                 result.Interest = interest;
                 totalInterest += interest;
