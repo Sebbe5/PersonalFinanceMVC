@@ -114,16 +114,25 @@ namespace PersonalFinanceMVC.Models
                 // Set year and principal
                 result.Year = i + 1;
 
-                // TODO: Continue commenting here
+                // Calculate interest for the current year in loop
                 decimal interest = (totalContribution + totalInterest) * interestRate;
-                result.Interest = interest;
-                totalInterest += interest;
 
+                // Add interest to the result instance
+                result.Interest = interest;
+
+                // Add on to the total interest
+                totalInterest += interest;
+                
+                // Calculate total contribution
                 totalContribution += monthlyContributions * 12;
+
+                // Add the total contribution to the result instance
                 result.Contribution = totalContribution;
 
+                // Calculate and add total amount for the result instance
                 result.Amount = totalContribution + totalInterest;
 
+                // Add the result to the list of results of the view model
                 vm.Results.Add(result);
             }
         }
