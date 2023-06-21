@@ -5,6 +5,7 @@ using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Models
 {
+    // TODO: Continue commenting here
     public class InvestmentService
     {
         UserManager<ApplicationUser> userManager;
