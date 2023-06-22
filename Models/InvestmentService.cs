@@ -5,7 +5,6 @@ using PersonalFinanceMVC.Views.Investment;
 
 namespace PersonalFinanceMVC.Models
 {
-    // TODO: Continue commenting here
     public class InvestmentService
     {
         UserManager<ApplicationUser> userManager;
@@ -62,6 +61,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal InvestmentDetailsVM CreateInvestmentDetailsVM(int id)
         {
+            // Create an instance of an investment detail
             var investment = GetUserInvestments()
                 .Select(i => new InvestmentDetailsVM
                 {
@@ -74,8 +74,13 @@ namespace PersonalFinanceMVC.Models
                 })
                 .FirstOrDefault();
 
+            // Initiate total contribution to the initial value of the investment
             double totalContribution = investment.InitialValue;
+
+            // Initiate total interest to 0
             double totalInterest = 0;
+
+            // TODO: Continue commenting here
             CreateInvestmentPredictionList(investment, ref totalContribution, ref totalInterest);
             return investment;
         }
