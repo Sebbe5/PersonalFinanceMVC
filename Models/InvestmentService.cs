@@ -80,12 +80,15 @@ namespace PersonalFinanceMVC.Models
             // Initiate total interest to 0
             double totalInterest = 0;
 
-            // TODO: Continue commenting here
+            // Create Investment prediction list
             CreateInvestmentPredictionList(investment, ref totalContribution, ref totalInterest);
+
+            // Return investment view model
             return investment;
         }
         internal EditInvestmentVM CreateEditInvestmentVM(int id)
         {
+            // TODO: Continue commenting here
             return GetUserInvestments()
                 .Select(i => new EditInvestmentVM
                 {
