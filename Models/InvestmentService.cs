@@ -88,7 +88,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal EditInvestmentVM CreateEditInvestmentVM(int id)
         {
-            // TODO: Continue commenting here
+            // Create and return an instance of an editInvestment view model
             return GetUserInvestments()
                 .Select(i => new EditInvestmentVM
                 {
@@ -102,6 +102,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditInvestment(EditInvestmentVM vm, int id)
         {
+            // TODO´: Continue commenting here
             var investmentToEdit = context.Investments.SingleOrDefault(i => i.Id == id);
 
             investmentToEdit.Name = investmentToEdit.Name == vm.Name ? investmentToEdit.Name : CheckIfNameExist(vm.Name);
