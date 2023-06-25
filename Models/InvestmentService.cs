@@ -102,19 +102,22 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditInvestment(EditInvestmentVM vm, int id)
         {
-            // TODO´: Continue commenting here
+           // Fetch the first investment to edit from the DB
             var investmentToEdit = context.Investments.SingleOrDefault(i => i.Id == id);
 
+            // Set the properties of the investment
             investmentToEdit.Name = investmentToEdit.Name == vm.Name ? investmentToEdit.Name : CheckIfNameExist(vm.Name);
             investmentToEdit.InitialValue = vm.InitialValue;
             investmentToEdit.RecurringDeposit = vm.MonthlyContribution;
             investmentToEdit.ExpectedAnnualInterest = (decimal)vm.AnnualInterest;
             investmentToEdit.ExpectedYearsInvested = vm.ExpectedYearsInvested;
 
+            // Save the changes to the DB
             context.SaveChanges();
         }
         internal void RemoveInvestment(int id)
         {
+            // TODO: Continue commenting here
             context.Investments.Remove(context.Investments.SingleOrDefault(i => i.Id == id));
             context.SaveChanges();
         }
