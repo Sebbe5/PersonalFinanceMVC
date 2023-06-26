@@ -117,13 +117,16 @@ namespace PersonalFinanceMVC.Models
         }
         internal void RemoveInvestment(int id)
         {
-            // TODO: Continue commenting here
+            // Remove the first investment from the DB with the matching id
             context.Investments.Remove(context.Investments.SingleOrDefault(i => i.Id == id));
+
+            // Save changes to DB
             context.SaveChanges();
         }
         private IQueryable<Investment> GetUserInvestments() => context.Investments.Where(i => i.ApplicationUserId == userId);
         private static void CreateInvestmentPredictionList(InvestmentDetailsVM investment, ref double totalContribution, ref double totalInterest)
         {
+            // TODO: Continue commenting here
             for (int i = 0; i < investment.ExpectedYearsInvested; i++)
             {
                 investment.YearLabels.Add("Year " + (i + 1).ToString());
