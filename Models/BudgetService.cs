@@ -5,6 +5,7 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Models
 {
+    // TODO: Add ability to check paid expenses and the reset the list with a button. Then have a summary of the amount left to pay
     public class BudgetService
     {
         UserManager<ApplicationUser> userManager;
