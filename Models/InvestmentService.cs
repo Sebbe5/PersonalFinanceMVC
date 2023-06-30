@@ -126,11 +126,13 @@ namespace PersonalFinanceMVC.Models
         private IQueryable<Investment> GetUserInvestments() => context.Investments.Where(i => i.ApplicationUserId == userId);
         private static void CreateInvestmentPredictionList(InvestmentDetailsVM investment, ref double totalContribution, ref double totalInterest)
         {
-            // TODO: Continue commenting here
+            // Loop thorugh list to fill
             for (int i = 0; i < investment.ExpectedYearsInvested; i++)
             {
+                // Set the current year of the loop
                 investment.YearLabels.Add("Year " + (i + 1).ToString());
 
+                // Continue commenting here
                 totalInterest += (totalInterest + totalContribution) * (double)(investment.ExpectedAnnualInterest / 100);
                 investment.Profits.Add(totalInterest);
 
