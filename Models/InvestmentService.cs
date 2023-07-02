@@ -132,10 +132,11 @@ namespace PersonalFinanceMVC.Models
                 // Set the current year of the loop
                 investment.YearLabels.Add("Year " + (i + 1).ToString());
 
-                // Continue commenting here
+                // Add to accumulated value of the total interest and set it for the current year of the loop
                 totalInterest += (totalInterest + totalContribution) * (double)(investment.ExpectedAnnualInterest / 100);
                 investment.Profits.Add(totalInterest);
 
+                // TODO: Continue commenting here
                 totalContribution += investment.RecurringDeposit * 12;
                 investment.Contributions.Add(totalContribution);
 
