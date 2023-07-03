@@ -136,10 +136,11 @@ namespace PersonalFinanceMVC.Models
                 totalInterest += (totalInterest + totalContribution) * (double)(investment.ExpectedAnnualInterest / 100);
                 investment.Profits.Add(totalInterest);
 
-                // TODO: Continue commenting here
+                // Add to accumulated value of the total contribution and set it for the current year of the loop
                 totalContribution += investment.RecurringDeposit * 12;
                 investment.Contributions.Add(totalContribution);
 
+                // Add to accumulated value of the total amount and set it for the current year of the loop
                 investment.TotalAmounts.Add(totalContribution + totalInterest);
             }
         }
@@ -162,7 +163,10 @@ namespace PersonalFinanceMVC.Models
                 else
                     name += $"{counter}";
 
+                // Check if the names of the budget contains the new name created in this while loop. If so loop again by setting isExisting to true
                 isExisting = investmentNames.Contains(name, StringComparer.OrdinalIgnoreCase);
+
+                // Add to the counter
                 counter++;
             }
 
