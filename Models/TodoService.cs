@@ -12,6 +12,8 @@ namespace PersonalFinanceMVC.Models
         UserManager<ApplicationUser> userManager;
         readonly string userId;
 
+        // TODO: Continue commenting here
+
         private readonly ApplicationContext context;
         public TodoService(
             ApplicationContext context,
