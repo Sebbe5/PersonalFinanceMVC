@@ -12,7 +12,6 @@ namespace PersonalFinanceMVC.Models
         UserManager<ApplicationUser> userManager;
         readonly string userId;
 
-        // TODO: Continue commenting here
 
         private readonly ApplicationContext context;
         public TodoService(
@@ -27,8 +26,10 @@ namespace PersonalFinanceMVC.Models
         }
         internal TodoListVM CreateTodoListVM()
         {
+            // Fetch the users todos
             var todos = GetUserTodos();
 
+            // TODO: Continue commenting here
             var todoItems = GetFilteredTodos(todos, t => t.Status == Status.ToDo && !t.IsToday);
             var todoItemsToday = GetFilteredTodos(todos, t => t.Status == Status.ToDo & t.IsToday);
             var inProgressItems = GetFilteredTodos(todos, t => t.Status == Status.InProgress & !t.IsToday);
