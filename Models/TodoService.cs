@@ -29,7 +29,7 @@ namespace PersonalFinanceMVC.Models
             // Fetch the users todos
             var todos = GetUserTodos();
 
-            // TODO: Continue commenting here
+            // Set a list of todo items depending on status
             var todoItems = GetFilteredTodos(todos, t => t.Status == Status.ToDo && !t.IsToday);
             var todoItemsToday = GetFilteredTodos(todos, t => t.Status == Status.ToDo & t.IsToday);
             var inProgressItems = GetFilteredTodos(todos, t => t.Status == Status.InProgress & !t.IsToday);
@@ -37,6 +37,7 @@ namespace PersonalFinanceMVC.Models
             var doneItems = GetFilteredTodos(todos, t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 3);
             var doneItemsToday = GetFilteredTodos(todos, t => t.Status == Status.Done & t.IsToday);
 
+            // TODO: Continue commenting here
             UpdateDaysInDone(doneItems);
 
             var sortedTodoItems = SortTodoItems(todoItems);
