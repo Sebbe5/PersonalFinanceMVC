@@ -37,9 +37,10 @@ namespace PersonalFinanceMVC.Models
             var doneItems = GetFilteredTodos(todos, t => t.Status == Status.Done & !t.IsToday & t.DaysInDone < 3);
             var doneItemsToday = GetFilteredTodos(todos, t => t.Status == Status.Done & t.IsToday);
 
-            // TODO: Continue commenting here
+            // Update amount of days tickets have been in done
             UpdateDaysInDone(doneItems);
 
+            // TODO: Continue commenting here
             var sortedTodoItems = SortTodoItems(todoItems);
 
             return new TodoListVM
