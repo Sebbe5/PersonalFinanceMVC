@@ -40,9 +40,10 @@ namespace PersonalFinanceMVC.Models
             // Update amount of days tickets have been in done
             UpdateDaysInDone(doneItems);
 
-            // TODO: Continue commenting here
+            // Sort the todo items
             var sortedTodoItems = SortTodoItems(todoItems);
 
+            // TODO: Continue commenting here
             return new TodoListVM
             {
                 Todos = sortedTodoItems,
