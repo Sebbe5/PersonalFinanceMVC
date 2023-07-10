@@ -43,7 +43,7 @@ namespace PersonalFinanceMVC.Models
             // Sort the todo items
             var sortedTodoItems = SortTodoItems(todoItems);
 
-            // TODO: Continue commenting here
+            // Return a new instance of a TodoListVm
             return new TodoListVM
             {
                 Todos = sortedTodoItems,
@@ -56,6 +56,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal string AddTodo(TodoListVM vm)
         {
+            // TODO: Contínue commenting here
             var nameOfTodos = new HashSet<string>(context.Todos.Where(t => t.ApplicationUserId == userId)
                 .Select(t => t.Name), StringComparer.OrdinalIgnoreCase);
 
