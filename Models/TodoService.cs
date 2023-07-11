@@ -56,10 +56,11 @@ namespace PersonalFinanceMVC.Models
         }
         internal string AddTodo(TodoListVM vm)
         {
-            // TODO: Contínue commenting here
+            // Set list of names of all todos
             var nameOfTodos = new HashSet<string>(context.Todos.Where(t => t.ApplicationUserId == userId)
                 .Select(t => t.Name), StringComparer.OrdinalIgnoreCase);
 
+            // TODO: Continue commenting here
             var validStrings = new string[] { "Work", "Personal", "Other" };
 
             if (nameOfTodos.Contains(vm.NewTodoItem))
