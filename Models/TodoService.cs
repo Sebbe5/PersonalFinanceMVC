@@ -60,14 +60,16 @@ namespace PersonalFinanceMVC.Models
             var nameOfTodos = new HashSet<string>(context.Todos.Where(t => t.ApplicationUserId == userId)
                 .Select(t => t.Name), StringComparer.OrdinalIgnoreCase);
 
-            // TODO: Continue commenting here
-            var validStrings = new string[] { "Work", "Personal", "Other" };
+            // Not in use anymore?
+            //var validStrings = new string[] { "Work", "Personal", "Other" };
 
+            // Check if the new TodoItem already exists
             if (nameOfTodos.Contains(vm.NewTodoItem))
             {
                 return "The todo already exists";
             }
-
+            
+            // TODO: Continue commenting here
             context.Todos.Add(new Todo
             {
                 ApplicationUserId = userId,
