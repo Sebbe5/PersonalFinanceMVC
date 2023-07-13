@@ -69,7 +69,7 @@ namespace PersonalFinanceMVC.Models
                 return "The todo already exists";
             }
             
-            // TODO: Continue commenting here
+            // Add the new todos to the database
             context.Todos.Add(new Todo
             {
                 ApplicationUserId = userId,
@@ -87,6 +87,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal void DeleteTodo(int id)
         {
+            // TODO: Continue commenting here
             context.Todos.Remove(context.Todos.FirstOrDefault(t => t.Id == id));
             context.SaveChanges();
         }
