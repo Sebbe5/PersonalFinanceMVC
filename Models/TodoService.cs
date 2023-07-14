@@ -87,12 +87,13 @@ namespace PersonalFinanceMVC.Models
         }
         internal void DeleteTodo(int id)
         {
-            // TODO: Continue commenting here
+            // Remove todo with matching id
             context.Todos.Remove(context.Todos.FirstOrDefault(t => t.Id == id));
             context.SaveChanges();
         }
         internal void UserSortSetting(TodoSortOrder sortPreference)
         {
+            // TODO: Continue commenting here
             userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder = sortPreference;
             context.SaveChanges();
         }
