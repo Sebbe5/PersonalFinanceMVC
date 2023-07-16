@@ -93,12 +93,13 @@ namespace PersonalFinanceMVC.Models
         }
         internal void UserSortSetting(TodoSortOrder sortPreference)
         {
-            // TODO: Continue commenting here
+            // Fetch the users prefereable sorting order (Ís this active?)
             userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder = sortPreference;
             context.SaveChanges();
         }
         internal EditVM CreateEditVM(int id)
         {
+            // TODO: Continue commenting here
             return context.Todos
                 .Where(t => t.Id == id)
                 .Select(b => new EditVM
