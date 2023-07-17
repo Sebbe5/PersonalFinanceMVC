@@ -99,7 +99,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal EditVM CreateEditVM(int id)
         {
-            // TODO: Continue commenting here
+            // Return a new instance of an EditVM
             return context.Todos
                 .Where(t => t.Id == id)
                 .Select(b => new EditVM
@@ -116,6 +116,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditTodo(EditVM vm, int id)
         {
+            // TODO: Continue commenting here
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
             todoToEdit.Name = vm.Name;
