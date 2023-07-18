@@ -116,9 +116,10 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditTodo(EditVM vm, int id)
         {
-            // TODO: Continue commenting here
+            // Fetch the todo with matching Id
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
+            // TODO: Continue commenting here
             todoToEdit.Name = vm.Name;
             todoToEdit.Deadline = vm.Deadline;
             todoToEdit.Category = vm.Category;
