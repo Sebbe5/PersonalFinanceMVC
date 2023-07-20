@@ -119,13 +119,14 @@ namespace PersonalFinanceMVC.Models
             // Fetch the todo with matching Id
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
-            // TODO: Continue commenting here
+            // Set properties
             todoToEdit.Name = vm.Name;
             todoToEdit.Deadline = vm.Deadline;
             todoToEdit.Category = vm.Category;
             todoToEdit.NeedDeadline = vm.ForDeadline;
             todoToEdit.Description = vm.Description;
 
+            // TODO: Continue commenting here
             UpdateStatusAndCheckWhenDone(vm.Status, todoToEdit);
             context.SaveChanges();
         }
