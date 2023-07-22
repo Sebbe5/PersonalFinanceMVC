@@ -126,12 +126,13 @@ namespace PersonalFinanceMVC.Models
             todoToEdit.NeedDeadline = vm.ForDeadline;
             todoToEdit.Description = vm.Description;
 
-            // TODO: Continue commenting here
+            // Update status
             UpdateStatusAndCheckWhenDone(vm.Status, todoToEdit);
             context.SaveChanges();
         }
         internal void EditStatus(int id, string status)
         {
+            // TODO: Continue commenting here
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
             UpdateStatusAndCheckWhenDone(status, todoToEdit);
             context.SaveChanges();
