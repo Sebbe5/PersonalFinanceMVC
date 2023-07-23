@@ -132,8 +132,10 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditStatus(int id, string status)
         {
-            // TODO: Continue commenting here
+            // Fetch todo with id
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
+
+            // TODO: Continue commenting here
             UpdateStatusAndCheckWhenDone(status, todoToEdit);
             context.SaveChanges();
         }
