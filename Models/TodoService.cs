@@ -135,12 +135,13 @@ namespace PersonalFinanceMVC.Models
             // Fetch todo with id
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
-            // TODO: Continue commenting here
+            // Update status
             UpdateStatusAndCheckWhenDone(status, todoToEdit);
             context.SaveChanges();
         }
         private static void UpdateStatusAndCheckWhenDone(string status, Todo todoToEdit)
         {
+            // TODO: Continue commenting here
             Status newStatus;
             Enum.TryParse(status, true, out newStatus);
 
