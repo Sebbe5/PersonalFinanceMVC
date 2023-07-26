@@ -141,10 +141,12 @@ namespace PersonalFinanceMVC.Models
         }
         private static void UpdateStatusAndCheckWhenDone(string status, Todo todoToEdit)
         {
-            // TODO: Continue commenting here
             Status newStatus;
+
+            // Check if the new status if of enum status
             Enum.TryParse(status, true, out newStatus);
 
+            // TODO: Continue commenting here
             if (newStatus == Status.Done && todoToEdit.Status != Status.Done)
                 todoToEdit.DateDone = DateTime.Now;
             else if (newStatus != Status.Done)
