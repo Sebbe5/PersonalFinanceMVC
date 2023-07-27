@@ -146,12 +146,14 @@ namespace PersonalFinanceMVC.Models
             // Check if the new status if of enum status
             Enum.TryParse(status, true, out newStatus);
 
-            // TODO: Continue commenting here
+            // If the new status is done, set DateDone to the current date
             if (newStatus == Status.Done && todoToEdit.Status != Status.Done)
                 todoToEdit.DateDone = DateTime.Now;
+            // Else set DateDone to null
             else if (newStatus != Status.Done)
                 todoToEdit.DateDone = null;
 
+            // TODO: Continue commenting here
             todoToEdit.Status = newStatus;
 
             if (todoToEdit.DateDone.HasValue)
