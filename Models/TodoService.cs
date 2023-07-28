@@ -153,9 +153,10 @@ namespace PersonalFinanceMVC.Models
             else if (newStatus != Status.Done)
                 todoToEdit.DateDone = null;
 
-            // TODO: Continue commenting here
+            // Set trhe new status
             todoToEdit.Status = newStatus;
 
+            // TODO: Continue commenting here
             if (todoToEdit.DateDone.HasValue)
             {
                 todoToEdit.DaysInDone = (DateTime.Now - todoToEdit.DateDone.Value).Days;
