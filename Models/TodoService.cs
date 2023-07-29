@@ -156,11 +156,12 @@ namespace PersonalFinanceMVC.Models
             // Set trhe new status
             todoToEdit.Status = newStatus;
 
-            // TODO: Continue commenting here
+            // If the Todo's date done has a value update DaysInDone
             if (todoToEdit.DateDone.HasValue)
             {
                 todoToEdit.DaysInDone = (DateTime.Now - todoToEdit.DateDone.Value).Days;
             }
+            // Else set days in done to 0
             else
             {
                 todoToEdit.DaysInDone = 0;
@@ -168,6 +169,7 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditIsToday(int id, bool isToday)
         {
+            // TODO: Continue commenting here
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
             todoToEdit.IsToday = isToday;
