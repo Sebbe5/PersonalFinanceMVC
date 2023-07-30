@@ -169,9 +169,10 @@ namespace PersonalFinanceMVC.Models
         }
         internal void EditIsToday(int id, bool isToday)
         {
-            // TODO: Continue commenting here
+            // Fetch todo with matching id
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
+            // TODO: continue commenting here
             todoToEdit.IsToday = isToday;
 
             context.SaveChanges();
