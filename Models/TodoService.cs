@@ -153,7 +153,7 @@ namespace PersonalFinanceMVC.Models
             else if (newStatus != Status.Done)
                 todoToEdit.DateDone = null;
 
-            // Set trhe new status
+            // Set the new status
             todoToEdit.Status = newStatus;
 
             // If the Todo's date done has a value update DaysInDone
@@ -172,13 +172,14 @@ namespace PersonalFinanceMVC.Models
             // Fetch todo with matching id
             var todoToEdit = context.Todos.SingleOrDefault(t => t.Id == id);
 
-            // TODO: continue commenting here
+            // Set the bool isToday to true or false depending on input
             todoToEdit.IsToday = isToday;
 
             context.SaveChanges();
         }
         private List<TodoListVM.TodoItemVM> SortTodoItems(List<TodoListVM.TodoItemVM> todoItems)
         {
+            // TODO: Continue commenting here
             var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
             switch (userPrefOrder)
             {
