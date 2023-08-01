@@ -179,8 +179,10 @@ namespace PersonalFinanceMVC.Models
         }
         private List<TodoListVM.TodoItemVM> SortTodoItems(List<TodoListVM.TodoItemVM> todoItems)
         {
-            // TODO: Continue commenting here
+            // Fetch the users preferable sorting order (is this used?)
             var userPrefOrder = userManager.Users.FirstOrDefault(u => u.Id == userId).TodoSortingOrder;
+
+            // Set the order of todos depending on userPrefOrder
             switch (userPrefOrder)
             {
                 case TodoSortOrder.AscendingName:
@@ -197,6 +199,8 @@ namespace PersonalFinanceMVC.Models
         }
         private void UpdateDaysInDone(List<TodoListVM.TodoItemVM> doneItems)
         {
+            // TODO: Continue commenting here
+
             // Update DaysInDone property for relevant Todos
             foreach (var doneItem in doneItems)
             {
