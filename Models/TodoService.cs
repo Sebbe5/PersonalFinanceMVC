@@ -199,14 +199,15 @@ namespace PersonalFinanceMVC.Models
         }
         private void UpdateDaysInDone(List<TodoListVM.TodoItemVM> doneItems)
         {
-            // TODO: Continue commenting here
 
             // Update DaysInDone property for relevant Todos
             foreach (var doneItem in doneItems)
             {
+                // Fetch todo with matching id
                 var todo = context.Todos.FirstOrDefault(t => t.Id == doneItem.Id);
                 if (todo != null)
                 {
+                    // TODO: Continue commenting here
                     todo.DaysInDone = (DateTime.Now - todo.DateDone.Value).Days;
                     context.SaveChanges();
                 }
