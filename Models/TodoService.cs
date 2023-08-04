@@ -207,7 +207,7 @@ namespace PersonalFinanceMVC.Models
                 var todo = context.Todos.FirstOrDefault(t => t.Id == doneItem.Id);
                 if (todo != null)
                 {
-                    // TODO: Continue commenting here
+                    // Set DaysInDone to the date done subtracted from today's date
                     todo.DaysInDone = (DateTime.Now - todo.DateDone.Value).Days;
                     context.SaveChanges();
                 }
@@ -215,6 +215,7 @@ namespace PersonalFinanceMVC.Models
         }
         private static List<TodoListVM.TodoItemVM> GetFilteredTodos(IQueryable<Todo> todos, Func<Todo, bool> filter)
         {
+            // TODO: Continue commenting here
             return todos
                 .Where(filter)
                 .Select(t => new TodoListVM.TodoItemVM
