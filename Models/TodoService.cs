@@ -215,7 +215,7 @@ namespace PersonalFinanceMVC.Models
         }
         private static List<TodoListVM.TodoItemVM> GetFilteredTodos(IQueryable<Todo> todos, Func<Todo, bool> filter)
         {
-            // TODO: Continue commenting here
+            // Return todos depending on what filter is used
             return todos
                 .Where(filter)
                 .Select(t => new TodoListVM.TodoItemVM
