@@ -7,11 +7,12 @@ namespace PersonalFinanceMVC.Controllers
 {
     [Authorize]
     public class BudgetController : Controller
-    {
-        // TODO: ContinueCommentingHere
+    {   
+        // Create an instance of a budget service
         BudgetService budgetService;
         public BudgetController(BudgetService dataService)
         {
+            // TODO: Continue commenting here
             this.budgetService = dataService;
         }
 
