@@ -12,13 +12,13 @@ namespace PersonalFinanceMVC.Controllers
         BudgetService budgetService;
         public BudgetController(BudgetService dataService)
         {
-            // TODO: Continue commenting here
             this.budgetService = dataService;
         }
 
         [HttpGet("budgets")]
         public IActionResult Budgets()
         {
+            // Create an instance of a BudgetsVM
             BudgetsVM vm = budgetService.CreateBudgetsVM();
             return View(vm);
         }
@@ -26,6 +26,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("budgetDetails")]
         public IActionResult BudgetDetails(int id)
         {
+            // TODO: Continue commenting here
             BudgetDetailsVM vm = budgetService.CreateBudgetDetailsVM(id);
             return View(vm);
         }
