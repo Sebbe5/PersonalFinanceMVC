@@ -26,7 +26,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("budgetDetails")]
         public IActionResult BudgetDetails(int id)
         {
-            // TODO: Continue commenting here
+            // Create an instance of a BudgetDetailsVM
             BudgetDetailsVM vm = budgetService.CreateBudgetDetailsVM(id);
             return View(vm);
         }
