@@ -34,7 +34,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("createBudget")]
         public IActionResult CreateBudget()
         {
-            // TODO: Continue commenting here
+            // Create an instance of a CreateBudgetsVM
             CreateBudgetVM vm = new CreateBudgetVM();
             return View(vm);
         }
@@ -42,6 +42,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("createBudget")]
         public IActionResult CreateBudget(CreateBudgetVM vm)
         {
+            // TODO: Continue commenting here
             if (!ModelState.IsValid)
                 return View(vm);
 
