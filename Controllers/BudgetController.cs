@@ -42,10 +42,11 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("createBudget")]
         public IActionResult CreateBudget(CreateBudgetVM vm)
         {
-            // TODO: Continue commenting here
+            // If the model state is invalid, go back to the view
             if (!ModelState.IsValid)
                 return View(vm);
 
+            // TODO: Continue commenting here
             budgetService.AddBudgetToDB(vm);
 
             return RedirectToAction(nameof(Budgets));
