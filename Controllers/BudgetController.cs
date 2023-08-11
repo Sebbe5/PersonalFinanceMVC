@@ -46,7 +46,7 @@ namespace PersonalFinanceMVC.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            // TODO: Continue commenting here
+            // Add budget to DB
             budgetService.AddBudgetToDB(vm);
 
             return RedirectToAction(nameof(Budgets));
@@ -55,6 +55,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("editBudget")]
         public IActionResult EditBudget(int id)
         {
+            // TODO: Continue commenting here
             Response.Cookies.Append("EditedBudgetId", id.ToString());
             EditBudgetVM vm = budgetService.CreateEditBudgetVM(id);
             return View(vm);
