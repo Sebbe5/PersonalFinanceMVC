@@ -55,8 +55,10 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("editBudget")]
         public IActionResult EditBudget(int id)
         {
-            // TODO: Continue commenting here
+            // Set the cookie of EditedBudgetId to the id from the input
             Response.Cookies.Append("EditedBudgetId", id.ToString());
+            
+            // TODO: Continue commenting here
             EditBudgetVM vm = budgetService.CreateEditBudgetVM(id);
             return View(vm);
         }
