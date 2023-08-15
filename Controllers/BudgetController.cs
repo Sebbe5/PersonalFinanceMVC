@@ -58,7 +58,7 @@ namespace PersonalFinanceMVC.Controllers
             // Set the cookie of EditedBudgetId to the id from the input
             Response.Cookies.Append("EditedBudgetId", id.ToString());
             
-            // TODO: Continue commenting here
+            // Create an instance of an EditBudgetVM
             EditBudgetVM vm = budgetService.CreateEditBudgetVM(id);
             return View(vm);
         }
@@ -66,6 +66,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("editBudget")]
         public IActionResult EditBudget(EditBudgetVM vm)
         {
+            // TODO: Continue commenting here
             if (!ModelState.IsValid)
                 return View(vm);
 
