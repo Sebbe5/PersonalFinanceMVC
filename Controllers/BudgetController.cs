@@ -26,6 +26,9 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("budgetDetails")]
         public IActionResult BudgetDetails(int id)
         {
+            // TODO: Ability to reset the list of paid items with a button.
+
+
             // Create an instance of a BudgetDetailsVM
             BudgetDetailsVM vm = budgetService.CreateBudgetDetailsVM(id);
             return View(vm);
@@ -87,6 +90,25 @@ namespace PersonalFinanceMVC.Controllers
             budgetService.RemoveBudget(id);
 
             return RedirectToAction(nameof(Budgets));
+        }
+
+        [HttpPost("updateIsPaidStatus")]
+        public IActionResult UpdateIsPaidStatus(int id, bool isPaid)
+        {
+            try
+            {
+                // Here you would update the isPaid status in your database
+                // based on the provided id and isPaid value
+
+                // Assuming you have a method to update the status in your budgetService
+                budgetService.UpdateIsPaidStatus(id, isPaid);
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
         }
     }
 }

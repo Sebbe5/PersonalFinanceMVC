@@ -5,7 +5,6 @@ using PersonalFinanceMVC.Views.Budget;
 
 namespace PersonalFinanceMVC.Models
 {
-    // TODO: Add ability to check paid expenses and the reset the list with a button. Then have a summary of the amount left to pay
     public class BudgetService
     {
         UserManager<ApplicationUser> userManager;
@@ -58,10 +57,12 @@ namespace PersonalFinanceMVC.Models
                 Name = budgetToReturn.Name,
                 Expenses = expenses.Select(e => new BudgetDetailsVM.ExpenseItemVM
                 {
+                    Id = e.Id,
                     Name = e.Name,
                     Amount = e.Money,
                     Category = e.Category != null ? e.Category : string.Empty,
                     IsActive = e.IsActive,
+                    IsPaid = e.IsPaid,
                 }).ToArray(),
                 TotalAmount = expenses.Where(e => e.IsActive).Sum(e => e.Money),
                 Categories = categories,
@@ -208,7 +209,7 @@ namespace PersonalFinanceMVC.Models
                                 BudgetId = id,
                             });
 
-                            // Add expense to DB table
+                            // Add expense to existing expenses
                             existingExpenses.Add(expenseItemVM.Name);
                         }
                     }
@@ -253,5 +254,13 @@ namespace PersonalFinanceMVC.Models
             }
         }
 
+        internal void UpdateIsPaidStatus(int id, bool isPaid)
+        {
+            // Update Expense in DB
+            context.Expenses.Where(e => e.Id == id).SingleOrDefault().IsPaid = isPaid;
+
+            context.SaveChanges();
+            
+        }
     }
 }

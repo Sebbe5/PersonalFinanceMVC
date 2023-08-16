@@ -14,10 +14,12 @@ namespace PersonalFinanceMVC.Views.Budget
 
         public class ExpenseItemVM
         {
+            public int Id { get; set; }
             public string Name { get; set; }
             public double Amount { get; set; }
             public string Category { get; set; }
             public bool IsActive { get; set; }
+            public bool IsPaid { get; set; }
         }
     }
 }

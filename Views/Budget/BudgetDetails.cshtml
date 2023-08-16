@@ -45,20 +45,28 @@
                             <th onclick="sortTable(2)">
                                 <p class="clickable">Category</p>
                             </th>
-
+                            <th class="text-center">
+                                <p class="mb-0">Is Paid</p>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var expense in Model.Expenses)
                         {
                             <tr style="@(expense.IsActive ? string.Empty : inactiveStyling)">
-                                <td style="width: 33%">@expense.Name</td>
-                                <td style="width: 33%">@expense.Amount.ToString("C")</td>
-                                <td style="width: 33%">@expense.Category</td>
+                                <td style="width: 25%">@expense.Name</td>
+                                <td style="width: 25%">@expense.Amount.ToString("C")</td>
+                                <td style="width: 25%">@expense.Category</td>
+                                <td style="width: 25%">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <input asp-for="@expense.IsPaid" type="checkbox" class="expense-checkbox" data-amount="@expense.Amount" data-isactive="@expense.IsActive" data-itemid="@expense.Id"/>
+                                    </div>
+                                </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+
             }
             else
             {
@@ -66,11 +74,62 @@
             }
         </div>
     </div>
-    <a asp-action="EditBudget" asp-route-id="@Model.Id" class="btn btn-warning mx-2">Edit Budget</a>
+    <div class="d-flex align-items-center">
+        <a asp-action="EditBudget" asp-route-id="@Model.Id" class="btn btn-warning mx-2">Edit Budget</a>
+        <div class="flex-grow-1"></div> <!-- Tomt utrymme för att skapa en flexbox mellanrum -->
+        <p id="TotalLeftToPay"></p>
+    </div>
 </div>
 
 @section EndOfBody {
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <script>
+        $(document).ready(function () {
+            // Hämta referens till checkboxen
+            var checkbox = $('.expense-checkbox');
+
+            // Lägg till en händelselyssnare på checkboxen
+            checkbox.on('change', function () {
+                var id = $(this).data('itemid');
+                var isPaid = $(this).prop('checked');
+
+                // Uppdatera isPaid-statusen med hjälp av jQuery.ajax()
+                $.ajax({
+                    type: 'POST',
+                    url: '/updateIsPaidStatus',
+                    data: {
+                        id: id,
+                        isPaid: isPaid
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        const checkboxes = document.querySelectorAll('.expense-checkbox');
+        const totalLeftToPayElement = document.getElementById('TotalLeftToPay');
+
+        function updateTotalLeftToPay() {
+            let total = 0;
+            checkboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    const amount = parseFloat(checkbox.getAttribute('data-amount'));
+                    const isActive = checkbox.getAttribute('data-isactive') === 'True';
+                    if (isActive) {
+                        total += amount;
+                    }
+                }
+            });
+            totalLeftToPayElement.innerHTML = 'Total Left to Pay: <strong>' + total.toFixed(2) + ' kr</strong>';
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotalLeftToPay);
+        });
+
+        // Calculate total on page load
+        updateTotalLeftToPay();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var ctx = document.getElementById('myChart').getContext('2d');
