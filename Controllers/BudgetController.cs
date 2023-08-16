@@ -66,20 +66,24 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("editBudget")]
         public IActionResult EditBudget(EditBudgetVM vm)
         {
-            // TODO: Continue commenting here
+            // If the model state is invalid, go back to the view
             if (!ModelState.IsValid)
                 return View(vm);
 
+            // Parsing the integer value stored in the "EditedBudgetId" cookie from the HTTP request.
             int id = int.Parse(Request.Cookies["EditedBudgetId"]);
 
+            // Calling the "EditBudget" method of the budgetService, passing in the "vm" (ViewModel) and the parsed "id".
             budgetService.EditBudget(vm, id);
 
-            return RedirectToAction(nameof(BudgetDetails), new {id});
+            // Redirecting to the "BudgetDetails" action, passing the "id" as a route parameter.
+            return RedirectToAction(nameof(BudgetDetails), new { id });
         }
 
         [HttpPost("removeBudget")]
         public IActionResult RemoveBudget(int id)
         {
+            // TODO: Comntinue commenting here
             budgetService.RemoveBudget(id);
 
             return RedirectToAction(nameof(Budgets));
