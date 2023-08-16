@@ -40,3 +40,5 @@ app.UseEndpoints(o => o.MapControllers());
 app.UseStaticFiles();
 
 app.Run();
+
+// TODO: Add ability to change language
