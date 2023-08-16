@@ -239,7 +239,7 @@ namespace PersonalFinanceMVC.Models
                 if (expense.IsActive)
                 {
                     // Check if the category exists in the categoryIndices dictionary
-                    if (categoryIndices.TryGetValue(expense.Category, out int categoryIndex))
+                    if (expense.Category != null && categoryIndices.TryGetValue(expense.Category, out int categoryIndex))
                     {
                         // If the category exists, increment the corresponding categoryAmounts index
                         categoryAmounts[categoryIndex] += expense.Money;
