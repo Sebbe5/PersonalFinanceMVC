@@ -7,6 +7,8 @@ using PersonalFinanceMVC.Views.Shared.Compound;
 
 namespace PersonalFinanceMVC.Controllers
 {
+
+    // TODO: Add function to let the user put in how much they want to live on per month...
     public class CompoundController : Controller
     {
         CompoundService compoundService;
