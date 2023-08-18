@@ -86,15 +86,18 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("removeBudget")]
         public IActionResult RemoveBudget(int id)
         {
-            // TODO: Comntinue commenting here
+            // Call the RemoveBudget method from the budgetService to delete a budget entry based on the specified ID.
             budgetService.RemoveBudget(id);
 
+            // Redirect to the "Budgets" action method to display the updated list of budgets after removal
             return RedirectToAction(nameof(Budgets));
+
         }
 
         [HttpPost("updateIsPaidStatus")]
         public IActionResult UpdateIsPaidStatus(int id, bool isPaid)
         {
+            // TODO: Continue commenting here
             try
             {
                 // Here you would update the isPaid status in your database
