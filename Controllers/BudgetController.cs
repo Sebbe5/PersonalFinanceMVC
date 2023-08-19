@@ -97,19 +97,17 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("updateIsPaidStatus")]
         public IActionResult UpdateIsPaidStatus(int id, bool isPaid)
         {
-            // TODO: Continue commenting here
             try
             {
-                // Here you would update the isPaid status in your database
-                // based on the provided id and isPaid value
-
-                // Assuming you have a method to update the status in your budgetService
+              
+                // Update IsPaid status
                 budgetService.UpdateIsPaidStatus(id, isPaid);
 
                 return Json(new { success = true });
             }
             catch (Exception ex)
             {
+                // Continue commenting here
                 return Json(new { success = false, error = ex.Message });
             }
         }
