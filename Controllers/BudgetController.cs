@@ -107,7 +107,11 @@ namespace PersonalFinanceMVC.Controllers
             }
             catch (Exception ex)
             {
-                // Continue commenting here
+                // If an exception is caught during the execution of the 'try' block,
+                // this 'catch' block is executed to handle the exception.
+
+                // A JSON response is created to indicate failure, and the error message
+                // from the caught exception is included in the response.
                 return Json(new { success = false, error = ex.Message });
             }
         }

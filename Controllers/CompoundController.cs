@@ -14,6 +14,7 @@ namespace PersonalFinanceMVC.Controllers
         CompoundService compoundService;
         public CompoundController(CompoundService dataService)
         {
+            // TODO: Continue commenting here
             this.compoundService = dataService;
         }
 
