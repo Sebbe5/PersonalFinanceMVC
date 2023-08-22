@@ -14,13 +14,13 @@ namespace PersonalFinanceMVC.Controllers
         CompoundService compoundService;
         public CompoundController(CompoundService dataService)
         {
-            // TODO: Continue commenting here
             this.compoundService = dataService;
         }
 
         [HttpGet("/calculate")]
         public IActionResult Calculate()
         {
+            // Create an instance of an that is fetched from the Cookie "LastCalculator" (If it exists)
             CalculateVM vm =  new CalculateVM { CalculatorUsed = Request.Cookies["LastCalculator"] };
             return View(vm);
         }
@@ -28,6 +28,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/PredictionCalculator")]
         public IActionResult PredictionCalculator()
         {
+            // TODO: Continue commenting here
             string serializedVm = Request.Cookies["_PredictionCalculatorVM"] as string;
 
             if (!string.IsNullOrEmpty(serializedVm))
