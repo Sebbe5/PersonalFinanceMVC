@@ -56,20 +56,33 @@ namespace PersonalFinanceMVC.Controllers
         [HttpPost("/PredictionCalculator")]
         public IActionResult PredictionCalculator(_PredictionCalculatorVM vm)
         {
-            // TODO: Continue Commenting here
+            // Serialize the 'vm' object using the JsonConvert class from the JSON.NET library.
             string serializedVm = JsonConvert.SerializeObject(vm);
+
+            // Create a new instance of the CookieOptions class to configure cookie properties.
             var cookieOptions = new CookieOptions
             {
-                Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
+                // Set the expiration date for the cookie to be 1 hour from the current date and time.
+                Expires = DateTime.Now.AddHours(1)
             };
+
+            // Append a cookie named "_PredictionCalculatorVM" with the serialized VM data to the response.
             Response.Cookies.Append("_PredictionCalculatorVM", serializedVm, cookieOptions);
+
+            // Append a cookie named "LastCalculator" with the value "prediction" to the response.
             Response.Cookies.Append("LastCalculator", "prediction", cookieOptions);
+
+            // Redirect the user to the "Calculate" action method.
+            // This typically means sending an HTTP 302 redirect response to the client's browser
+            // to navigate to the action method named "Calculate".
             return RedirectToAction(nameof(Calculate));
+
         }
 
         [HttpGet("/GoalCalculator")]
         public IActionResult GoalCalculator()
         {
+            // TODO: Continue commenting here
             string serializedVm = Request.Cookies["_GoalCalculatorVM"] as string;
 
             if (!string.IsNullOrEmpty(serializedVm))
