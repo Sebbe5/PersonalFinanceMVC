@@ -82,26 +82,36 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/GoalCalculator")]
         public IActionResult GoalCalculator()
         {
-            // TODO: Continue commenting here
+            // This line retrieves a serialized string named "_GoalCalculatorVM" from the HTTP cookies of the request.
             string serializedVm = Request.Cookies["_GoalCalculatorVM"] as string;
 
+            // Check if the retrieved serialized string is not null or empty.
             if (!string.IsNullOrEmpty(serializedVm))
             {
+                // Deserialize the serialized string using JsonConvert into an instance of the _GoalCalculatorVM class.
                 var vm = JsonConvert.DeserializeObject<_GoalCalculatorVM>(serializedVm);
+
+                // Call the compoundService's method to update the deserialized object.
                 vm = compoundService.Update_GoalCalculatorVM(vm);
 
+                // Return a partial view named "_GoalCalculator" along with the updated deserialized object.
                 return PartialView("Compound/_GoalCalculator", vm);
             }
             else
             {
+                // If the serialized string is null or empty, create a new instance of the _GoalCalculatorVM class.
                 _GoalCalculatorVM vm = new _GoalCalculatorVM();
+
+                // Return a partial view named "_GoalCalculator" along with the newly created object.
                 return PartialView("Compound/_GoalCalculator", vm);
             }
+
         }
 
         [HttpPost("/GoalCalculator")]
         public IActionResult GoalCalculator(_GoalCalculatorVM vm)
         {
+            // TODO: Continue commenting here
             string serializedVm = JsonConvert.SerializeObject(vm);
             var cookieOptions = new CookieOptions
             {
