@@ -114,11 +114,12 @@ namespace PersonalFinanceMVC.Controllers
             // This line sets a serialized string named "_GoalCalculatorVM" from the HTTP cookies of the request.
             string serializedVm = JsonConvert.SerializeObject(vm);
 
-            //TODO: Continue commenting here
+            // Set a new cookie option
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
             };
+            // TODO: Continue commenting here
             Response.Cookies.Append("_GoalCalculatorVM", serializedVm, cookieOptions);
             Response.Cookies.Append("LastCalculator", "goal", cookieOptions);
             return RedirectToAction(nameof(Calculate));
