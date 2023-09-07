@@ -119,8 +119,10 @@ namespace PersonalFinanceMVC.Controllers
             {
                 Expires = DateTime.Now.AddHours(1) // Set the cookie expiration date as desired
             };
-            // TODO: Continue commenting here
+
+            // Append a cookie named "_GoalCalculatorVM" with the serialized VM data to the response.
             Response.Cookies.Append("_GoalCalculatorVM", serializedVm, cookieOptions);
+            //TODO: Continue commenting here
             Response.Cookies.Append("LastCalculator", "goal", cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
