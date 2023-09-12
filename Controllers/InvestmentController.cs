@@ -18,6 +18,7 @@ namespace PersonalFinanceMVC.Controllers
         [HttpGet("/investments")]
         public IActionResult Investments()
         {
+            // TODO: Contionue commenting here
             InvestmentsVM vm = investmentService.CreateInvestmentsVM();
             return View(vm);
         }

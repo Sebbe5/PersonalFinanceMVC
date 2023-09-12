@@ -122,7 +122,8 @@ namespace PersonalFinanceMVC.Controllers
 
             // Append a cookie named "_GoalCalculatorVM" with the serialized VM data to the response.
             Response.Cookies.Append("_GoalCalculatorVM", serializedVm, cookieOptions);
-            //TODO: Continue commenting here
+
+            // Append a cookie named "LastCalculator" with "goal" to the response.
             Response.Cookies.Append("LastCalculator", "goal", cookieOptions);
             return RedirectToAction(nameof(Calculate));
         }
